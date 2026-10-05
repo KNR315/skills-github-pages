@@ -122,6 +122,7 @@ function refresh(rebuildPanel = true) {
 }
 
 function selectZone(id) {
+  if (submitting) return;
   activeZone = id;
   if (ZVIEW[id] && ZVIEW[id] !== view) { view = ZVIEW[id]; renderMap(); } else refresh();
 }
@@ -133,8 +134,8 @@ mapSvg.addEventListener('keydown', e => {
 mapSvg.addEventListener('click', e => { const g = e.target.closest('.zone'); if (g) selectZone(g.dataset.zone); });
 chipsEl.addEventListener('click', e => { const c = e.target.closest('.zchip'); if (c) selectZone(c.dataset.zone); });
 panel.addEventListener('change', e => { if (e.target.name === 'zone_state' && activeZone) { zoneState[activeZone] = e.target.value; refresh(false); progress(); } });
-document.querySelectorAll('.viewbtn').forEach(b => b.addEventListener('click', () => { view = b.dataset.view; renderMap(); }));
-document.getElementById('mapReset').addEventListener('click', () => { defaultState(); activeZone = null; refresh(); });
+document.querySelectorAll('.viewbtn').forEach(b => b.addEventListener('click', () => { if (submitting) return; view = b.dataset.view; renderMap(); }));
+document.getElementById('mapReset').addEventListener('click', () => { if (submitting) return; defaultState(); activeZone = null; refresh(); });
 
 renderMap();
 
@@ -250,6 +251,9 @@ form.addEventListener('submit', async e => {
   form.setAttribute('aria-busy', 'true');
   submitStatus.textContent = 'Sending your appointment request. Please keep this page open.';
   lastData = buildData();
+  // Freeze the request after taking its snapshot so edits cannot disappear during delivery.
+  const locked = [...form.querySelectorAll('input, select, textarea, button')].filter(el => !el.disabled);
+  locked.forEach(el => { el.disabled = true; });
   try {
     await core.send(FORM_ENDPOINT, lastData, Object.fromEntries(ZONES.map(z => [z.id, z.name])));
     lastData.meta.status = 'accepted-by-delivery-service';
@@ -266,6 +270,7 @@ form.addEventListener('submit', async e => {
     submitStatus.textContent = 'Your responses remain on this page. You can save a draft or prepare an email below.';
     showErrors([{ message: 'We could not confirm delivery. Check your connection, then save your record or email a request manually. If you already sent a request, confirm with the practitioner before retrying to avoid duplicates.' }]);
   } finally {
+    locked.forEach(el => { el.disabled = false; });
     submitting = false;
     submitBtn.disabled = false;
     submitBtn.textContent = 'Solidify Intentions';

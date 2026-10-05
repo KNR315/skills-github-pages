@@ -16,6 +16,7 @@ Scope: the supplied single HTML file, its browser behavior, the FormSubmit integ
 | Pressure output never updated | Medium | Live label and accessible slider value text |
 | Progress excluded required length and displayed an inconsistent total | Medium | Nine validated completion criteria, matching delivery acknowledgment |
 | No network/timeout handling or repeat-submit guard | Medium | Timeout, rejection handling, busy states, and double-click guard |
+| Answers could change while a request was in flight | Medium | Snapshot first, then lock form controls and map until delivery finishes |
 | Object URLs were never revoked | Low | Download anchors removed and URLs released |
 | Motion and small-screen controls needed attention | Medium | Reduced-motion support, 44px choice controls, chip wrapping, and mobile padding |
 | All application code lived in one HTML file | Low | Browser behavior and pure intake logic separated for focused edits and tests |
@@ -23,6 +24,8 @@ Scope: the supplied single HTML file, its browser behavior, the FormSubmit integ
 ## Verification
 
 Node regression tests cover complete records, consent and availability validation, St. Louis date boundaries, real POST payload shape, successful acceptance, HTTP rejection, false/missing success, invalid JSON, network failure, and timeout. Static HTML checks cover duplicate IDs and required script/control references. Public-page inspection follows the Pages deployment.
+
+The public page loaded with the original design. Live checks confirmed keyboard map selection, focus preference updates, pressure-label updates, and visible/focused errors on an empty submission. Mobile wrapping and reduced-motion styles were inspected in source; full device emulation was not available in this environment.
 
 ## Remaining limits
 
