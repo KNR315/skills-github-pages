@@ -30,6 +30,6 @@ The form includes an email-delivery disclosure and consent checkbox. Previewing 
 
 Answers remain only in the current page until explicitly sent or exported. A refresh loses unsaved answers. No localStorage or public intake storage is added. FormSubmit and the recipient mailbox process submitted data.
 
-Live delivery was not exercised with a real client request. Tests mock the provider to avoid sending test messages. Before inviting clients, verify recipient activation and send an explicitly intended request end to end.
+Live inbox delivery was verified on October 5, 2026, using an explicitly authorized synthetic test. FormSubmit's one-time activation was completed, the public page reported provider acceptance, and the matching request arrived in the configured Gmail inbox at 1:01 PM Central. The received email retained the request ID, body map, agreements, and complete record. No real client health data was used. Automated regression tests still mock the provider.
 
 Styling depends on the original Tailwind CDN and fonts on Google Fonts. A later optional improvement is to compile Tailwind locally and self-host fonts; neither changes the creative design.

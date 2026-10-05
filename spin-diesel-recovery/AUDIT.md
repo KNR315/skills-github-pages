@@ -34,9 +34,9 @@ The earlier public revision was verified for keyboard map selection, focus prefe
 
 ## Remaining limits
 
-- No custom backend was supplied. The backend available here is the third-party FormSubmit service; its internals and recipient activation cannot be verified from this source.
+- No custom backend was supplied. The backend available here is the third-party FormSubmit service; its internals cannot be verified from this source. Recipient activation and live inbox delivery were verified on October 5, 2026.
 - This is an appointment request, with no live calendar, slot locking, bookings database, payment system, or automatic appointment confirmation.
 - A timeout can occur after the provider accepted a request. The page advises confirming with the practitioner before retrying; there is no server-side idempotency guarantee.
-- Tests use mocked delivery responses. No real intake was emailed during automated verification.
+- Regression tests use mocked delivery responses. An explicitly authorized synthetic request was submitted through the live public page after FormSubmit activation. Its matching email arrived in the configured Gmail inbox at 1:01 PM Central, with the complete record, body map, and agreements intact. No real client health data was sent.
 - Original Tailwind runtime CDN and externally loaded fonts remain dependencies. The next practical code improvement is a compiled stylesheet for more predictable production loading.
 - The clinical copy was preserved. Public release of a creative prototype does not establish suitability for storing clinical records.
