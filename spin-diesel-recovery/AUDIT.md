@@ -19,6 +19,7 @@ Scope: the supplied single HTML file, its browser behavior, the FormSubmit integ
 | Answers could change while a request was in flight | Medium | Snapshot first, then lock form controls and map until delivery finishes |
 | Object URLs were never revoked | Low | Download anchors removed and URLs released |
 | Motion and small-screen controls needed attention | Medium | Reduced-motion support, 44px choice controls, chip wrapping, and mobile padding |
+| Custom fade-in classes referenced keyframes that Tailwind did not generate | High | Explicit CSS keyframes restore the hero title, navigation, and intake button |
 | All application code lived in one HTML file | Low | Browser behavior and pure intake logic separated for focused edits and tests |
 
 ## Verification

@@ -84,3 +84,7 @@ test('interactive map keeps keyboard activation, accessible names, and radio foc
   assert.match(app, /refresh\(false\)/);
   assert.doesNotMatch(app, /Simulate network/);
 });
+test('hero fade-in has its own keyframes rather than depending on Tailwind generation', () => {
+  const html = fs.readFileSync(require.resolve('../index.html'), 'utf8');
+  assert.match(html, /@keyframes fadeInUp\s*\{/);
+});
