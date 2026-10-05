@@ -231,10 +231,10 @@ function prepareEmail(data) {
 }
 
 form.addEventListener('input', e => {
-  e.target.removeAttribute('aria-invalid');
+  clearErrors();
   progress();
 });
-form.addEventListener('change', progress);
+form.addEventListener('change', () => { clearErrors(); progress(); });
 window.addEventListener('focus', progress);
 progress();
 
