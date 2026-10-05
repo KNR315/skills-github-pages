@@ -1,27 +1,28 @@
 
 /* ============ CONFIG ============ */
+// Set this to a real form endpoint (Formspree, Basin, your own server, etc.) so requests reach you.
+// Leave blank and the page will show the guest a summary to copy/download/email instead.
 const FORM_ENDPOINT = "https://formsubmit.co/ajax/khylannr15@gmail.com";
-const PRACTITIONER_EMAIL = "khylannr15@gmail.com";
+const PRACTITIONER_EMAIL = "khylannr15@gmail.com";   // used by the "Email it" button
 
 /* ============ BODY MAP ============ */
 const ZONES = [
-  { id:'neck', name:'Cervical & Upper Traps', desc:'Broad, slow myofascial release along the neck and shoulders.' },
-  { id:'shoulders', name:'Deltoid Complex', desc:'Addressing overhead inversion fatigue in the shoulder capsule.' },
-  { id:'upper_back', name:'Scapular Region', desc:'Unbinding rhomboids and latissimus dorsi attachments.' },
-  { id:'low_back', name:'Lumbar Spine', desc:'Sweeping decompression for the lower posterior chain.' },
-  { id:'glutes', name:'Gluteal Group', sens:true, desc:'Broad forearm compression over drapery to release external rotators.' },
-  { id:'hamstrings', name:'Hamstrings', desc:'Downward rhythmic pétrissage.' },
-  { id:'calves', name:'Gastrocnemius', desc:'Deep stripping to counter constant plantar flexion (toe-pointing).' },
-  { id:'feet', name:'Plantar Fascia', desc:'Restoration for the arches and toe joints.' },
-  { id:'forearms', name:'Forearm Flexors', desc:'Active pin-and-stretch to reset grip fatigue.' },
-  { id:'elbows', name:'Epicondyles', desc:'Relieving the origins of medial/lateral elbow strain.' },
-  { id:'chest', name:'Pectoralis Minor', sens:true, desc:'Static anchor beneath the clavicle to open rounded shoulders. No breast tissue involvement.' },
-  { id:'underarm', name:'Subscapularis', sens:true, desc:'Axillary hold against the ribcage. Practitioner guided or self-applied.' },
-  { id:'hipflex', name:'Psoas / Iliacus', sens:true, desc:'Breath-assisted, sustained pressure near the anterior hip bone.' },
-  { id:'inner', name:'Adductors', sens:true, desc:'Broad, flat compression avoiding the groin and bruising. Highly sensitive in pole athletes.' },
-  { id:'quads', name:'Quadriceps', desc:'Broad flushing along the anterior thigh.' }
+  { id:'neck', name:'Neck & upper traps', desc:'Broad, slow work on the neck muscles and tops of the shoulders.' },
+  { id:'shoulders', name:'Shoulders', desc:'Deltoids and the shoulder joint, for overhead and inversion fatigue.' },
+  { id:'upper_back', name:'Upper back & shoulder blades', desc:'Lats, rhomboids and the muscles around the shoulder blades.' },
+  { id:'low_back', name:'Low back', desc:'Broad compression and sweeping work along the lower back.' },
+  { id:'glutes', name:'Glutes', sens:true, desc:'Broad forearm compression over a sheet or clothing to release the hip rotators.' },
+  { id:'hamstrings', name:'Hamstrings', desc:'Slow, downward kneading along the back of the thigh.' },
+  { id:'calves', name:'Calves', desc:'Release for constant toe-pointing (gastrocnemius and soleus).' },
+  { id:'feet', name:'Feet & toes', desc:'Release for toe-point fatigue and arches.' },
+  { id:'forearms', name:'Forearms & grip', desc:'Pin-and-stretch for the forearm flexors, plus thumb-pad work for grip fatigue.' },
+  { id:'elbows', name:'Elbows', desc:'Relief at the inner and outer elbow, where grip strain often collects.' },
+  { id:'chest', name:'Upper chest (below collarbone)', sens:true, desc:'Static pressure just beneath the collarbone to ease rounded shoulders, over clothing or a towel. Does not involve breast tissue.' },
+  { id:'underarm', name:'Underarm / side of ribcage', sens:true, desc:'A hold along the side of the ribcage to release the rotator cuff. I can guide you to position your own arm, or you can apply the pressure yourself with my instruction.' },
+  { id:'hipflex', name:'Hip flexors / lower abdomen', sens:true, desc:'Slow, sustained pressure on the soft tissue beside the lower abdomen, over a sheet or clothing, paired with breathing. I will describe exactly where my hands go first.' },
+  { id:'inner', name:'Inner thighs', sens:true, desc:'A common site of pole bruising. Broad, flat compression only, kept on the thigh and away from the groin. No sharp points.' },
+  { id:'quads', name:'Front of thighs', desc:'Broad compression and sweeping work along the front of the thigh.' }
 ];
-
 const ZVIEW = { chest:'front', underarm:'front', hipflex:'front', quads:'front', inner:'front', upper_back:'back', low_back:'back', glutes:'back', hamstrings:'back', calves:'back' };
 const STATES = { focus:'Focus here', include:'Include', ask:'Ask me first', skip:'Skip' };
 const zname = id => ZONES.find(z => z.id === id).name;
@@ -61,7 +62,6 @@ const BACK = [ ...SHARED,
   E('calves','rect',{x:73,y:298,width:22,height:82,rx:11}), E('calves','rect',{x:105,y:298,width:22,height:82,rx:11})
 ];
 const mk = (tag, a) => `<${tag} ${Object.entries(a).map(([k,v]) => `${k}="${v}"`).join(' ')}/>`;
-
 function svgFor(view) {
   const list = view === 'front' ? FRONT : BACK, by = {};
   list.forEach(s => (by[s.z] = by[s.z] || []).push(s));
@@ -81,17 +81,15 @@ function renderMap() {
   document.querySelectorAll('.viewbtn').forEach(b => b.setAttribute('aria-pressed', String(b.dataset.view === view)));
   refresh();
 }
-
 function renderPanel() {
   if (!activeZone) {
-    panel.innerHTML = '<p class="text-sm font-light text-mystic-champagne/60 leading-relaxed italic">Select an area on the topography map or from the list to define your boundaries. Intrusive zones default to <strong class="text-mystic-rose font-medium">Skip</strong>.</p>';
+    panel.innerHTML = '<p class="text-sm text-[#c7cfe0]">Tap any glowing area on the body, or pick from the list below. Everything starts as <strong class="text-white">Include</strong>, except sensitive areas, which start as <strong class="text-white">Skip</strong>.</p>';
     return;
   }
   const z = ZONES.find(x => x.id === activeZone), cur = zoneState[z.id];
-  panel.innerHTML = `
-    <h4 class="font-serif text-lg text-mystic-champagne mb-2 border-b border-mystic-copper/20 pb-1 inline-block">${z.name}</h4>
-    <p class="hint mb-4 text-xs">${z.desc}</p>
-    ${z.sens ? '<p class="text-xs text-mystic-rose mb-4 italic">Sensory Zone: Requires explicit opt-in.</p>' : ''}
+  panel.innerHTML = `<h4 class="font-display text-sm text-mystic-glow mb-2">${z.name}</h4>
+    <p class="hint mb-3">${z.desc}</p>
+    ${z.sens ? '<p class="text-xs text-[#9fd0ff] mb-3">Sensitive area: starts as Skip, and nothing happens here unless you choose it.</p>' : ''}
     <div class="flex flex-wrap gap-2" role="radiogroup" aria-label="${z.name} preference">
       <label class="pill"><input type="radio" name="zone_state" value="focus" ${cur==='focus'?'checked':''}><span>Focus here</span></label>
       <label class="pill"><input type="radio" name="zone_state" value="include" ${cur==='include'?'checked':''}><span>Include</span></label>
@@ -99,13 +97,12 @@ function renderPanel() {
       <label class="pill skip"><input type="radio" name="zone_state" value="skip" ${cur==='skip'?'checked':''}><span>Skip</span></label>
     </div>`;
 }
-
 function refresh(rebuildPanel = true) {
   document.querySelectorAll('.zone').forEach(g => {
     const id = g.dataset.zone;
     g.dataset.state = zoneState[id];
     g.classList.toggle('active', id === activeZone);
-    g.setAttribute('aria-label', `${zname(id)}: ${STATES[zoneState[id]]}`);
+    g.setAttribute('aria-label', `${zname(id)}: ${STATES[zoneState[id]]}. Press Enter to change.`);
     g.setAttribute('aria-pressed', String(id === activeZone));
   });
   chipsEl.querySelectorAll('.zchip').forEach(c => {
@@ -117,34 +114,30 @@ function refresh(rebuildPanel = true) {
     c.setAttribute('aria-controls', 'zonePanel');
   });
   const n = k => Object.values(zoneState).filter(s => s === k).length;
-  document.getElementById('mapCount').textContent = `FOCAL: ${n('focus')} | VERBAL: ${n('ask')} | OMITTED: ${n('skip')}`;
+  document.getElementById('mapCount').textContent = `${n('focus')} focus · ${n('ask')} ask first · ${n('skip')} skipped`;
   if (rebuildPanel) renderPanel();
 }
-
 function selectZone(id) {
   if (submitting) return;
   activeZone = id;
   if (ZVIEW[id] && ZVIEW[id] !== view) { view = ZVIEW[id]; renderMap(); } else refresh();
 }
-
-mapSvg.addEventListener('keydown', e => {
-  const g = e.target.closest('.zone');
-  if (g && ['Enter', ' '].includes(e.key)) { e.preventDefault(); selectZone(g.dataset.zone); }
-});
 mapSvg.addEventListener('click', e => { const g = e.target.closest('.zone'); if (g) selectZone(g.dataset.zone); });
+mapSvg.addEventListener('keydown', e => { const g = e.target.closest('.zone'); if (g && (e.key === 'Enter' || e.key === ' ')) { e.preventDefault(); selectZone(g.dataset.zone); } });
 chipsEl.addEventListener('click', e => { const c = e.target.closest('.zchip'); if (c) selectZone(c.dataset.zone); });
 panel.addEventListener('change', e => { if (e.target.name === 'zone_state' && activeZone) { zoneState[activeZone] = e.target.value; refresh(false); progress(); } });
 document.querySelectorAll('.viewbtn').forEach(b => b.addEventListener('click', () => { if (submitting) return; view = b.dataset.view; renderMap(); }));
 document.getElementById('mapReset').addEventListener('click', () => { if (submitting) return; defaultState(); activeZone = null; refresh(); });
-
 renderMap();
 
 function zoneSummary() {
   const g = { focus:[], include:[], ask:[], skip:[] };
   ZONES.forEach(z => g[zoneState[z.id]].push(z.name));
-  return ['  Focus: ' + (g.focus.join(', ') || '—'), '  Ask First: ' + (g.ask.join(', ') || '—'),
-          '  Skipped: ' + (g.skip.join(', ') || '—'), '  Included: ' + (g.include.join(', ') || '—')].join('\n');
+  return ['  Focus here: ' + (g.focus.join(', ') || '—'), '  Ask me first: ' + (g.ask.join(', ') || '—'),
+          '  Skip: ' + (g.skip.join(', ') || '—'), '  Include as usual: ' + (g.include.join(', ') || '—')].join('\n');
 }
+
+
 
 /* ============ FORM LOGIC ============ */
 const core = RecoveryIntake;
@@ -159,7 +152,7 @@ const smooth = () => window.matchMedia('(prefers-reduced-motion: reduce)').match
 
 function values() {
   const fd = new FormData(form);
-  return { ...Object.fromEntries(fd), times: fd.getAll('times') };
+  return { ...Object.fromEntries(fd), times: fd.getAll('times'), days: fd.getAll('days'), health: fd.getAll('health') };
 }
 function updateDates() {
   for (const id of ['date1', 'date2']) document.getElementById(id).min = core.todayISO();
@@ -171,7 +164,7 @@ function progress() {
     !!v.name?.trim(), /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email?.trim() || ''),
     ['30','60','90'].includes(v.length),
     core.validDate(v.date1) && v.date1 >= core.todayISO() && (!v.date2 || (core.validDate(v.date2) && v.date2 >= core.todayISO())),
-    !!v.flexible || v.times.length > 0, !!v.drape, !!v.ack1, !!v.ack3, !!v.ackDelivery
+    !!v.flexible || v.times.length > 0, !!v.flexible || v.days.length > 0, !!v.drape, !!v.ack1, !!v.ack2, !!v.ack3, !!v.ackDelivery
   ];
   const n = checks.filter(Boolean).length;
   document.getElementById('pbar').style.width = `${n / checks.length * 100}%`;
@@ -180,6 +173,7 @@ function progress() {
   const text = `${pressure.value} · ${core.PRESSURE[Number(pressure.value)-1]}`;
   document.getElementById('pressureOut').textContent = text;
   pressure.setAttribute('aria-valuetext', text);
+  updateSnapshot();
 }
 function clearErrors() {
   errBox.classList.add('hidden');
@@ -230,66 +224,124 @@ function prepareEmail(data) {
   link.click();
 }
 
-form.addEventListener('input', e => {
+function updateSnapshot() {
+  const v = values();
+  document.getElementById('snapLength').textContent = `${v.length || '60'} min`;
+  document.getElementById('snapPressure').textContent = core.PRESSURE[Number(v.pressure) - 1];
+  document.getElementById('snapFocus').textContent = Object.values(zoneState).filter(s => s === 'focus').length;
+  document.getElementById('snapSkip').textContent = `${Object.values(zoneState).filter(s => s === 'skip').length} skipped`;
+}
+function readableSummary(data) {
+  const payload = core.payload(data, Object.fromEntries(ZONES.map(z => [z.id, z.name])));
+  return Object.entries(payload).filter(([key]) => !key.startsWith('_') && key !== 'Complete record').map(([key, value]) => `${key}: ${value || '—'}`).join('\n');
+}
+function refreshRecord() {
+  document.getElementById('summary').textContent = readableSummary(lastData);
+  document.getElementById('jsonPreview').textContent = JSON.stringify(lastData, null, 2);
+}
+function renderReview() {
+  document.getElementById('doneTitle').textContent = `Ready when you are, ${lastData.contact.name.split(/\s+/)[0]}.`;
+  document.getElementById('doneMsg').textContent = 'Review your session intentions below. Nothing has been sent yet. Your preferences will be reconfirmed in person.';
+  document.getElementById('sendReviewedBtn').classList.remove('hidden');
+  document.getElementById('retryBtn').classList.add('hidden');
+  refreshRecord();
+  form.classList.add('hidden');
+  document.getElementById('intakeProgress').classList.add('hidden');
+  document.querySelector('.session-snapshot').classList.add('hidden');
+  done.classList.remove('hidden');
+  done.focus({ preventScroll:true });
+  done.scrollIntoView({ behavior:smooth(), block:'start' });
+}
+async function sendReviewed() {
+  if (submitting || !lastData || lastData.meta.status === 'accepted-by-delivery-service') return;
+  submitting = true;
+  const buttons = [...done.querySelectorAll('button')];
+  buttons.forEach(btn => { btn.disabled = true; });
+  done.setAttribute('aria-busy', 'true');
+  const message = document.getElementById('doneMsg');
+  message.textContent = 'Sending your appointment request. Please keep this page open.';
+  try {
+    await core.send(FORM_ENDPOINT, lastData, Object.fromEntries(ZONES.map(z => [z.id, z.name])));
+    lastData.meta.status = 'accepted-by-delivery-service';
+    document.getElementById('doneTitle').textContent = 'Your request is on its way.';
+    message.textContent = 'The delivery service accepted your request for email delivery. Your time is not booked yet; the practitioner will contact you to confirm availability and boundaries.';
+    document.getElementById('sendReviewedBtn').classList.add('hidden');
+    document.getElementById('retryBtn').classList.add('hidden');
+  } catch {
+    lastData.meta.status = 'delivery-unconfirmed';
+    document.getElementById('doneTitle').textContent = 'Your answers are still here.';
+    message.textContent = 'We could not confirm delivery. Download your record or prepare an email below. Check with the practitioner before retrying if a request may already have arrived, so it is not duplicated.';
+    document.getElementById('sendReviewedBtn').classList.add('hidden');
+    document.getElementById('retryBtn').classList.remove('hidden');
+  } finally {
+    submitting = false;
+    buttons.forEach(btn => { btn.disabled = false; });
+    done.removeAttribute('aria-busy');
+    refreshRecord();
+  }
+}
+
+document.querySelectorAll('[data-quick-name]').forEach(button => button.addEventListener('click', () => {
+  const choices = button.dataset.vals === '*' ? null : button.dataset.vals.split(',');
+  form.querySelectorAll(`input[name="${button.dataset.quickName}"]`).forEach(input => {
+    input.checked = choices === null || choices.includes(input.value);
+  });
   clearErrors();
   progress();
-});
+}));
+form.addEventListener('input', () => { clearErrors(); progress(); });
 form.addEventListener('change', () => { clearErrors(); progress(); });
 window.addEventListener('focus', progress);
+document.getElementById('mapReset').addEventListener('click', progress);
 progress();
 
-form.addEventListener('submit', async e => {
-  e.preventDefault();
+form.addEventListener('submit', event => {
+  event.preventDefault();
   if (submitting) return;
   clearErrors();
   const problems = core.validate(values());
   if (problems.length) { showErrors(problems); return; }
   if (!form.checkValidity()) { form.reportValidity(); return; }
-  submitting = true;
-  submitBtn.disabled = true;
-  submitBtn.textContent = 'Sending intentions…';
-  form.setAttribute('aria-busy', 'true');
-  submitStatus.textContent = 'Sending your appointment request. Please keep this page open.';
   lastData = buildData();
-  // Freeze the request after taking its snapshot so edits cannot disappear during delivery.
-  const locked = [...form.querySelectorAll('input, select, textarea, button')].filter(el => !el.disabled);
-  locked.forEach(el => { el.disabled = true; });
-  try {
-    await core.send(FORM_ENDPOINT, lastData, Object.fromEntries(ZONES.map(z => [z.id, z.name])));
-    lastData.meta.status = 'accepted-by-delivery-service';
-    document.getElementById('doneName').textContent = lastData.contact.name.split(/\s+/)[0];
-    document.getElementById('doneMsg').textContent = 'The delivery service accepted your intake for email delivery. Your session time is not yet booked; the practitioner will contact you to confirm availability and boundaries. Please contact us directly if you do not hear back.';
-    form.classList.add('hidden');
-    document.getElementById('intakeProgress').classList.add('hidden');
-    done.classList.remove('hidden');
-    done.focus({ preventScroll: true });
-    done.scrollIntoView({ behavior: smooth(), block: 'start' });
-    submitStatus.textContent = '';
-  } catch (error) {
-    lastData.meta.status = 'delivery-unconfirmed';
-    submitStatus.textContent = 'Your responses remain on this page. You can save a draft or prepare an email below.';
-    showErrors([{ message: 'We could not confirm delivery. Check your connection, then save your record or email a request manually. If you already sent a request, confirm with the practitioner before retrying to avoid duplicates.' }]);
-  } finally {
-    locked.forEach(el => { el.disabled = false; });
-    submitting = false;
-    submitBtn.disabled = false;
-    submitBtn.textContent = 'Solidify Intentions';
-    form.removeAttribute('aria-busy');
-  }
+  renderReview();
 });
-
-document.getElementById('draftBtn').addEventListener('click', () => saveRecord(buildData()));
-document.getElementById('draftMailBtn').addEventListener('click', () => prepareEmail(buildData()));
+document.getElementById('sendReviewedBtn').addEventListener('click', sendReviewed);
+document.getElementById('retryBtn').addEventListener('click', sendReviewed);
+document.getElementById('jsonNowBtn').addEventListener('click', () => saveRecord(buildData()));
 document.getElementById('jsonBtn').addEventListener('click', () => { if (lastData) saveRecord(lastData); });
 document.getElementById('mailBtn').addEventListener('click', () => {
   if (!lastData) return;
   prepareEmail(lastData);
   document.getElementById('doneMsg').textContent = submitStatus.textContent;
 });
+document.getElementById('copyBtn').addEventListener('click', async event => {
+  if (!lastData) return;
+  try {
+    await navigator.clipboard.writeText(JSON.stringify(lastData, null, 2));
+    event.target.textContent = 'Copied';
+  } catch {
+    document.getElementById('jsonPreview').closest('details').open = true;
+    event.target.textContent = 'Select and copy JSON below';
+  }
+});
 document.getElementById('editBtn').addEventListener('click', () => {
+  if (submitting) return;
   done.classList.add('hidden');
   form.classList.remove('hidden');
   document.getElementById('intakeProgress').classList.remove('hidden');
+  document.querySelector('.session-snapshot').classList.remove('hidden');
   document.getElementById('name').focus();
   progress();
 });
+
+// A quiet, optional response to pointer movement, never needed to use the page.
+const artwork = document.getElementById('heroArtwork');
+const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
+artwork.addEventListener('pointermove', event => {
+  if (motion.matches || event.pointerType !== 'mouse') return;
+  const rect = artwork.getBoundingClientRect();
+  const x = ((event.clientX - rect.left) / rect.width - .5) * 4;
+  const y = ((event.clientY - rect.top) / rect.height - .5) * -4;
+  artwork.style.transform = `perspective(1000px) rotateY(${x}deg) rotateX(${y}deg)`;
+});
+artwork.addEventListener('pointerleave', () => { artwork.style.transform = ''; });

@@ -1,402 +1,34 @@
 <!DOCTYPE html>
-<html lang="en" class="scroll-smooth">
+<html lang="en">
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spin Diesel Recovery | Ethereal Bodywork</title>
-<meta name="description" content="Therapeutic myofascial restoration for pole and aerial athletes. A deeply intentional, consent-first healing space.">
-
-<!-- Tailwind CSS -->
+<title>Spin Diesel Recovery | The Athlete’s Sanctuary</title>
+<meta name="theme-color" content="#080d1b">
+<link rel="icon" href="./assets/lotus-fire-water.webp" type="image/webp">
+<link rel="apple-touch-icon" href="./assets/lotus-fire-water.webp">
+<meta name="description" content="60-minute myofascial recovery bodywork for pole and aerial athletes. Consent-first booking with flexible availability.">
 <script src="https://cdn.tailwindcss.com"></script>
-
-<!-- Premium Artisan Fonts: Cormorant Garamond (Serif) & Jost (Sans) -->
-<link rel="preconnect" href="https://fonts.googleapis.com">
-<link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
-<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400&family=Jost:wght@200;300;400;500&display=swap" rel="stylesheet">
-
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,400;0,500;0,600;1,400;1,500&family=Syncopate:wght@400;700&family=Outfit:wght@300;400;500;600&display=swap" rel="stylesheet">
 <script>
 tailwind.config = {
-  theme: { 
-    extend: {
-      colors: { 
-        mystic: { 
-          obsidian: '#05070a', 
-          charcoal: '#0d111a', 
-          copper: '#c27e57', 
-          gold: '#d4af37', 
-          champagne: '#f7e7ce', 
-          rose: '#9e5b5b',
-          glow: '#e8a97d'
-        } 
-      },
-      fontFamily: { 
-        serif: ['"Cormorant Garamond"', 'serif'], 
-        sans: ['"Jost"', 'sans-serif'] 
-      },
-      animation: {
-        'breath': 'breath 8s ease-in-out infinite',
-        'fade-in-up': 'fadeInUp 1s ease-out forwards'
-      },
-      keyframes: {
-        breath: {
-          '0%, 100%': { opacity: '0.6', transform: 'scale(1)' },
-          '50%': { opacity: '1', transform: 'scale(1.05)' },
-        },
-        fadeInUp: {
-          '0%': { opacity: '0', transform: 'translateY(20px)' },
-          '100%': { opacity: '1', transform: 'translateY(0)' },
-        }
-      }
-    } 
-  }
+  theme: { extend: {
+    colors: { mystic: { blue:'#0a1128', darkBlue:'#050814', red:'#6b0f1a', gold:'#d4af37', glow:'#ffaa00', water:'#1e3c78' } },
+    fontFamily: { serif:['Outfit','sans-serif'], display:['Syncopate','sans-serif'], sans:['Outfit','sans-serif'] }
+  } }
 }
 </script>
-
-<style>
-  body {
-    background-color: #05070a;
-    color: #f7e7ce;
-    overflow-x: hidden;
-    -webkit-font-smoothing: antialiased;
-    -moz-osx-font-smoothing: grayscale;
-  }
-
-  /* Retaining your original Lotus Image Data but blending it elegantly */
-  :root {
-    --lotus: url('data:image/jpeg;base64,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');
-  }
-
-  .bg-ethereal {
-    background-image: 
-      radial-gradient(circle at 50% 100%, rgba(194, 126, 87, 0.15) 0%, transparent 70%),
-      radial-gradient(circle at 100% 40%, rgba(212, 175, 55, 0.08) 0%, transparent 50%),
-      radial-gradient(circle at 0% 60%, rgba(158, 91, 91, 0.12) 0%, transparent 60%),
-      linear-gradient(to bottom, #05070a 0%, #0d111a 100%);
-    background-attachment: fixed;
-  }
-
-  /* Cinematic Hero background blending */
-  .hero {
-    position: relative;
-    isolation: isolate;
-    min-height: 100vh;
-    min-height: 100svh;
-    display: flex;
-    flex-direction: column;
-    align-items: center;
-    justify-content: center;
-    background-image: var(--lotus);
-    background-size: cover;
-    background-position: center 40%;
-  }
-
-  /* Smooth vignette over the image */
-  .hero::after {
-    content: "";
-    position: absolute;
-    inset: 0;
-    z-index: -1;
-    background: radial-gradient(ellipse at center, rgba(5,7,10,0.4) 10%, rgba(5,7,10,0.95) 85%, #05070a 100%);
-  }
-
-  .hero-title {
-    text-shadow: 0 4px 40px rgba(0,0,0,0.9), 0 0 60px rgba(232, 169, 125, 0.15);
-    color: #f7e7ce;
-  }
-
-  .hero-sub {
-    text-shadow: 0 2px 20px rgba(0,0,0,0.9);
-  }
-
-  /* Sophisticated Glassmorphism */
-  .glass-card {
-    background: rgba(13, 17, 26, 0.45);
-    backdrop-filter: blur(20px);
-    -webkit-backdrop-filter: blur(20px);
-    border: 1px solid rgba(247, 231, 206, 0.08);
-    box-shadow: 0 10px 40px rgba(0, 0, 0, 0.4), inset 0 0 20px rgba(194, 126, 87, 0.03);
-    transition: all 0.6s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  .glass-card.hoverable:hover {
-    border-color: rgba(232, 169, 125, 0.3);
-    background: rgba(13, 17, 26, 0.6);
-    transform: translateY(-3px);
-    box-shadow: 0 15px 50px rgba(0, 0, 0, 0.5), inset 0 0 30px rgba(194, 126, 87, 0.06);
-  }
-
-  /* Soft, elegant text gradients */
-  .text-gradient-copper {
-    background: linear-gradient(to right, #f7e7ce, #c27e57);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  .text-gradient-rose {
-    background: linear-gradient(90deg, #d4af37 0%, #f7e7ce 40%, #c27e57 80%, #9e5b5b 100%);
-    -webkit-background-clip: text;
-    background-clip: text;
-    -webkit-text-fill-color: transparent;
-  }
-
-  /* Refined Form Elements */
-  .field {
-    background: rgba(5, 7, 10, 0.4);
-    border: 1px solid rgba(247, 231, 206, 0.15);
-    border-bottom: 1px solid rgba(194, 126, 87, 0.4);
-    color: #f7e7ce;
-    border-radius: 0.25rem; /* Sharper corners for elegance */
-    transition: all 0.4s ease;
-  }
-
-  .field:focus {
-    outline: none;
-    border-color: #c27e57;
-    background: rgba(13, 17, 26, 0.8);
-    box-shadow: 0 10px 30px -10px rgba(194, 126, 87, 0.15);
-  }
-
-  .field option {
-    background: #0d111a;
-    color: #f7e7ce;
-  }
-
-  .label {
-    display: block;
-    font-size: 0.8rem;
-    font-weight: 400;
-    letter-spacing: 0.1em;
-    color: #d4af37;
-    margin-bottom: 0.5rem;
-  }
-
-  .hint {
-    font-size: 0.85rem;
-    color: #a4abb8;
-    font-weight: 300;
-  }
-
-  /* Tactile Pill Choices */
-  .pill input { position: absolute; opacity: 0; pointer-events: none; }
-  .pill span {
-    display: inline-flex;
-    align-items: center;
-    justify-content: center;
-    min-height: 42px;
-    padding: 0.5rem 1.25rem;
-    border-radius: 4px;
-    border: 1px solid rgba(247, 231, 206, 0.15);
-    font-size: 0.85rem;
-    font-weight: 300;
-    cursor: pointer;
-    transition: all 0.4s cubic-bezier(0.16, 1, 0.3, 1);
-    background: rgba(5, 7, 10, 0.5);
-    text-align: center;
-  }
-
-  .pill input:checked + span {
-    background: rgba(194, 126, 87, 0.15);
-    color: #f7e7ce;
-    border-color: #c27e57;
-    font-weight: 400;
-    box-shadow: 0 0 20px rgba(194, 126, 87, 0.1);
-  }
-
-  .pill input:focus-visible + span { outline: 1px solid #f7e7ce; outline-offset: 2px; }
-
-  /* Status Colors */
-  .pill.skip input:checked + span { background: rgba(158, 91, 91, 0.15); border-color: #9e5b5b; }
-  .pill.ask input:checked + span { background: rgba(212, 175, 55, 0.15); border-color: #d4af37; }
-
-  .check {
-    width: 1.1rem;
-    height: 1.1rem;
-    accent-color: #c27e57;
-    flex-shrink: 0;
-    margin-top: 0.15rem;
-    cursor: pointer;
-  }
-
-  /* Refined Focus States */
-  a:focus-visible, button:focus-visible, summary:focus-visible {
-    outline: 1px solid #f7e7ce;
-    outline-offset: 4px;
-  }
-
-  .skip-link {
-    position: absolute;
-    left: -999px;
-    top: 0;
-    background: #c27e57;
-    color: #000;
-    padding: 0.75rem 1rem;
-    z-index: 100;
-  }
-  .skip-link:focus { left: 0; }
-
-  /* Icons */
-  .ico {
-    width: 1rem; height: 1rem; margin-right: 0.5rem;
-    fill: none; stroke: currentColor; stroke-width: 1.2;
-    stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0;
-  }
-  
-  .ico-lg {
-    width: 1.5rem; height: 1.5rem;
-    fill: none; stroke: #c27e57; stroke-width: 1;
-    stroke-linecap: round; stroke-linejoin: round; flex-shrink: 0;
-  }
-
-  legend { display: flex; align-items: center; gap: 0.75rem; }
-
-  /* Minimalist Buttons */
-  .chip-btn {
-    font-size: 0.75rem;
-    padding: 0.35rem 1rem;
-    min-height: 32px;
-    border-radius: 4px;
-    border: 1px solid rgba(247, 231, 206, 0.2);
-    background: transparent;
-    color: #a4abb8;
-    cursor: pointer;
-    transition: 0.4s ease;
-  }
-  .chip-btn:hover { color: #f7e7ce; border-color: rgba(247, 231, 206, 0.5); }
-
-  /* Progress Bar */
-  .progress {
-    position: sticky; top: 1rem; z-index: 20;
-    background: rgba(13, 17, 26, 0.75);
-    backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);
-    border: 1px solid rgba(247, 231, 206, 0.08);
-    border-radius: 6px; padding: 0.75rem 1.25rem; margin-bottom: 2rem;
-  }
-  .pbar {
-    height: 3px; border-radius: 2px; background: rgba(247, 231, 206, 0.1); overflow: hidden;
-  }
-  .pbar > i {
-    display: block; height: 100%; width: 0;
-    background: linear-gradient(90deg, #9e5b5b, #c27e57, #d4af37);
-    transition: width 0.8s cubic-bezier(0.16, 1, 0.3, 1);
-  }
-
-  /* Range Slider */
-  input[type=range]#pressure {
-    -webkit-appearance: none; appearance: none; height: 2px;
-    background: rgba(247, 231, 206, 0.2); outline-offset: 8px;
-  }
-  input[type=range]#pressure::-webkit-slider-thumb {
-    -webkit-appearance: none; width: 16px; height: 16px; border-radius: 50%;
-    background: #05070a; border: 2px solid #c27e57;
-    box-shadow: 0 0 10px rgba(194, 126, 87, 0.3); cursor: pointer;
-    transition: transform 0.2s;
-  }
-  input[type=range]#pressure::-webkit-slider-thumb:hover { transform: scale(1.2); }
-
-  /* Body Map SVG Styling - Copper Wireframe Look */
-  .mapcard {
-    background: radial-gradient(circle at 50% 30%, rgba(194, 126, 87, 0.05), transparent 70%), rgba(5, 7, 10, 0.3);
-  }
-  
-  .viewbtn {
-    font-size: 0.75rem; padding: 0.3rem 1rem; min-height: 32px; border-radius: 4px;
-    border: 1px solid rgba(247, 231, 206, 0.2); background: transparent; color: #a4abb8; cursor: pointer; transition: 0.4s;
-  }
-  .viewbtn[aria-pressed=true] { border-color: #c27e57; color: #f7e7ce; }
-
-  #mapSvg svg {
-    display: block; width: 100%; height: auto;
-    filter: drop-shadow(0 0 20px rgba(194, 126, 87, 0.05));
-  }
-  
-  .sil * { fill: rgba(247, 231, 206, 0.02); stroke: rgba(247, 231, 206, 0.15); stroke-width: 0.5; }
-  
-  .zone { cursor: pointer; outline: none; }
-  .zone * { fill: rgba(212, 175, 55, 0.05); stroke: rgba(194, 126, 87, 0.4); stroke-width: 1; transition: all 0.5s ease; }
-  
-  .zone[data-state=focus] * { fill: rgba(194, 126, 87, 0.25); stroke: #c27e57; filter: drop-shadow(0 0 8px rgba(194, 126, 87, 0.4)); }
-  .zone[data-state=ask] * { fill: rgba(212, 175, 55, 0.15); stroke: #d4af37; }
-  .zone[data-state=skip] * { fill: rgba(158, 91, 91, 0.1); stroke: #9e5b5b; stroke-dasharray: 2 2; }
-  
-  .zone.active * { stroke: #f7e7ce; stroke-width: 1.5; }
-  .zone:focus-visible * { stroke: #f7e7ce; stroke-width: 2; }
-  .zone:hover * { stroke: #f7e7ce; stroke-width: 1.5; }
-
-  /* Map Keys & Chips */
-  .sw { display: inline-block; width: 10px; height: 10px; border-radius: 50%; border: 1px solid; }
-  .sw-focus { background: rgba(194, 126, 87, 0.4); border-color: #c27e57; }
-  .sw-include { background: rgba(212, 175, 55, 0.1); border-color: rgba(194, 126, 87, 0.4); }
-  .sw-ask { background: rgba(212, 175, 55, 0.3); border-color: #d4af37; }
-  .sw-skip { background: rgba(158, 91, 91, 0.2); border-color: #9e5b5b; }
-
-  .zpanel {
-    border: 1px solid rgba(247, 231, 206, 0.1); border-radius: 6px; padding: 1.25rem;
-    background: rgba(5, 7, 10, 0.4); min-height: 8rem; transition: 0.3s;
-  }
-  
-  .zchip {
-    display: inline-flex; align-items: center; gap: 0.5rem; min-height: 32px; padding: 0.25rem 0.75rem;
-    border-radius: 4px; border: 1px solid rgba(247, 231, 206, 0.15); background: transparent;
-    color: #a4abb8; font-size: 0.8rem; cursor: pointer; transition: 0.4s; font-weight: 300;
-  }
-  .zchip i { width: 6px; height: 6px; border-radius: 50%; background: rgba(194, 126, 87, 0.4); transition: 0.4s; }
-  
-  .zchip[data-state=focus] i { background: #c27e57; box-shadow: 0 0 6px #c27e57; }
-  .zchip[data-state=ask] i { background: #d4af37; }
-  .zchip[data-state=skip] i { background: #9e5b5b; }
-  
-  .zchip[data-state=focus] { border-color: rgba(194, 126, 87, 0.5); color: #f7e7ce; }
-  .zchip[data-state=ask] { border-color: rgba(212, 175, 55, 0.4); }
-  .zchip[data-state=skip] { opacity: 0.6; }
-  .zchip.active { border-color: #f7e7ce; color: #fff; }
-  
-  .zchip small { color: #8a96b8; font-size: 0.7rem; font-style: italic; }
-
-  /* Animations */
-  @keyframes fadeInUp {
-    from { opacity: 0; transform: translateY(20px); }
-    to { opacity: 1; transform: translateY(0); }
-  }
-  .fade-in { animation: fadeInUp 1s ease-out forwards; opacity: 0; }
-  .delay-1 { animation-delay: 0.2s; }
-  .delay-2 { animation-delay: 0.4s; }
-  .delay-3 { animation-delay: 0.6s; }
-
-  /* Keep the original composition usable on small screens and without motion. */
-  fieldset, .zpanel, #zoneChips { min-width: 0; }
-  .zchip { flex-wrap: wrap; max-width: 100%; min-height: 44px; text-align: left; }
-  .zchip[data-state=skip] { opacity: 0.85; }
-  .viewbtn, .chip-btn, .pill span { min-height: 44px; }
-  .mapcard [aria-label="Body view"] { flex-wrap: wrap; }
-  button:disabled { cursor: wait; opacity: 0.65; }
-  [aria-invalid=true] { outline: 1px solid #e8a97d; outline-offset: 3px; }
-  @media (max-width: 480px) {
-    .mapcard { padding: 1rem; }
-    .progress { padding: 0.75rem; }
-    .pill span { padding: 0.5rem 0.75rem; }
-    #submitBtn { width: 100%; padding-left: 1rem; padding-right: 1rem; }
-  }
-  @media (prefers-reduced-motion: reduce) {
-    html { scroll-behavior: auto !important; }
-    *, *::before, *::after { animation: none !important; transition: none !important; }
-    .fade-in { opacity: 1; }
-    .glass-card.hoverable:hover { transform: none; }
-    .bg-ethereal { background-attachment: scroll; }
-  }
-</style>
+<link rel="stylesheet" href="./base.css">
+<link rel="stylesheet" href="./design.css">
 </head>
-
-<body class="bg-ethereal font-sans min-h-screen text-lg selection:bg-mystic-copper/30">
-
-<!-- SVG Sprites -->
+<body class="bg-ethereal font-sans min-h-screen">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
 <symbol id="i-clock" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="M12 7v5l3 2"/></symbol>
 <symbol id="i-sunrise" viewBox="0 0 24 24"><path d="M3 18h18M6.5 18a5.5 5.5 0 0 1 11 0M12 6v4M4.9 10.9l1.5 1.5M19.1 10.9l-1.5 1.5"/></symbol>
 <symbol id="i-sun" viewBox="0 0 24 24"><circle cx="12" cy="12" r="4"/><path d="M12 2v2M12 20v2M2 12h2M20 12h2M4.9 4.9l1.4 1.4M17.7 17.7l1.4 1.4M4.9 19.1l1.4-1.4M17.7 6.3l1.4-1.4"/></symbol>
 <symbol id="i-sunset" viewBox="0 0 24 24"><path d="M3 19h18M7 19a5 5 0 0 1 10 0M12 4v5M9 7l3 3 3-3"/></symbol>
 <symbol id="i-moon" viewBox="0 0 24 24"><path d="M20 14.5A8 8 0 0 1 9.5 4 8 8 0 1 0 20 14.5z"/></symbol>
-<symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="2"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
+<symbol id="i-calendar" viewBox="0 0 24 24"><rect x="3" y="5" width="18" height="16" rx="3"/><path d="M3 10h18M8 3v4M16 3v4"/></symbol>
 <symbol id="i-shirt" viewBox="0 0 24 24"><path d="M8 4 3 7l2 4 3-1v10h8V10l3 1 2-4-5-3a4 4 0 0 1-8 0z"/></symbol>
 <symbol id="i-layers" viewBox="0 0 24 24"><path d="M12 3 21 8l-9 5-9-5z"/><path d="m3 13 9 5 9-5"/></symbol>
 <symbol id="i-chat" viewBox="0 0 24 24"><path d="M21 12a8 8 0 0 1-11.5 7.2L4 20l1-4.5A8 8 0 1 1 21 12z"/></symbol>
@@ -410,333 +42,376 @@ tailwind.config = {
 <symbol id="i-check" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></symbol>
 <symbol id="i-bolt" viewBox="0 0 24 24"><path d="M13 2 4 14h7l-1 8 9-12h-7z"/></symbol>
 </defs></svg>
-
 <a href="#booking-survey" class="skip-link">Skip to booking form</a>
 
-<nav class="w-full absolute top-0 py-8 px-8 flex justify-center z-50 fade-in" aria-label="Site">
-  <p class="font-serif text-xl tracking-[0.2em] uppercase text-mystic-champagne opacity-80">Spin Diesel Recovery</p>
+<nav class="site-nav" aria-label="Site">
+  <a class="wordmark" href="#top"><span class="brand-orbit" aria-hidden="true"></span><span>Spin Diesel<br><small>Recovery</small></span></a>
+  <div class="nav-links"><a href="#seq-h">The sequence</a><a href="#bodymap">Body map</a><a href="#booking-survey" class="nav-book">Shape your session</a></div>
 </nav>
 
-<header class="hero pt-32 pb-24 px-4 text-center">
-  <h1 class="font-serif hero-title text-4xl sm:text-5xl md:text-7xl leading-tight mb-6 max-w-4xl italic fade-in delay-1">
-    The Athlete's <br class="hidden sm:block">Sanctuary
-  </h1>
-  <p class="hero-sub mt-4 text-lg md:text-xl text-mystic-champagne max-w-2xl mx-auto font-light leading-relaxed tracking-wide opacity-90 fade-in delay-2">
-    Therapeutic myofascial restoration for pole and aerial artists. Built entirely around your body, your training rhythm, and your absolute boundaries.
-  </p>
-  <div class="mt-12 flex flex-wrap justify-center gap-4 text-sm font-light fade-in delay-3">
-    <span class="glass-card rounded px-5 py-2.5 text-mystic-champagne/80">Always draped or clothed</span>
-    <span class="glass-card rounded px-5 py-2.5 text-mystic-champagne/80">You control the pace</span>
-    <span class="glass-card rounded px-5 py-2.5 text-mystic-champagne/80">Opt-in touch only</span>
+<header class="hero" id="top">
+  <div class="hero-grid">
+    <div class="hero-copy">
+      <p class="eyebrow"><span></span> Pole & aerial bodywork</p>
+      <h1 class="hero-title">The Athlete’s<br><em>Sanctuary.</em></h1>
+      <p class="hero-sub">Your strength deserves a softer landing. Myofascial recovery shaped around your body, your training rhythm, and your absolute boundaries.</p>
+      <div class="hero-actions"><a class="primary-action" href="#booking-survey">Shape your session</a><a class="secondary-action" href="#seq-h">Explore the sequence</a></div>
+      <div class="hero-promise"><span>30 / 60 / 90 minutes</span><span>Consent at every step</span></div>
+    </div>
+    <figure class="art-frame" id="heroArtwork">
+      <img src="./assets/lotus-fire-water.webp" width="1092" height="1092" fetchpriority="high" alt="A luminous golden lotus held between flowing fire-red and water-blue currents." />
+      <figcaption><span>Fire · water · restoration</span><span>Spin Diesel Recovery</span></figcaption>
+    </figure>
   </div>
-  <div class="mt-16 fade-in delay-3">
-    <a href="#booking-survey" class="inline-block px-10 py-4 border border-mystic-copper/50 text-mystic-champagne font-serif text-lg tracking-widest uppercase hover:bg-mystic-copper/10 transition-all duration-500 rounded-sm">
-      Begin Intake
-    </a>
-  </div>
+  <div class="hero-foundations"><span><i aria-hidden="true"></i>Clothed or draped. Your choice.</span><span><i aria-hidden="true"></i>Pause or stop at any moment.</span><span><i aria-hidden="true"></i>Nothing begins without your yes.</span></div>
 </header>
 
-<main class="relative max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-16">
+<main class="band max-w-7xl mx-auto px-4 sm:px-6 lg:px-8 py-10">
 
-  <section class="mb-32" aria-labelledby="seq-h">
-    <div class="text-center mb-16">
-      <h2 id="seq-h" class="font-serif text-2xl md:text-4xl text-mystic-champagne italic mb-4">The Sequence</h2>
-      <div class="h-px w-24 bg-mystic-copper/40 mx-auto mb-6"></div>
-      <p class="hint max-w-2xl mx-auto text-base">Every phase is an offering, never a requirement. You design your session below; shorter bookings focus only on your chosen priorities.</p>
+  <!-- SEQUENCE -->
+  <section class="mb-20" aria-labelledby="seq-h">
+    <div class="text-center mb-10">
+      <h2 id="seq-h" class="font-display text-xl md:text-2xl text-mystic-gold border-b border-mystic-gold/30 inline-block pb-2 px-8">The 60-Minute Sequence</h2>
+      <p class="hint mt-4 max-w-2xl mx-auto">Every phase is optional. You choose which areas are included in the booking form below; shorter sessions focus on the phases you pick.</p>
     </div>
-    
-    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-8">
-      <article class="glass-card hoverable p-8">
-        <h3 class="font-serif text-2xl text-mystic-glow mb-2">I. Dorsal Chain</h3>
-        <p class="text-xs text-mystic-gold uppercase tracking-widest mb-6 opacity-60">Prone · 15 Min</p>
-        <ul class="space-y-4 text-sm text-mystic-champagne/80 font-light">
-          <li><strong class="text-mystic-champagne font-medium">Broad Effleurage:</strong> Sweeping somatic warm-up for the posterior chain.</li>
-          <li><strong class="text-mystic-champagne font-medium">Deep Stripping:</strong> Glacial pacing up the latissimus dorsi.</li>
-          <li><strong class="text-mystic-champagne font-medium">Ischemic Compression:</strong> Melting the infraspinatus and upper traps.</li>
+    <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6">
+      <article class="glass-card hoverable rounded-xl p-6">
+        <h3 class="font-serif text-xl text-mystic-glow mb-1">I. Back & Shoulders (prone)</h3>
+        <p class="text-xs text-mystic-gold uppercase tracking-widest mb-4">15 min</p>
+        <ul class="space-y-3 text-sm text-gray-200 font-light">
+          <li><strong class="text-white">Broad effleurage:</strong> sweeping warm-up for the whole back.</li>
+          <li><strong class="text-white">Slow stripping:</strong> along the latissimus dorsi.</li>
+          <li><strong class="text-white">Compression:</strong> infraspinatus and upper traps.</li>
+          <li><strong class="text-white">Scapular work:</strong> easing rhomboid tension along the shoulder blade.</li>
         </ul>
       </article>
-      
-      <article class="glass-card hoverable p-8">
-        <h3 class="font-serif text-2xl text-mystic-glow mb-2">II. Grounding</h3>
-        <p class="text-xs text-mystic-gold uppercase tracking-widest mb-6 opacity-60">Prone · 10 Min</p>
-        <ul class="space-y-4 text-sm text-mystic-champagne/80 font-light">
-          <li><strong class="text-mystic-champagne font-medium">Gluteal Compression:</strong> Broad forearm pressure, always draped.</li>
-          <li><strong class="text-mystic-champagne font-medium">Hamstring Pétrissage:</strong> Slow, downward rhythmic kneading.</li>
-          <li><strong class="text-mystic-champagne font-medium">Calf Release:</strong> Unbinding the gastrocnemius from toe-point fatigue.</li>
+      <article class="glass-card hoverable rounded-xl p-6">
+        <h3 class="font-serif text-xl text-mystic-glow mb-1">II. Glutes & Legs (prone)</h3>
+        <p class="text-xs text-mystic-gold uppercase tracking-widest mb-4">10 min</p>
+        <ul class="space-y-3 text-sm text-gray-200 font-light">
+          <li><strong class="text-white">Gluteal compression:</strong> broad forearm pressure, over a sheet or clothing.</li>
+          <li><strong class="text-white">Hamstring kneading:</strong> slow, downward.</li>
+          <li><strong class="text-white">Calf release:</strong> gastrocnemius and soleus, for constant toe-pointing.</li>
         </ul>
       </article>
-
-      <article class="glass-card hoverable p-8">
-        <h3 class="font-serif text-2xl text-mystic-glow mb-2">III. Hip Mechanics</h3>
-        <p class="text-xs text-mystic-gold uppercase tracking-widest mb-6 opacity-60">Supine · 10 Min</p>
-        <ul class="space-y-4 text-sm text-mystic-champagne/80 font-light">
-          <li><strong class="text-mystic-champagne font-medium">Inner-Thigh Flush:</strong> Flat compression kept strictly above the knee crease. <span class="italic text-mystic-rose/80">Opt-in.</span></li>
-          <li><strong class="text-mystic-champagne font-medium">Diaphragmatic Release:</strong> Breath-assisted work at the iliacus. <span class="italic text-mystic-rose/80">Opt-in.</span></li>
+      <article class="glass-card hoverable rounded-xl p-6">
+        <h3 class="font-serif text-xl text-mystic-glow mb-1">III. Hips (supine)</h3>
+        <p class="text-xs text-mystic-gold uppercase tracking-widest mb-4">10 min</p>
+        <ul class="space-y-3 text-sm text-gray-200 font-light">
+          <li><strong class="text-white">Inner-thigh flush:</strong> broad, flat compression only, kept above the knee crease and away from the groin. Opt-in.</li>
+          <li><strong class="text-white">Hip-flexor release:</strong> breath-assisted work at the front of the hip. Opt-in, and always explained first.</li>
         </ul>
       </article>
-
-      <article class="glass-card hoverable p-8">
-        <h3 class="font-serif text-2xl text-mystic-glow mb-2">IV. Anterior Open</h3>
-        <p class="text-xs text-mystic-gold uppercase tracking-widest mb-6 opacity-60">Supine · 10 Min</p>
-        <ul class="space-y-4 text-sm text-mystic-champagne/80 font-light">
-          <li><strong class="text-mystic-champagne font-medium">Pectoral Sweep:</strong> Opening the front shoulder line.</li>
-          <li><strong class="text-mystic-champagne font-medium">Pec Minor Anchor:</strong> Static pressure beneath the clavicle. <span class="italic text-mystic-rose/80">Opt-in.</span></li>
-          <li><strong class="text-mystic-champagne font-medium">Subscapularis Hold:</strong> Guided ribcage release. <span class="italic text-mystic-rose/80">Opt-in.</span></li>
+      <article class="glass-card hoverable rounded-xl p-6">
+        <h3 class="font-serif text-xl text-mystic-glow mb-1">IV. Chest & Shoulder Front (supine)</h3>
+        <p class="text-xs text-mystic-gold uppercase tracking-widest mb-4">10 min</p>
+        <ul class="space-y-3 text-sm text-gray-200 font-light">
+          <li><strong class="text-white">Upper-chest sweep:</strong> opening the front of the shoulders, over clothing or a towel.</li>
+          <li><strong class="text-white">Pec minor hold:</strong> static pressure just below the collarbone. Opt-in.</li>
+          <li><strong class="text-white">Underarm / shoulder-blade underside:</strong> a hold along the side of the ribcage. Opt-in, with the option to do it yourself while I guide.</li>
         </ul>
       </article>
-
-      <article class="glass-card hoverable p-8 md:col-span-2 lg:col-span-1">
-        <h3 class="font-serif text-2xl text-mystic-glow mb-2">V. The Grip Base</h3>
-        <p class="text-xs text-mystic-gold uppercase tracking-widest mb-6 opacity-60">Supine · 15 Min</p>
-        <ul class="space-y-4 text-sm text-mystic-champagne/80 font-light">
-          <li><strong class="text-mystic-champagne font-medium">Pin-and-Stretch:</strong> Active receiver movement targeting forearm flexors.</li>
-          <li><strong class="text-mystic-champagne font-medium">Epicondyle Relief:</strong> Soothing the origins of golfer's elbow.</li>
-          <li><strong class="text-mystic-champagne font-medium">Thenar Friction:</strong> Cross-fiber unbinding of the thumb pad.</li>
+      <article class="glass-card hoverable rounded-xl p-6 md:col-span-2 lg:col-span-1">
+        <h3 class="font-serif text-xl text-mystic-glow mb-1">V. Forearms & Grip</h3>
+        <p class="text-xs text-mystic-gold uppercase tracking-widest mb-4">15 min</p>
+        <ul class="space-y-3 text-sm text-gray-200 font-light">
+          <li><strong class="text-white">Pin-and-stretch:</strong> you actively move while I anchor the tissue.</li>
+          <li><strong class="text-white">Elbow relief:</strong> medial and lateral epicondyle origins.</li>
+          <li><strong class="text-white">Thumb-pad friction:</strong> unbinding the thenar eminence.</li>
         </ul>
       </article>
-
-      <article class="glass-card p-8 border-mystic-copper/20 flex flex-col justify-center text-center">
-        <svg class="ico-lg mx-auto mb-4 opacity-50" style="width: 2rem; height: 2rem;"><use href="#i-drop"/></svg>
-        <h3 class="font-serif text-xl text-mystic-champagne mb-3 italic">Integration</h3>
-        <p class="text-sm text-mystic-champagne/70 font-light leading-relaxed">
-          Hydrate deeply and avoid maximum-effort training for 24 hours. Light structural soreness is normal; we will stay in touch to ensure your recovery is seamless.
-        </p>
+      <article class="glass-card rounded-xl p-6 border-mystic-glow/40">
+        <h3 class="font-serif text-xl text-mystic-glow mb-3">Aftercare</h3>
+        <ul class="space-y-2 text-sm text-gray-200 font-light list-disc pl-5">
+          <li>Hydrate and avoid max-effort training for 24 hours after deep work.</li>
+          <li>Light soreness is normal; sharp pain, numbness or tingling is not. Tell me right away or message me after.</li>
+          <li>Pole-friction bruises: we will work around them, never on top of them.</li>
+        </ul>
       </article>
     </div>
   </section>
 
   <!-- HOW IT WORKS / PROMISE -->
-  <section class="mb-24 max-w-3xl mx-auto" aria-labelledby="promise-h">
-    <div class="p-10 border-l border-mystic-copper/30 bg-gradient-to-r from-mystic-obsidian/80 to-transparent">
-      <h2 id="promise-h" class="font-serif text-2xl md:text-3xl text-mystic-champagne mb-6 italic">The Philosophy of Consent</h2>
-      <ul class="space-y-4 text-base text-mystic-champagne/80 font-light">
-        <li class="flex items-start gap-4">
-          <div class="mt-1 w-1.5 h-1.5 rounded-full bg-mystic-copper flex-shrink-0"></div>
-          <p><strong class="text-mystic-champagne font-medium">Enthusiastic Opt-In.</strong> Intrusive areas are skipped by default. "Ask me first" means we will discuss the touch in real-time, and wait for your explicit permission.</p>
-        </li>
-        <li class="flex items-start gap-4">
-          <div class="mt-1 w-1.5 h-1.5 rounded-full bg-mystic-copper flex-shrink-0"></div>
-          <p><strong class="text-mystic-champagne font-medium">Absolute Control.</strong> Say "pause", "skip", or simply raise a hand. The technique ends immediately, without question or explanation required.</p>
-        </li>
-        <li class="flex items-start gap-4">
-          <div class="mt-1 w-1.5 h-1.5 rounded-full bg-mystic-copper flex-shrink-0"></div>
-          <p><strong class="text-mystic-champagne font-medium">Your Sanctuary.</strong> You decide your level of undress. Only the specific area being addressed is uncovered. Privacy is sacred.</p>
-        </li>
+  <section class="mb-20 max-w-4xl mx-auto" aria-labelledby="promise-h">
+    <div class="glass-card rounded-2xl p-8 text-center">
+      <h2 id="promise-h" class="font-display text-lg md:text-xl text-mystic-glow mb-3">Our Consent Promise</h2>
+      <ul class="text-left max-w-2xl mx-auto space-y-2 text-sm text-gray-200 font-light list-disc pl-6">
+        <li><strong class="text-white">Opt-in only.</strong> Sensitive areas start as Skip, and every preference is confirmed before touch. "Ask me first" means I will describe the touch and wait for your answer each time.</li>
+        <li><strong class="text-white">Explain, then ask, then touch.</strong> Before working any sensitive area I will say where, how, and for how long.</li>
+        <li><strong class="text-white">Change your mind anytime.</strong> Say "pause", "skip", or "stop". Any one of those ends the technique immediately, no explanation needed. You can also raise a hand.</li>
+        <li><strong class="text-white">Draping and privacy.</strong> You decide what you wear. Only the area being worked is uncovered if you choose draping. You can dress or undress in private.</li>
+        <li><strong class="text-white">Share at your own pace.</strong> You can keep personal history for the conversation in person. Email delivery is explained before you send.</li>
       </ul>
     </div>
   </section>
 
+  <!-- FORM -->
   <section class="mb-20 max-w-4xl mx-auto" id="booking-survey" aria-labelledby="form-h">
-    <div class="glass-card rounded p-6 md:p-14 shadow-2xl">
-      <div class="text-center mb-12">
-        <h2 id="form-h" class="font-serif italic text-3xl md:text-4xl text-mystic-champagne mb-4">Intake & Intentions</h2>
-        <div class="h-px w-16 bg-mystic-copper/40 mx-auto mb-6"></div>
-        <p class="text-mystic-champagne/60 font-light text-sm md:text-base max-w-xl mx-auto">This takes about 5 minutes. This is an appointment request; your time is confirmed personally after review. Your responses help us sculpt a session that honors your nervous system. You may change any answer upon arrival.</p>
+    <div class="glass-card rounded-2xl p-6 md:p-12">
+      <div class="text-center mb-8">
+        <h2 id="form-h" class="font-display text-xl md:text-2xl text-gradient-gold mb-3">Booking & Consent Intake</h2>
+        <p class="text-gray-200 font-light text-sm md:text-base max-w-2xl mx-auto">About 5 minutes. Preview your session before sending an appointment request. Times are confirmed personally. Fields marked <span aria-hidden="true">*</span><span class="sr-only">with an asterisk</span> are required. You can change any answer at any time, including during your session.</p>
       </div>
 
-      <div id="formError" tabindex="-1" role="alert" class="hidden mb-8 border-l-2 border-mystic-rose bg-mystic-rose/10 p-5 text-sm text-mystic-champagne"></div>
+      <div id="formError" tabindex="-1" role="alert" class="hidden mb-6 rounded-lg border border-red-400 bg-red-950/60 p-4 text-sm"></div>
 
-      <div id="intakeProgress" class="progress" role="status" aria-live="polite">
-        <div class="flex justify-between text-xs mb-3 font-light tracking-wide text-mystic-champagne/60">
-          <span id="ptxt">0 of 9 required fields</span>
-          <span>Required fields *</span>
-        </div>
-        <div class="pbar"><i id="pbar"></i></div>
-      </div>
+      <div id="intakeProgress" class="progress" role="status" aria-live="polite"><div class="flex justify-between text-xs mb-2"><span id="ptxt">0 of 11 required fields</span><span class="text-mystic-gold">Required fields only</span></div><div class="pbar"><i id="pbar"></i></div></div>
 
-      <noscript><p class="hint">This interactive intake requires JavaScript. Please email <a href="mailto:khylannr15@gmail.com">khylannr15@gmail.com</a> to request a session.</p></noscript>
-      <form id="intakeForm" class="space-y-14 mt-10" novalidate>
+      <div class="session-snapshot" aria-label="Your session at a glance">
+  <div><span>Session</span><strong id="snapLength">60 min</strong></div><div><span>Pressure</span><strong id="snapPressure">Firm</strong></div><div><span>Focus areas</span><strong id="snapFocus">0</strong></div><div><span>Boundaries</span><strong id="snapSkip">5 skipped</strong></div>
+</div>
+<noscript><p class="hint">Please enable JavaScript for the interactive map, or email khylannr15@gmail.com to request a session.</p></noscript>
+<form id="intakeForm" class="space-y-10" novalidate>
 
         <!-- 1. About you -->
-        <fieldset class="space-y-8">
-          <legend class="font-serif text-2xl text-mystic-champagne italic mb-4 border-b border-mystic-copper/20 pb-2 w-full flex items-center gap-3">
-            <svg class="ico-lg opacity-70"><use href="#i-user"/></svg> Identity
-          </legend>
-          <div class="grid md:grid-cols-2 gap-8">
+        <fieldset class="space-y-6">
+          <legend class="font-serif text-xl text-mystic-glow mb-2"><svg class="ico-lg"><use href="#i-user"/></svg>1. About you</legend>
+          <div class="grid md:grid-cols-2 gap-6">
             <div><label class="label" for="name">Name *</label>
-              <input maxlength="100" id="name" name="name" type="text" autocomplete="name" required class="field w-full px-4 py-3 text-base"></div>
-            <div><label class="label" for="pronouns">Pronouns (optional)</label>
-              <input maxlength="60" id="pronouns" name="pronouns" type="text" class="field w-full px-4 py-3 text-base"></div>
+              <input maxlength="100" id="name" name="name" type="text" autocomplete="name" required class="field w-full px-3 py-3 text-base"></div>
+            <div><label class="label" for="pronouns">Pronouns / name to use (optional)</label>
+              <input maxlength="60" id="pronouns" name="pronouns" type="text" class="field w-full px-3 py-3 text-base"></div>
             <div><label class="label" for="email">Email *</label>
-              <input maxlength="254" id="email" name="email" type="email" autocomplete="email" required class="field w-full px-4 py-3 text-base"></div>
-            <div><label class="label" for="phone">Phone (optional, for day-of contact)</label>
-              <input maxlength="40" id="phone" name="phone" type="tel" autocomplete="tel" class="field w-full px-4 py-3 text-base"></div>
+              <input maxlength="254" id="email" name="email" type="email" autocomplete="email" required class="field w-full px-3 py-3 text-base"></div>
+            <div><label class="label" for="phone">Phone (optional, for same-day changes)</label>
+              <input maxlength="40" id="phone" name="phone" type="tel" autocomplete="tel" class="field w-full px-3 py-3 text-base"></div>
+          </div>
+          <div>
+            <label class="label" for="contactPref">Best way to reach you</label>
+            <select id="contactPref" name="contactPref" class="field w-full px-3 py-3 text-base">
+              <option value="email">Email</option><option value="text">Text message</option><option value="either">Either is fine</option>
+            </select>
+          </div>
+          <div>
+            <label class="label" for="ecName">Emergency contact (optional)</label>
+            <input maxlength="150" id="ecName" name="ecName" type="text" placeholder="Name and phone number" class="field w-full px-3 py-3 text-base">
           </div>
         </fieldset>
 
         <!-- 2. Availability -->
-        <fieldset class="space-y-8">
-          <legend class="font-serif text-2xl text-mystic-champagne italic mb-4 border-b border-mystic-copper/20 pb-2 w-full flex items-center gap-3">
-            <svg class="ico-lg opacity-70"><use href="#i-calendar"/></svg> Scheduling
-          </legend>
-          
+        <fieldset class="space-y-6">
+          <legend class="font-serif text-xl text-mystic-glow mb-2"><svg class="ico-lg"><use href="#i-calendar"/></svg>2. When works for you</legend>
+          <p class="hint">Pick everything that could work. All time windows are in St. Louis time (Central). Your final time is confirmed personally.</p>
+
           <div>
-            <p class="label" id="lenLabel">Session Length *</p>
-            <div class="flex flex-wrap gap-3 mt-2" role="radiogroup" aria-labelledby="lenLabel">
-              <label class="pill"><input type="radio" name="length" value="30" required><span>30 min · Targeted</span></label>
-              <label class="pill"><input type="radio" name="length" value="60" checked><span>60 min · Full Sequence</span></label>
-              <label class="pill"><input type="radio" name="length" value="90"><span>90 min · Deep & Slow</span></label>
+            <p class="label" id="lenLabel">Session length *</p>
+            <div class="flex flex-wrap gap-3" role="radiogroup" aria-labelledby="lenLabel">
+              <label class="pill"><input type="radio" name="length" value="30" required><span><svg class="ico"><use href="#i-clock"/></svg>30 min · targeted</span></label>
+              <label class="pill"><input type="radio" name="length" value="60" checked><span><svg class="ico"><use href="#i-clock"/></svg>60 min · full sequence</span></label>
+              <label class="pill"><input type="radio" name="length" value="90"><span><svg class="ico"><use href="#i-clock"/></svg>90 min · deep + slow</span></label>
             </div>
           </div>
 
-          <div class="grid md:grid-cols-2 gap-8">
-            <div><label class="label" for="date1">Earliest available date *</label>
-              <input id="date1" name="date1" type="date" required class="field w-full px-4 py-3 text-base [color-scheme:dark]"></div>
-            <div><label class="label" for="date2">Secondary date (optional)</label>
-              <input id="date2" name="date2" type="date" class="field w-full px-4 py-3 text-base [color-scheme:dark]"></div>
+          <div>
+            <p class="label" id="daysLabel">Days that could work *</p>
+            <div class="flex flex-wrap gap-2 mb-3"><button type="button" class="chip-btn" data-quick-name="days" data-vals="Mon,Tue,Wed,Thu,Fri">Weekdays</button><button type="button" class="chip-btn" data-quick-name="days" data-vals="Sat,Sun">Weekends</button><button type="button" class="chip-btn" data-quick-name="days" data-vals="*">Any day</button><button type="button" class="chip-btn" data-quick-name="days" data-vals="">Clear</button></div>
+            <div class="flex flex-wrap gap-2" role="group" aria-labelledby="daysLabel">
+              <label class="pill"><input type="checkbox" name="days" value="Mon"><span>Mon</span></label>
+              <label class="pill"><input type="checkbox" name="days" value="Tue"><span>Tue</span></label>
+              <label class="pill"><input type="checkbox" name="days" value="Wed"><span>Wed</span></label>
+              <label class="pill"><input type="checkbox" name="days" value="Thu"><span>Thu</span></label>
+              <label class="pill"><input type="checkbox" name="days" value="Fri"><span>Fri</span></label>
+              <label class="pill"><input type="checkbox" name="days" value="Sat"><span>Sat</span></label>
+              <label class="pill"><input type="checkbox" name="days" value="Sun"><span>Sun</span></label>
+            </div>
           </div>
 
           <div>
-            <p class="label" id="timesLabel">Time Windows *</p>
-            <p class="hint mb-4">Select all that might work to expedite booking. All windows are in St. Louis time (Central).</p>
+            <p class="label" id="timesLabel">Time windows that could work *</p>
+            <div class="flex flex-wrap gap-2 mb-3"><button type="button" class="chip-btn" data-quick-name="times" data-vals="Early morning (7-9am),Morning (9am-12pm)">Mornings</button><button type="button" class="chip-btn" data-quick-name="times" data-vals="Evening (4-8pm),Late (8-9:30pm)">Evenings</button><button type="button" class="chip-btn" data-quick-name="times" data-vals="*">Any time</button><button type="button" class="chip-btn" data-quick-name="times" data-vals="">Clear</button></div>
             <div class="flex flex-wrap gap-3" role="group" aria-labelledby="timesLabel">
-              <label class="pill"><input type="checkbox" name="times" value="Morning (9am-12pm)"><span>Morning (9-12)</span></label>
-              <label class="pill"><input type="checkbox" name="times" value="Afternoon (12-4pm)"><span>Afternoon (12-4)</span></label>
-              <label class="pill"><input type="checkbox" name="times" value="Evening (4-8pm)"><span>Evening (4-8)</span></label>
-              <label class="pill skip"><input type="checkbox" name="flexible" value="yes"><span>I am completely flexible</span></label>
+              <label class="pill"><input type="checkbox" name="times" value="Early morning (7-9am)"><span><svg class="ico"><use href="#i-sunrise"/></svg>Early (7–9am)</span></label>
+              <label class="pill"><input type="checkbox" name="times" value="Morning (9am-12pm)"><span><svg class="ico"><use href="#i-sun"/></svg>Morning (9–12)</span></label>
+              <label class="pill"><input type="checkbox" name="times" value="Afternoon (12-4pm)"><span><svg class="ico"><use href="#i-sun"/></svg>Afternoon (12–4)</span></label>
+              <label class="pill"><input type="checkbox" name="times" value="Evening (4-8pm)"><span><svg class="ico"><use href="#i-sunset"/></svg>Evening (4–8)</span></label>
+              <label class="pill"><input type="checkbox" name="times" value="Late (8-9:30pm)"><span><svg class="ico"><use href="#i-moon"/></svg>Late (8–9:30)</span></label>
             </div>
           </div>
-          
+
+          <div class="grid md:grid-cols-2 gap-6">
+            <div><label class="label" for="date1">Earliest date you could come *</label>
+              <input id="date1" name="date1" type="date" required class="field w-full px-3 py-3 text-base [color-scheme:dark]"></div>
+            <div><label class="label" for="date2">Backup date (optional)</label>
+              <input id="date2" name="date2" type="date" class="field w-full px-3 py-3 text-base [color-scheme:dark]"></div>
+          </div>
+
+          <div class="space-y-3">
+            <label class="flex items-start gap-3 cursor-pointer"><input type="checkbox" class="check" name="waitlist" value="yes">
+              <span class="text-sm">Add me to the <strong>cancellation list</strong>. Text or email me if an earlier slot opens.</span></label>
+            <label class="flex items-start gap-3 cursor-pointer"><input type="checkbox" class="check" name="flexible" value="yes">
+              <span class="text-sm">I am <strong>flexible</strong>. Offer me whatever opens first.</span></label>
+            <label class="flex items-start gap-3 cursor-pointer"><input type="checkbox" class="check" name="group" value="yes">
+              <span class="text-sm">I would like to book <strong>with a friend or studio group</strong> (back-to-back slots, we will discuss details).</span></label>
+          </div>
+
           <div>
-            <label class="label" for="timing">Training Context</label>
-            <select id="timing" name="timing" class="field w-full px-4 py-3 text-base">
-              <option value="">Select current phase...</option>
-              <option>Acute Recovery (Within 24h of intense load)</option>
-              <option>Pre-Performance (1-2 days before)</option>
-              <option>Post-Performance Reset</option>
-              <option>Routine Maintenance</option>
+            <label class="label" for="timing">Where does this fit in your training week?</label>
+            <select id="timing" name="timing" class="field w-full px-3 py-3 text-base">
+              <option value="">No preference</option>
+              <option>Within 24 hours after a hard session</option>
+              <option>1–2 days before a performance or competition</option>
+              <option>After a performance or competition</option>
+              <option>On a rest day</option>
+              <option>Regular maintenance</option>
+            </select>
+            <p class="hint mt-2">Deep work is usually best 2+ days before a performance, and gentler right before one.</p>
+          </div>
+        </fieldset>
+
+        <!-- 3. Goals -->
+        <fieldset class="space-y-6">
+          <legend class="font-serif text-xl text-mystic-glow mb-2"><svg class="ico-lg"><use href="#i-body"/></svg>3. Body map &amp; preferences</legend>
+          <div id="bodymap" class="mapcard rounded-2xl border border-mystic-gold/30 p-4 md:p-6">
+  <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
+    <p class="label" id="mapLabel" style="margin:0">Body map · tap an area to set it</p>
+    <div class="flex gap-2" role="group" aria-label="Body view">
+      <button type="button" class="viewbtn" data-view="front" aria-pressed="true">Front</button>
+      <button type="button" class="viewbtn" data-view="back" aria-pressed="false">Back</button>
+    </div>
+  </div>
+  <div class="grid md:grid-cols-[minmax(0,230px)_1fr] gap-6 items-start">
+    <div id="mapSvg" class="w-full max-w-[230px] mx-auto"></div>
+    <div>
+      <div id="zonePanel" class="zpanel" aria-live="polite"></div>
+      <ul class="flex flex-wrap gap-x-4 gap-y-2 mt-4 text-xs text-[#c7cfe0]" aria-label="Map key">
+        <li class="flex items-center gap-2"><i class="sw sw-focus"></i>Focus here</li>
+        <li class="flex items-center gap-2"><i class="sw sw-include"></i>Include</li>
+        <li class="flex items-center gap-2"><i class="sw sw-ask"></i>Ask me first</li>
+        <li class="flex items-center gap-2"><i class="sw sw-skip"></i>Skip</li>
+      </ul>
+      <p class="label" style="margin-top:1.25rem">All areas (same choices, easier on small screens)</p>
+      <div id="zoneChips" class="flex flex-wrap gap-2"></div>
+      <div class="flex flex-wrap items-center gap-3 mt-4">
+        <button type="button" id="mapReset" class="chip-btn">Reset to defaults</button>
+        <p id="mapCount" class="hint" aria-live="polite"></p>
+      </div>
+    </div>
+  </div>
+</div>
+
+          <div>
+            <label class="label" for="pressure">Overall pressure today: <output id="pressureOut" class="text-white">3 · Firm</output></label>
+            <input id="pressure" name="pressure" type="range" min="1" max="5" step="1" value="3" class="w-full accent-[#ffaa00]" aria-describedby="pressureHint">
+            <div class="flex justify-between hint mt-2" aria-hidden="true"><span class="inline-flex items-center"><svg class="ico" style="margin-right:.3rem"><use href="#i-drop"/></svg>1 Light</span><span class="inline-flex items-center"><svg class="ico" style="margin-right:.3rem"><use href="#i-drop"/></svg>3 Firm</span><span class="inline-flex items-center"><svg class="ico" style="margin-right:.3rem"><use href="#i-bolt"/></svg>5 Intense</span></div>
+            <p id="pressureHint" class="hint mt-1">We can adjust pressure for each area in person, and we will check in during the session.</p>
+          </div>
+          <div>
+            <p class="label" id="styleLabel">Session atmosphere</p>
+            <div class="flex flex-wrap gap-2" role="radiogroup" aria-labelledby="styleLabel">
+              <label class="pill"><input type="radio" name="style" value="No preference" checked><span>No preference</span></label>
+              <label class="pill"><input type="radio" name="style" value="Quiet, minimal talking"><span><svg class="ico"><use href="#i-mute"/></svg>Quiet</span></label>
+              <label class="pill"><input type="radio" name="style" value="Check in with me often"><span><svg class="ico"><use href="#i-chat"/></svg>Check in often</span></label>
+              <label class="pill"><input type="radio" name="style" value="Explain each technique as you go"><span><svg class="ico"><use href="#i-user"/></svg>Explain as you go</span></label>
+              <label class="pill"><input type="radio" name="style" value="Soft music"><span><svg class="ico"><use href="#i-music"/></svg>Soft music</span></label>
+              <label class="pill"><input type="radio" name="style" value="No music"><span><svg class="ico"><use href="#i-mute"/></svg>No music</span></label>
+            </div>
+          </div>
+        </fieldset>
+
+        <!-- 4. Consent -->
+        <fieldset class="space-y-6">
+          <legend class="font-serif text-xl text-mystic-glow mb-2"><svg class="ico-lg"><use href="#i-shield"/></svg>4. Your boundaries</legend>
+
+          <div>
+            <p class="label" id="drapeLabel">Clothing & draping *</p>
+            <div class="flex flex-wrap gap-3" role="radiogroup" aria-labelledby="drapeLabel">
+              <label class="pill"><input type="radio" name="drape" value="Clothed (sports bra / shorts)" required><span><svg class="ico"><use href="#i-shirt"/></svg>Stay clothed</span></label>
+              <label class="pill"><input type="radio" name="drape" value="Undressed to comfort with full draping"><span><svg class="ico"><use href="#i-layers"/></svg>Draped with sheet</span></label>
+              <label class="pill"><input type="radio" name="drape" value="Discuss at arrival"><span><svg class="ico"><use href="#i-chat"/></svg>Discuss when I arrive</span></label>
+            </div>
+            <p class="hint mt-2">Whatever you pick, I will leave the room while you get settled, and nothing is uncovered unless you've agreed.</p>
+          </div>
+
+          <div>
+            <label class="label" for="chaperone">Support person</label>
+            <select id="chaperone" name="chaperone" class="field w-full px-3 py-3 text-base">
+              <option value="">Not needed</option><option>I would like a friend to wait nearby</option><option>I would like a friend in the room</option>
             </select>
           </div>
-        </fieldset>
 
-        <!-- 3. Goals & Body Map -->
-        <fieldset class="space-y-8">
-          <legend class="font-serif text-2xl text-mystic-champagne italic mb-4 border-b border-mystic-copper/20 pb-2 w-full flex items-center gap-3">
-            <svg class="ico-lg opacity-70"><use href="#i-body"/></svg> Somatic Topography
-          </legend>
-          
-          <div id="bodymap" class="mapcard rounded-sm border border-mystic-copper/10 p-6 md:p-8">
-            <div class="flex flex-wrap items-center justify-between gap-4 mb-6">
-              <p class="text-sm font-serif text-mystic-champagne tracking-widest uppercase">Interactive Map</p>
-              <div class="flex gap-2" role="group" aria-label="Body view">
-                <button type="button" class="viewbtn" data-view="front" aria-pressed="true">Anterior (Front)</button>
-                <button type="button" class="viewbtn" data-view="back" aria-pressed="false">Posterior (Back)</button>
-              </div>
-            </div>
-            
-            <div class="grid md:grid-cols-[minmax(0,250px)_1fr] gap-8 items-start">
-              <div id="mapSvg" class="w-full max-w-[250px] mx-auto opacity-90 transition-opacity hover:opacity-100"></div>
-              
-              <div>
-                <div id="zonePanel" class="zpanel" aria-live="polite"></div>
-                
-                <div class="mt-8">
-                  <p class="label mb-3">Manual Selection</p>
-                  <div id="zoneChips" class="flex flex-wrap gap-2"></div>
-                </div>
-                
-                <div class="flex flex-wrap justify-between items-center mt-6 pt-4 border-t border-mystic-copper/10">
-                  <p id="mapCount" class="text-xs text-mystic-champagne/50 font-light tracking-wide" aria-live="polite"></p>
-                  <button type="button" id="mapReset" class="text-xs text-mystic-copper hover:text-mystic-champagne transition-colors uppercase tracking-widest">Reset Map</button>
-                </div>
-              </div>
-            </div>
-          </div>
-
-          <div class="pt-4">
-            <label class="label flex justify-between" for="pressure">
-              <span>Overall Pressure Intention</span>
-              <output id="pressureOut" class="text-mystic-champagne font-light">3 · Firm</output>
-            </label>
-            <input id="pressure" name="pressure" type="range" min="1" max="5" step="1" value="3" class="w-full accent-mystic-copper mt-3" aria-describedby="pressureHint">
-            <p id="pressureHint" class="hint mt-3 italic">Pressure is a dialogue. We will constantly refine this based on tissue response.</p>
-          </div>
+          <div class="rounded-xl border border-mystic-gold/30 p-5 flex items-start gap-3"><svg class="ico-lg"><use href="#i-body"/></svg><p class="hint">Area-by-area choices (Focus, Include, Ask me first, Skip) are set on the <a href="#bodymap" class="underline text-mystic-gold">body map</a> above. Sensitive areas start as <strong class="text-white">Skip</strong>. You can change any of them again in person.</p></div>
 
           <div>
-            <p class="label" id="styleLabel">Atmosphere</p>
-            <div class="flex flex-wrap gap-3 mt-2" role="radiogroup" aria-labelledby="styleLabel">
-              <label class="pill"><input type="radio" name="style" value="Quiet" checked><span>Quiet (Meditative)</span></label>
-              <label class="pill"><input type="radio" name="style" value="Check in often"><span>Frequent Check-ins</span></label>
-              <label class="pill"><input type="radio" name="style" value="Explain as you go"><span>Clinical Explanation</span></label>
-            </div>
+            <label class="label" for="stopWord">Your own stop word or signal (optional)</label>
+            <input maxlength="100" id="stopWord" name="stopWord" type="text" placeholder="e.g. 'red', or tap twice" class="field w-full px-3 py-3 text-base">
+            <p class="hint mt-1">"Pause", "skip" and "stop" will always work too.</p>
           </div>
         </fieldset>
 
-        <!-- 4. Boundaries -->
-        <fieldset class="space-y-8">
-          <legend class="font-serif text-2xl text-mystic-champagne italic mb-4 border-b border-mystic-copper/20 pb-2 w-full flex items-center gap-3">
-            <svg class="ico-lg opacity-70"><use href="#i-shield"/></svg> Sanctuary Rules
-          </legend>
-
-          <div>
-            <p class="label" id="drapeLabel">Draping Preference *</p>
-            <div class="flex flex-col gap-3 mt-2" role="radiogroup" aria-labelledby="drapeLabel">
-              <label class="pill justify-start text-left"><input type="radio" name="drape" value="Clothed" required><span>Athletic wear (Sports bra / shorts)</span></label>
-              <label class="pill justify-start text-left"><input type="radio" name="drape" value="Draped"><span>Undressed to comfort, fully draped with linens</span></label>
-            </div>
+        <!-- 5. Health -->
+        <fieldset class="space-y-4">
+          <legend class="font-serif text-xl text-mystic-glow mb-2"><svg class="ico-lg"><use href="#i-heart"/></svg>5. Health check</legend>
+          <p class="hint">This helps keep deep work safe. Tick anything that applies. I may need to adapt the session or ask for a doctor's okay, and I will talk it through with you first.</p>
+          <div class="grid md:grid-cols-2 gap-3 text-sm">
+            <label class="flex items-start gap-3"><input type="checkbox" class="check" name="health" value="Pregnant or possibly pregnant"><span>Pregnant or possibly pregnant</span></label>
+            <label class="flex items-start gap-3"><input type="checkbox" class="check" name="health" value="Blood thinners or clotting condition"><span>Blood thinners or clotting condition</span></label>
+            <label class="flex items-start gap-3"><input type="checkbox" class="check" name="health" value="Recent injury, sprain or strain (under 6 weeks)"><span>Recent injury or strain (under 6 weeks)</span></label>
+            <label class="flex items-start gap-3"><input type="checkbox" class="check" name="health" value="Recent surgery"><span>Recent surgery</span></label>
+            <label class="flex items-start gap-3"><input type="checkbox" class="check" name="health" value="Fresh bruising, open skin or rash"><span>Fresh bruising, open skin, rash or pole burns</span></label>
+            <label class="flex items-start gap-3"><input type="checkbox" class="check" name="health" value="Numbness or tingling"><span>Numbness or tingling in arms or legs</span></label>
+            <label class="flex items-start gap-3"><input type="checkbox" class="check" name="health" value="Fever or feeling unwell"><span>Fever or feeling unwell today</span></label>
+            <label class="flex items-start gap-3"><input type="checkbox" class="check" name="health" value="Allergies (oils, lotions, latex)"><span>Allergies to oils, lotions or latex</span></label>
           </div>
-
           <div>
-            <label class="label" for="stopWord">Personal Stop Signal (optional)</label>
-            <input maxlength="100" id="stopWord" name="stopWord" type="text" placeholder="e.g., 'Red' or two taps" class="field w-full px-4 py-3 text-base">
-            <p class="hint mt-2">"Pause" and "Stop" are always universally respected.</p>
-          </div>
-          
-          <div>
-            <label class="label" for="notes">Somatic Notes & History</label>
-            <textarea maxlength="2000" id="notes" name="notes" rows="3" class="field w-full px-4 py-3 text-base resize-y" placeholder="Injuries, guarding points, emotional triggers, or specific access needs. Share only what feels safe."></textarea>
+            <label class="label" for="notes">Anything else I should know (injuries, sensitive spots, past experiences, access needs)</label>
+            <textarea maxlength="2000" id="notes" name="notes" rows="4" class="field w-full px-3 py-3 text-base resize-y" placeholder="Share only what you're comfortable with. Optional."></textarea>
           </div>
         </fieldset>
-
-        <p id="deliveryNote" class="hint leading-relaxed">Sending shares your responses with FormSubmit for delivery to the practitioner by email. Share only what you are comfortable emailing; you can discuss personal history in person. This page does not save responses after a refresh. A downloaded record stays on your device.</p>
 
         <!-- 6. Agreement -->
-        <fieldset class="space-y-5 bg-mystic-charcoal/30 p-6 rounded border border-mystic-copper/10">
-          <label class="flex items-start gap-4 cursor-pointer text-sm font-light text-mystic-champagne/90 leading-relaxed">
-            <input type="checkbox" class="check mt-1" name="ack1" required>
-            <span>I acknowledge this is restorative bodywork, not medical treatment. I hold the power to alter or halt any technique immediately. *</span>
-          </label>
-          <label class="flex items-start gap-4 cursor-pointer text-sm font-light text-mystic-champagne/90 leading-relaxed">
-            <input type="checkbox" class="check mt-1" name="ack3" required>
-            <span>I understand my map and boundaries will be verbally honored and confirmed before the session begins. *</span>
-          </label>
+        <fieldset class="space-y-4">
+          <legend class="font-serif text-xl text-mystic-glow mb-2"><svg class="ico-lg"><use href="#i-check"/></svg>6. Agreement</legend>
+          <label class="flex items-start gap-3 cursor-pointer text-sm"><input type="checkbox" class="check" name="ack1" required>
+            <span>I understand this is therapeutic bodywork, not medical diagnosis or treatment, and that I can ask for any technique to change or stop at any time. *</span></label>
+          <label class="flex items-start gap-3 cursor-pointer text-sm"><input type="checkbox" class="check" name="ack2" required>
+            <span>My answers above are accurate to my knowledge, and I will tell the practitioner if anything changes before or during the session. *</span></label>
+          <label class="flex items-start gap-3 cursor-pointer text-sm"><input type="checkbox" class="check" name="ack3" required>
+            <span>I understand that my choices here will be reconfirmed verbally at the session, and I can change them then. *</span></label>
+          <label class="flex items-start gap-3 cursor-pointer text-sm"><input type="checkbox" class="check" name="ack4">
+            <span>Optional: send me a reminder the day before, and a short aftercare note afterward.</span></label>
         </fieldset>
 
-        <label class="flex items-start gap-4 cursor-pointer text-sm font-light text-mystic-champagne/90 leading-relaxed">
-          <input type="checkbox" class="check mt-1" name="ackDelivery" required aria-describedby="deliveryNote">
-          <span>I agree to send these responses through FormSubmit to the practitioner by email. *</span>
-        </label>
-        <div class="text-center pt-8">
-          <button id="submitBtn" type="submit" class="inline-flex items-center justify-center px-12 py-5 font-serif text-lg tracking-widest uppercase text-mystic-obsidian bg-mystic-champagne hover:bg-white transition-colors rounded-sm shadow-[0_0_20px_rgba(247,231,206,0.15)]">
-            Solidify Intentions
+        <div class="delivery-note"><p id="deliveryNote">Sending shares these answers, including any health details, with FormSubmit for email delivery to the practitioner. Share only what you are comfortable emailing. This page keeps answers only until it is refreshed; a downloaded copy stays on your device.</p>
+          <label class="flex items-start gap-3"><input type="checkbox" name="ackDelivery" required class="check" aria-describedby="deliveryNote"><span>I agree to this email delivery of my answers. *</span></label>
+        </div>
+        <div class="text-center pt-2">
+          <button id="submitBtn" type="submit" class="inline-flex items-center justify-center px-8 py-4 min-h-[48px] font-serif text-lg tracking-wider text-black bg-gradient-to-r from-mystic-gold to-mystic-glow rounded-full hover:scale-105 transition-transform">
+            Preview my session
           </button>
           <p id="submitStatus" class="hint mt-4" role="status" aria-live="polite"></p>
-          <div class="flex flex-wrap justify-center gap-4 mt-6">
-            <button id="draftBtn" type="button" class="chip-btn">Save a draft JSON</button>
-            <button id="draftMailBtn" type="button" class="chip-btn">Email a request manually</button>
-          </div>
+          <div class="mt-5"><button type="button" id="jsonNowBtn" class="chip-btn">Download my answers as JSON</button><p class="hint mt-2">Optional. Saves a copy to your device, nothing is sent.</p></div>
         </div>
       </form>
 
       <!-- Confirmation -->
-      <div id="done" class="hidden text-center fade-in" tabindex="-1" aria-live="polite">
-        <svg class="ico-lg mx-auto mb-6 opacity-80" style="width: 3rem; height: 3rem; stroke: #d4af37;"><use href="#i-check"/></svg>
-        <h3 class="font-serif text-3xl text-mystic-champagne italic mb-4">Request Submitted, <span id="doneName"></span></h3>
-        <p id="doneMsg" class="text-mystic-champagne/70 font-light mb-10 max-w-lg mx-auto leading-relaxed"></p>
-        
-        <div class="flex flex-wrap justify-center gap-4 no-print border-t border-mystic-copper/20 pt-10">
-          <button id="jsonBtn" type="button" class="text-sm tracking-widest uppercase px-6 py-3 border border-mystic-copper/40 text-mystic-champagne hover:bg-mystic-copper/10 transition-colors rounded-sm">Save JSON Record</button>
-          <button id="mailBtn" type="button" class="text-sm tracking-widest uppercase px-6 py-3 border border-mystic-copper/40 text-mystic-champagne hover:bg-mystic-copper/10 transition-colors rounded-sm">Prepare Email Copy</button>
-          <button id="editBtn" type="button" class="chip-btn">Return to my responses</button>
+      <div id="done" class="hidden text-center" tabindex="-1" aria-live="polite">
+        <p class="eyebrow review-eyebrow">Your session intentions</p><h3 id="doneTitle" class="review-title">Ready when you are, <span id="doneName"></span>.</h3>
+        <p id="doneMsg" class="text-gray-200 font-light mb-6"></p>
+        <div class="flex flex-wrap justify-center gap-3 no-print">
+          <button id="sendReviewedBtn" type="button" class="primary-action">Send appointment request</button>
+          <button id="jsonBtn" type="button" class="px-5 py-3 rounded-full bg-gradient-to-r from-mystic-gold to-mystic-glow text-black font-medium">Download JSON</button>
+          <button id="retryBtn" type="button" class="hidden px-5 py-3 rounded-full border border-mystic-glow text-mystic-glow hover:bg-white/10">Try sending again</button>
+          <button id="mailBtn" type="button" class="px-5 py-3 rounded-full border border-mystic-gold/60 hover:bg-white/10">Email it myself</button>
+          <button id="copyBtn" type="button" class="px-5 py-3 rounded-full border border-mystic-gold/60 hover:bg-white/10">Copy JSON</button>
+          <button id="editBtn" type="button" class="px-5 py-3 rounded-full border border-mystic-gold/60 hover:bg-white/10">Edit my answers</button>
         </div>
+        <details class="mt-6 text-left">
+          <summary class="cursor-pointer text-mystic-gold text-sm">Your answers (JSON)</summary>
+          <pre id="jsonPreview" class="mt-3 text-xs whitespace-pre-wrap break-words bg-black/40 rounded-lg p-4 max-h-96 overflow-auto"></pre>
+        </details>
+        <details class="mt-4 text-left" open>
+          <summary class="cursor-pointer text-mystic-gold text-sm">Readable summary</summary>
+          <pre id="summary" class="mt-3 text-xs whitespace-pre-wrap bg-black/40 rounded-lg p-4 max-h-80 overflow-auto"></pre>
+        </details>
       </div>
     </div>
   </section>
 </main>
 
-<footer class="border-t border-mystic-copper/10 py-12 text-center bg-mystic-obsidian">
-  <p class="text-xs text-mystic-champagne/40 font-sans tracking-[0.2em] uppercase">© 2026 Spin Diesel Recovery</p>
+<footer class="border-t border-white/10 py-8 text-center">
+  <p class="footer-brand">Spin Diesel Recovery</p><p class="hint">Your body. Your rhythm. Your boundaries.</p><p class="footer-meta">© 2026 · Pole & aerial bodywork · St. Louis time</p>
 </footer>
+
 
 <script src="./intake-core.js"></script>
 <script src="./app.js"></script>

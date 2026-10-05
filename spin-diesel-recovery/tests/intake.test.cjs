@@ -7,8 +7,10 @@ const values = {
   name: '  Example Athlete  ', pronouns: 'they/them', email: 'athlete@example.com', phone: '555-0100',
   length: '60', date1: '2026-10-05', date2: '2026-10-07', times: ['Evening (4-8pm)'],
   flexible: 'yes', timing: 'Routine Maintenance', pressure: '4', style: 'Quiet',
+  days: ['Mon','Fri'], contactPref: 'either', ecName: 'Example Contact, 555-0101',
+  waitlist: 'yes', group: 'yes', chaperone: 'I would like a friend in the room', health: ['Recent surgery'],
   drape: 'Clothed', notes: '<script>literal text</script>', stopWord: 'Red',
-  ack1: 'on', ack3: 'on', ackDelivery: 'on'
+  ack1: 'on', ack2: 'on', ack3: 'on', ack4: 'on', ackDelivery: 'on'
 };
 const zones = { neck: 'focus', glutes: 'skip', chest: 'ask' };
 const record = () => core.buildData(values, zones, new Date('2026-10-05T13:00:00Z'), 'test-request');
@@ -38,7 +40,7 @@ test('record retains every intake answer and a snapshot of the body map', () => 
   assert.equal(data.availability.date2, values.date2);
   assert.equal(data.availability.flexible, true);
   assert.equal(data.availability.trainingContext, values.timing);
-  assert.equal(data.preferences.pressureLabel, 'Deep');
+  assert.equal(data.preferences.pressureLabel, 'Firm-deep');
   assert.equal(data.boundaries.notes, values.notes);
   assert.deepEqual(data.preferences.bodyMap, zones);
   assert.equal(data.agreements.emailDelivery, true);
@@ -84,7 +86,23 @@ test('interactive map keeps keyboard activation, accessible names, and radio foc
   assert.match(app, /refresh\(false\)/);
   assert.doesNotMatch(app, /Simulate network/);
 });
-test('hero fade-in has its own keyframes rather than depending on Tailwind generation', () => {
-  const html = fs.readFileSync(require.resolve('../index.html'), 'utf8');
-  assert.match(html, /@keyframes fadeInUp\s*\{/);
+test('expanded source intake survives export and delivery without dropping preferences', () => {
+  const data=record();
+  assert.deepEqual(data.availability.days,['Mon','Fri']);
+  assert.equal(data.availability.cancellationList,true);
+  assert.equal(data.availability.groupBooking,true);
+  assert.equal(data.contact.preferredContact,'either');
+  assert.equal(data.contact.emergencyContact,values.ecName);
+  assert.deepEqual(data.health.flags,values.health);
+  assert.equal(data.boundaries.supportPerson,values.chaperone);
+  assert.equal(data.agreements.answersAccurate,true);
+  assert.equal(data.agreements.reminderAndAftercareOptIn,true);
+  const p=core.payload(data,{});
+  assert.equal(p['Health flags'],'Recent surgery');
+  assert.equal(p['Support person'],values.chaperone);
+});
+test('missing days and accuracy agreement cannot pass unless day availability is flexible', () => {
+  assert.ok(core.validate({...values, days:[], flexible:'',ack2:''},'2026-10-05').some(e=>e.field==='days'));
+  assert.ok(core.validate({...values, ack2:''},'2026-10-05').some(e=>e.field==='ack2'));
+  assert.deepEqual(core.validate({...values, days:[], times:[]},'2026-10-05'),[]);
 });

@@ -1,6 +1,6 @@
 # Code audit — October 5, 2026
 
-Scope: the supplied single HTML file, its browser behavior, the FormSubmit integration, and GitHub Pages publishing. Original clinical and creative copy retained; this is a software review, not a review of practitioner qualifications or treatment methods.
+Scope: both supplied HTML revisions, their browser behavior, the FormSubmit integration, and GitHub Pages publishing. The richer revision and supplied lotus artwork are synthesized into the existing site, preserving creative copy and consent defaults.
 
 | Finding | Severity | Repair |
 | --- | --- | --- |
@@ -14,19 +14,22 @@ Scope: the supplied single HTML file, its browser behavior, the FormSubmit integ
 | SVG buttons lacked labels and keyboard handlers | Medium | Named map controls, Enter/Space activation, selection states, and panel associations |
 | Rebuilding the zone panel after each radio change lost focus | Medium | Change updates map/chips without replacing the focused radio group |
 | Pressure output never updated | Medium | Live label and accessible slider value text |
-| Progress excluded required length and displayed an inconsistent total | Medium | Nine validated completion criteria, matching delivery acknowledgment |
+| Progress excluded required length and displayed an inconsistent total | Medium | Eleven completion criteria matching the richer form's required agreements and availability |
 | No network/timeout handling or repeat-submit guard | Medium | Timeout, rejection handling, busy states, and double-click guard |
 | Answers could change while a request was in flight | Medium | Snapshot first, then lock form controls and map until delivery finishes |
 | Object URLs were never revoked | Low | Download anchors removed and URLs released |
 | Motion and small-screen controls needed attention | Medium | Reduced-motion support, 44px choice controls, chip wrapping, and mobile padding |
-| Custom fade-in classes referenced keyframes that Tailwind did not generate | High | Explicit CSS keyframes restore the hero title, navigation, and intake button |
+| Custom fade-in classes referenced keyframes that Tailwind did not generate | High | Current hero renders visibly without depending on generated animation utilities |
 | All application code lived in one HTML file | Low | Browser behavior and pure intake logic separated for focused edits and tests |
+| Richer revision introduced additional fields absent from the earlier record | High | Days, health flags, support person, contact preference, cancellation list, group booking, and all agreements survive review, export, and delivery |
+| Form submission immediately initiated delivery | Medium | Explicit preview step followed by a separate send action; editing preserves answers |
+| Artwork embedded a large data URI in the page | Low | Optimized WebP asset loads separately and retains the full artwork |
 
 ## Verification
 
-Node regression tests cover complete records, consent and availability validation, St. Louis date boundaries, real POST payload shape, successful acceptance, HTTP rejection, false/missing success, invalid JSON, network failure, and timeout. Static HTML checks cover duplicate IDs and required script/control references. Public-page inspection follows the Pages deployment.
+Twelve Node regression tests cover complete records including the richer fields, consent and availability validation, St. Louis date boundaries, real POST payload shape, successful acceptance, HTTP rejection, false/missing success, invalid JSON, network failure, and timeout. Static HTML checks cover duplicate IDs and relative asset references. Public-page inspection follows the Pages deployment.
 
-The public page loaded with the original design. Live checks confirmed keyboard map selection, focus preference updates, pressure-label updates, and visible/focused errors on an empty submission. Mobile wrapping and reduced-motion styles were inspected in source; full device emulation was not available in this environment.
+The earlier public revision was verified for keyboard map selection, focus preference updates, pressure labels, and focused errors. The current synthesis adds live session summaries, explicit review, day/time shortcuts, and optional pointer parallax that respects reduced motion. Mobile wrapping and reduced-motion styles were inspected in source; full device emulation was not available in this environment.
 
 ## Remaining limits
 

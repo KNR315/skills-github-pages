@@ -1,10 +1,12 @@
 # Spin Diesel Recovery
 
-An appointment-request and consent intake for pole and aerial athletes, preserving Khylan's lotus artwork, copper and champagne palette, artisan typography, somatic map, and sanctuary language.
+An appointment-request and consent intake for pole and aerial athletes, preserving Khylan's lotus artwork, somatic map, consent defaults, and sanctuary language. The latest synthesis uses the supplied fire-and-water artwork with navy, gold, red, and blue accents.
 
 ## Files
 
-- `index.html`: Original composition, content, inline lotus image, and responsive styles.
+- `index.html`: Page composition, richer intake, and review panel.
+- `base.css` and `design.css`: Responsive foundation and artwork-inspired visual system.
+- `assets/lotus-fire-water.webp`: Supplied artwork optimized for web delivery, retaining its full composition.
 - `app.js`: Interactive map, progress, validation presentation, submission, and downloads.
 - `intake-core.js`: Testable data, validation, and delivery functions.
 - `tests/intake.test.cjs`: Regression coverage using Node's built-in test runner.
@@ -24,7 +26,9 @@ Natural-language edits can target this folder's files. Preserve the artwork, cop
 
 GitHub Pages serves static files. The page POSTs to the pre-existing FormSubmit address in `app.js`; no custom server or appointment database exists. FormSubmit forwards accepted requests by email. The recipient may need to activate FormSubmit in their inbox before delivery works. A positive API response does not prove inbox receipt or confirm an appointment. The frontend reports this distinction explicitly.
 
-The form includes an email-delivery disclosure and consent checkbox. It retains answers only in the current page and offers JSON downloads and manual email drafts. A refresh loses unsaved answers. No localStorage, cookies for intake data, or public data storage is added. FormSubmit and the recipient mailbox process submitted data; this implementation makes no clinical security certification claim.
+The form includes an email-delivery disclosure and consent checkbox. Previewing shows a readable review without sending anything; a separate send action submits the reviewed snapshot. Live session summaries, day/time shortcuts, optional health fields, support-person preferences, JSON exports, manual email drafts, and retries are included. All richer fields are retained in the delivery payload and export.
+
+Answers remain only in the current page until explicitly sent or exported. A refresh loses unsaved answers. No localStorage or public intake storage is added. FormSubmit and the recipient mailbox process submitted data.
 
 Live delivery was not exercised with a real client request. Tests mock the provider to avoid sending test messages. Before inviting clients, verify recipient activation and send an explicitly intended request end to end.
 
