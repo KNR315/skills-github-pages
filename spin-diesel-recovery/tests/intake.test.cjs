@@ -64,6 +64,8 @@ test('only accepted provider responses report success; POST contains complete da
       assert.equal(options.method, 'POST');
       assert.ok(JSON.parse(options.body)['Complete record']);
       assert.equal(JSON.parse(options.body)._url, core.SITE_URL);
+      assert.equal(options.referrer, core.SITE_URL);
+      assert.equal(options.referrerPolicy, 'no-referrer-when-downgrade');
       return { ok: true, json: async () => ({ success }) };
     });
   }

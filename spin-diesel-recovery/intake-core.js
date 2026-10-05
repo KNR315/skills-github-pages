@@ -78,6 +78,8 @@
     try {
       const response = await fetchFn(endpoint, {
         method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
+        // Share only the canonical public form address, never a visitor's query or fragment.
+        referrer: SITE_URL, referrerPolicy: 'no-referrer-when-downgrade',
         body: JSON.stringify(payload(data, names)), signal: controller.signal
       });
       const result = await response.json();

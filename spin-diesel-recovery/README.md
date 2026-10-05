@@ -20,7 +20,7 @@ From this folder, run `python3 -m http.server 8000` and open `http://localhost:8
 
 This folder lives in `KNR315/skills-github-pages` on `main`. The existing GitHub Pages branch build publishes it at `/skills-github-pages/spin-diesel-recovery/`. Changes committed to `main` deploy automatically through the existing Pages build. Repository history retains each revision.
 
-Public booking link: [Spin Diesel Recovery — Booking & Consent](https://knr315.github.io/skills-github-pages/spin-diesel-recovery/). The repository's Pages homepage redirects here. The GitHub repository README also links here directly. The bare `https://knr315.github.io/` domain has no personal Pages site and is not the booking URL. FormSubmit receives the explicit full form URL through `_url` and a readable `Form URL` field, preventing its email links from losing the project path.
+Public booking link: [Spin Diesel Recovery — Booking & Consent](https://knr315.github.io/skills-github-pages/spin-diesel-recovery/). The repository's Pages homepage redirects here. The GitHub repository README also links here directly. The bare `https://knr315.github.io/` domain has no personal Pages site and is not the booking URL. FormSubmit receives the explicit full form URL through `_url`, a readable `Form URL` field, and a request-specific canonical referrer. This referrer contains no visitor query parameters or fragments. The readable `Form URL` field was verified in a delivered test email; it provides a working address even when the provider's introductory line uses the bare origin.
 
 Natural-language edits can target this folder's files. Preserve the artwork, copy, consent defaults, and aesthetic unless a change is specifically requested. Request data must never be committed to the repository.
 
