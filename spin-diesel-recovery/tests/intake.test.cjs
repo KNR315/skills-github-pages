@@ -55,12 +55,15 @@ test('provider payload includes boundaries, body map, and full record', () => {
   assert.match(payload['Body map'], /ask: Chest/);
   assert.deepEqual(JSON.parse(payload['Complete record']), record());
   assert.equal(payload.email, values.email);
+  assert.equal(payload._url, 'https://knr315.github.io/skills-github-pages/spin-diesel-recovery/');
+  assert.equal(payload['Form URL'], payload._url);
 });
 test('only accepted provider responses report success; POST contains complete data', async () => {
   for (const success of [true, 'true']) {
     await core.send('https://example.invalid', record(), {}, async (endpoint, options) => {
       assert.equal(options.method, 'POST');
       assert.ok(JSON.parse(options.body)['Complete record']);
+      assert.equal(JSON.parse(options.body)._url, core.SITE_URL);
       return { ok: true, json: async () => ({ success }) };
     });
   }

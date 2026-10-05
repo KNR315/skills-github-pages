@@ -25,6 +25,8 @@ Scope: both supplied HTML revisions, their browser behavior, the FormSubmit inte
 | Form submission immediately initiated delivery | Medium | Explicit preview step followed by a separate send action; editing preserves answers |
 | Artwork embedded a large data URI in the page | Low | Optimized WebP asset loads separately and retains the full artwork |
 | Browser reused earlier scripts after the new HTML deployed | High | Versioned local stylesheet and script URLs keep the synthesis assets together for returning visitors |
+| FormSubmit emails linked to the bare domain, which returned 404 | High | Explicit `_url` and readable `Form URL` use the complete working form address |
+| Repository landing page still showed the GitHub exercise | Medium | Branded root redirect, direct booking link in the repository README, and a useful project 404 page |
 
 ## Verification
 

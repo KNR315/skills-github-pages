@@ -1,16 +1,19 @@
-# GitHub Pages
+# Spin Diesel Recovery
 
-<img src="https://octodex.github.com/images/Professortocat_v2.png" align="right" height="200px" />
+Consent-first recovery bodywork for pole and aerial athletes.
 
-Hey KNR315!
+**[Open Spin Diesel Recovery — Booking & Consent](https://knr315.github.io/skills-github-pages/spin-diesel-recovery/)**
 
-Mona here. I'm done preparing your exercise. Hope you enjoy! 💚
+Use the booking link above to explore the body map, share preferences, and request a session. Times are confirmed personally. This repository contains the website's source code.
 
-Remember, it's self-paced so feel free to take a break! ☕️
+The shorter [Pages homepage](https://knr315.github.io/skills-github-pages/) also opens the form. The bare `knr315.github.io` domain is not the booking address.
 
-[![](https://img.shields.io/badge/Go%20to%20Exercise-%E2%86%92-1f883d?style=for-the-badge&logo=github&labelColor=197935)](https://github.com/KNR315/skills-github-pages/issues/1)
+## Project files
 
----
+- [`spin-diesel-recovery/`](spin-diesel-recovery/): website, styles, artwork, and intake logic.
+- [Project README](spin-diesel-recovery/README.md): local development and publishing.
+- [Code audit](spin-diesel-recovery/AUDIT.md): repairs, verification, and limits.
 
-&copy; 2025 GitHub &bull; [Code of Conduct](https://www.contributor-covenant.org/version/2/1/code_of_conduct/code_of_conduct.md) &bull; [MIT License](https://gh.io/mit)
+Run `node --test spin-diesel-recovery/tests/intake.test.cjs` for regression checks. Pushes to `main` publish through GitHub Pages.
 
+The repository began as the GitHub Pages exercise. Its original first-page copy remains at `index.md`, published under `/archive/first-page/`, and earlier revisions remain in Git history.

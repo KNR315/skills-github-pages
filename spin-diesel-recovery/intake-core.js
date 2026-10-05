@@ -3,6 +3,7 @@
 // Pure intake logic shared by the browser and regression tests.
 (function (root) {
   const TIME_ZONE = 'America/Chicago';
+  const SITE_URL = 'https://knr315.github.io/skills-github-pages/spin-diesel-recovery/';
   const PRESSURE = ['Light', 'Light-medium', 'Firm', 'Firm-deep', 'Intense'];
   function todayISO(now = new Date()) {
     const parts = new Intl.DateTimeFormat('en-US', {
@@ -49,6 +50,8 @@
     return {
       name: data.contact.name, email: data.contact.email,
       _subject: 'Spin Diesel Recovery — appointment request', _template: 'table',
+      _url: SITE_URL,
+      'Form URL': SITE_URL,
       'Request ID': data.meta.requestId,
       'Pronouns': data.contact.pronouns, 'Phone': data.contact.phone,
       'Preferred contact': data.contact.preferredContact, 'Emergency contact': data.contact.emergencyContact,
@@ -82,7 +85,7 @@
       return result;
     } finally { clearTimeout(timeout); }
   }
-  const api = { TIME_ZONE, PRESSURE, todayISO, validDate, validate, buildData, payload, send };
+  const api = { TIME_ZONE, SITE_URL, PRESSURE, todayISO, validDate, validate, buildData, payload, send };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.RecoveryIntake = api;
 })(globalThis);
