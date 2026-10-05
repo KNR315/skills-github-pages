@@ -24,6 +24,7 @@ Scope: both supplied HTML revisions, their browser behavior, the FormSubmit inte
 | Richer revision introduced additional fields absent from the earlier record | High | Days, health flags, support person, contact preference, cancellation list, group booking, and all agreements survive review, export, and delivery |
 | Form submission immediately initiated delivery | Medium | Explicit preview step followed by a separate send action; editing preserves answers |
 | Artwork embedded a large data URI in the page | Low | Optimized WebP asset loads separately and retains the full artwork |
+| Browser reused earlier scripts after the new HTML deployed | High | Versioned local stylesheet and script URLs keep the synthesis assets together for returning visitors |
 
 ## Verification
 
