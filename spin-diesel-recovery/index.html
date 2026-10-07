@@ -23,8 +23,8 @@ tailwind.config = {
   } }
 }
 </script>
-<link rel="stylesheet" href="./base.css?v=20261005-synthesis">
-<link rel="stylesheet" href="./design.css?v=20261005-synthesis">
+<link rel="stylesheet" href="./base.css?v=20261006-fragrance-kiosk">
+<link rel="stylesheet" href="./design.css?v=20261006-fragrance-kiosk">
 </head>
 <body class="bg-ethereal font-sans min-h-screen">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
@@ -326,6 +326,27 @@ tailwind.config = {
               <label class="pill"><input type="radio" name="scent" value="Interested in a scent; discuss before use"><span>Discuss a scent with me</span></label>
             </div>
             <p class="hint mt-2">Scent preferences do not authorize application of essential oils to your skin. Any product use will be discussed separately.</p>
+
+            <section class="fragrance-matrix mt-4" id="fragranceMatrix" aria-labelledby="fragranceTitle">
+              <div class="fragrance-header"><div><p class="fragrance-kicker">Your atmosphere, composed</p><h3 id="fragranceTitle">The Scent Atelier</h3></div><span class="fragrance-badge">20 scents</span></div>
+              <p class="hint" id="fragranceHint">Explore a family, tap a scent, and choose your preference. You can select several interests and exclusions. Every choice is discussed before use.</p>
+              <div class="fragrance-families" id="scentFamilies" role="group" aria-label="Filter scent family"></div>
+              <div class="fragrance-workspace">
+                <div id="scentCards" class="scent-grid" aria-describedby="fragranceHint"></div>
+                <div id="scentPanel" class="scent-panel" role="group" aria-label="Selected scent preference"></div>
+              </div>
+              <div class="scent-intensity" role="radiogroup" aria-labelledby="scentIntensityLabel" aria-describedby="scentIntensityHint">
+                <p class="label" id="scentIntensityLabel">Requested scent intensity</p>
+                <div class="intensity-options">
+                  <label class="pill"><input type="radio" name="scentIntensity" value="Light" checked><span>Light</span></label>
+                  <label class="pill"><input type="radio" name="scentIntensity" value="Medium"><span>Medium</span></label>
+                  <label class="pill"><input type="radio" name="scentIntensity" value="Strong"><span>Strong · discuss first</span></label>
+                </div>
+                <p class="hint" id="scentIntensityHint">How noticeable you'd like the scent to be. This preference does not set an oil dilution or authorize a stronger blend. Product use and any dilution are confirmed separately. Available when a scent discussion is requested.</p>
+              </div>
+              <div class="scent-selection"><div class="scent-selection-header"><h4>Your scent composition</h4><button type="button" id="scentReset" class="chip-btn">Reset</button></div><p class="hint" id="scentCount" role="status" aria-live="polite"></p><div id="scentSelection"></div></div>
+              <p class="hint fragrance-footnote">No added fragrance clears interests and keeps exclusions. Scents are listed from the MAYJAM 20-piece set; availability is confirmed in person.</p>
+            </section>
             <label class="label mt-4" for="atmosphereNotes">Anything else for your atmosphere?</label>
             <textarea id="atmosphereNotes" name="atmosphereNotes" rows="2" maxlength="1000" class="field w-full px-3 py-3 text-base resize-y" placeholder="A music genre, scent preference or sensitivity, or another detail…"></textarea>
           </div>
@@ -436,7 +457,7 @@ tailwind.config = {
 </footer>
 
 
-<script src="./intake-core.js?v=20261006-atmosphere"></script>
-<script src="./app.js?v=20261006-atmosphere"></script>
+<script src="./intake-core.js?v=20261006-fragrance-kiosk"></script>
+<script src="./app.js?v=20261006-fragrance-kiosk"></script>
 </body>
 </html>

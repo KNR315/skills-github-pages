@@ -53,3 +53,12 @@ The earlier public revision was verified for keyboard map selection, focus prefe
 - Inspected all 26 current text files and the repository file listing. No real client submission records were found. Test fixtures are synthetic. The form sends requests to FormSubmit by POST for email delivery; it has no public requests feed, database, browser storage, or submission logging.
 - Added ignore rules for downloaded intake records and private client-record directories. These reduce accidental commits; they are not an access-control mechanism.
 - Public source files still expose the practitioner delivery address. FormSubmit and the mailbox process submissions; their access controls are outside this static site's code.
+
+
+## Fragrance atelier
+
+- Twenty scent names taken from MAYJAM's matching product listing: https://www.mayjam.net/productdetails?product_id=220 . Categories are menu organization, not safety or medical classifications.
+- Touch tiles, family filters, active scent panel, and a live composition summary support Interested, Discuss, and Avoid preferences.
+- No added fragrance remains the default. Selecting that mode clears interests/discussion and keeps exclusions; reset clears all scent choices.
+- Light, Medium, and Strong are requested scent intensity only. No numeric dilution, automatic blending, or permission for skin application is implied. Intensity is disabled in fragrance-free mode.
+- Preferences remain in page memory and the private email request flow. All 18 Node checks passed, including export/delivery of scent selections and intensity, fragrance-free normalization, and exclusion retention.

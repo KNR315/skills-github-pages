@@ -150,9 +150,91 @@ let lastData = null;
 let submitting = false;
 const smooth = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
 
+// Fragrance preferences stay in this page and travel only with the guest's request.
+const scentState = Object.fromEntries(core.SCENTS.map(scent => [scent.id, 'neutral']));
+const scentCards = document.getElementById('scentCards');
+const scentFamilies = document.getElementById('scentFamilies');
+const scentPanel = document.getElementById('scentPanel');
+const scentLabels = { neutral: 'No preference', interested: 'Interested', discuss: 'Discuss with me', avoid: 'Avoid' };
+let activeScent = core.SCENTS[0].id;
+let activeFamily = 'all';
+const families = ['all', ...new Set(core.SCENTS.map(scent => scent.family))];
+scentFamilies.innerHTML = families.map(family => `<button type="button" class="scent-family" data-family="${family}" aria-controls="scentCards" aria-pressed="${family === 'all'}">${family === 'all' ? 'All scents' : family}</button>`).join('');
+scentCards.innerHTML = core.SCENTS.map(scent => `<button type="button" class="scent-card" data-scent="${scent.id}" data-family="${scent.family}" aria-controls="scentPanel">
+  <span class="scent-emblem" aria-hidden="true"><svg class="ico"><use href="#i-drop"/></svg></span><span class="scent-name">${scent.name}</span><small>${scent.family}</small><span class="scent-status">No preference</span></button>`).join('');
+function renderScentPanel() {
+  const scent = core.SCENTS.find(item => item.id === activeScent);
+  scentPanel.innerHTML = `<div class="scent-panel-emblem" aria-hidden="true"><svg class="ico-lg"><use href="#i-drop"/></svg></div><p class="fragrance-kicker">${scent.family}</p><h4>${scent.name}</h4><p class="hint">How would you like this scent considered?</p>
+    <div class="scent-actions" role="radiogroup" aria-label="${scent.name} preference">${Object.entries(scentLabels).map(([state, label]) => `<label class="pill ${state === 'avoid' ? 'skip' : state === 'discuss' ? 'ask' : ''}"><input type="radio" name="activeScentState" value="${state}" ${scentState[activeScent] === state ? 'checked' : ''}><span>${label}</span></label>`).join('')}</div><p class="hint scent-panel-note">Your preferences guide the conversation. They do not authorize application to skin.</p>`;
+}
+function refreshScents(rebuildPanel = true) {
+  Object.assign(scentState, core.scentChoices({ scent: new FormData(form).get('scent'), scentMap: scentState }));
+  for (const card of scentCards.children) {
+    const id = card.dataset.scent;
+    card.dataset.state = scentState[id];
+    card.classList.toggle('active', id === activeScent);
+    card.setAttribute('aria-pressed', String(id === activeScent));
+    card.setAttribute('aria-label', `${core.SCENTS.find(s => s.id === id).name}: ${scentLabels[scentState[id]]}. Explore scent.`);
+    card.querySelector('.scent-status').textContent = scentLabels[scentState[id]];
+    card.hidden = activeFamily !== 'all' && card.dataset.family !== activeFamily;
+  }
+  scentFamilies.querySelectorAll('button').forEach(button => button.setAttribute('aria-pressed', String(button.dataset.family === activeFamily)));
+  const count = state => Object.values(scentState).filter(value => value === state).length;
+  const fragranceFree = new FormData(form).get('scent') === 'No added fragrance';
+  form.querySelectorAll('input[name="scentIntensity"]').forEach(input => { input.disabled = fragranceFree; });
+  document.getElementById('scentCount').textContent = `${fragranceFree ? 'No added fragrance' : 'Scent discussion requested'} · ${count('interested')} interested · ${count('discuss')} to discuss · ${count('avoid')} avoided`;
+  const rows = ['interested', 'discuss', 'avoid'].map(state => {
+    const selected = core.SCENTS.filter(scent => scentState[scent.id] === state);
+    return `<div class="scent-selection-row" data-state="${state}"><span>${scentLabels[state]}</span><div>${selected.length ? selected.map(scent => `<button type="button" data-explore-scent="${scent.id}" aria-label="Review ${scent.name} preference">${scent.name}</button>`).join('') : '<small>None selected</small>'}</div></div>`;
+  });
+  document.getElementById('scentSelection').innerHTML = rows.join('');
+  if (rebuildPanel) renderScentPanel();
+}
+function exploreScent(id) {
+  if (submitting) return;
+  activeScent = id;
+  refreshScents();
+  if (window.matchMedia('(max-width: 700px)').matches) scentPanel.scrollIntoView({ behavior: smooth(), block: 'nearest' });
+}
+scentCards.addEventListener('click', event => {
+  const card = event.target.closest('[data-scent]');
+  if (card) exploreScent(card.dataset.scent);
+});
+scentFamilies.addEventListener('click', event => {
+  const button = event.target.closest('[data-family]');
+  if (!button) return;
+  activeFamily = button.dataset.family;
+  if (activeFamily !== 'all' && core.SCENTS.find(s => s.id === activeScent).family !== activeFamily) activeScent = core.SCENTS.find(s => s.family === activeFamily).id;
+  refreshScents();
+});
+scentPanel.addEventListener('change', event => {
+  if (event.target.name !== 'activeScentState') return;
+  scentState[activeScent] = event.target.value;
+  if (['interested', 'discuss'].includes(event.target.value)) form.querySelector('input[name="scent"][value="Interested in a scent; discuss before use"]').checked = true;
+  refreshScents(false);
+});
+document.getElementById('scentSelection').addEventListener('click', event => {
+  const button = event.target.closest('[data-explore-scent]');
+  if (!button) return;
+  activeFamily = 'all';
+  exploreScent(button.dataset.exploreScent);
+  scentPanel.scrollIntoView({ behavior: smooth(), block: 'nearest' });
+});
+form.addEventListener('change', event => { if (event.target.name === 'scent') refreshScents(); });
+document.getElementById('scentReset').addEventListener('click', () => {
+  Object.keys(scentState).forEach(id => { scentState[id] = 'neutral'; });
+  form.querySelector('input[name="scent"][value="No added fragrance"]').checked = true;
+  form.querySelector('input[name="scentIntensity"][value="Light"]').checked = true;
+  activeFamily = 'all';
+  activeScent = core.SCENTS[0].id;
+  refreshScents();
+  progress();
+});
+refreshScents();
+
 function values() {
   const fd = new FormData(form);
-  return { ...Object.fromEntries(fd), times: fd.getAll('times'), days: fd.getAll('days'), health: fd.getAll('health'), style: fd.getAll('style') };
+  return { ...Object.fromEntries(fd), times: fd.getAll('times'), days: fd.getAll('days'), health: fd.getAll('health'), style: fd.getAll('style'), scentMap: { ...scentState } };
 }
 function updateDates() {
   for (const id of ['date1', 'date2']) document.getElementById(id).min = core.todayISO();

@@ -148,3 +148,40 @@ test('specific bodywork requests and scent preference survive delivery as litera
   assert.equal(JSON.parse(sent['Complete record']).preferences.bodyRequests, note);
   assert.equal(core.buildData(values, zones).preferences.scent, 'No added fragrance');
 });
+
+test('fragrance matrix retains multiple interests, discussion, and exclusions in delivery', async () => {
+  const data = core.buildData({ ...values, scent: 'Interested in a scent; discuss before use', scentMap: { lavender: 'interested', sandalwood: 'interested', chamomile: 'discuss', peppermint: 'avoid' } }, zones);
+  assert.equal(core.SCENTS.length, 20);
+  assert.equal(new Set(core.SCENTS.map(s => s.id)).size, 20);
+  const exported = JSON.parse(JSON.stringify(data));
+  assert.equal(exported.preferences.scentMap.lavender, 'interested');
+  assert.equal(exported.preferences.scentMap.peppermint, 'avoid');
+  await core.send('https://example.invalid', data, {}, async (_, options) => {
+    const sent = JSON.parse(options.body);
+    assert.match(sent['Fragrance preferences'], /Interested in: Lavender, Sandalwood/);
+    assert.match(sent['Fragrance preferences'], /Discuss with me: Chamomile/);
+    assert.match(sent['Fragrance preferences'], /Avoid: Peppermint/);
+    assert.deepEqual(JSON.parse(sent['Complete record']).preferences.scentMap, data.preferences.scentMap);
+    return { ok: true, json: async () => ({ success: true }) };
+  });
+});
+test('fragrance-free clears positive choices, preserves exclusions, and rejects unknown values', () => {
+  const map = { lavender: 'interested', jasmine: 'discuss', cinnamon: 'avoid', peppermint: 'unexpected', unknown: 'interested' };
+  const data = core.buildData({ ...values, scentMap: map }, zones);
+  assert.equal(data.preferences.scent, 'No added fragrance');
+  assert.equal(data.preferences.scentMap.lavender, 'neutral');
+  assert.equal(data.preferences.scentMap.jasmine, 'neutral');
+  assert.equal(data.preferences.scentMap.cinnamon, 'avoid');
+  assert.equal(data.preferences.scentMap.peppermint, 'neutral');
+  assert.equal(data.preferences.scentMap.unknown, undefined);
+  assert.equal(map.lavender, 'interested');
+});
+
+test('requested scent intensity is retained as a preference and disabled for fragrance-free', () => {
+  for (const intensity of ['Light', 'Medium', 'Strong']) {
+    const data = core.buildData({ ...values, scent: 'Interested in a scent; discuss before use', scentIntensity: intensity }, zones);
+    assert.equal(core.payload(data, {})['Requested scent intensity'], intensity);
+  }
+  assert.equal(core.buildData({ ...values, scentIntensity: 'Strong' }, zones).preferences.scentIntensity, 'None');
+  assert.equal(core.buildData({ ...values, scent: 'Interested in a scent; discuss before use', scentIntensity: 'invalid' }, zones).preferences.scentIntensity, 'Light');
+});

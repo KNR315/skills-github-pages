@@ -5,6 +5,28 @@
   const TIME_ZONE = 'America/Chicago';
   const SITE_URL = 'https://knr315.github.io/skills-github-pages/spin-diesel-recovery/';
   const PRESSURE = ['Light', 'Light-medium', 'Firm', 'Firm-deep', 'Intense'];
+  // Scent names from MAYJAM's matching 20-piece listing (product_id=220).
+  // Families organize the menu; they are not medical or safety classifications.
+  const SCENTS = [
+    ['lavender', 'Lavender', 'Floral'], ['jasmine', 'Jasmine', 'Floral'],
+    ['ylang_ylang', 'Ylang Ylang', 'Floral'], ['rose', 'Rose', 'Floral'],
+    ['geranium', 'Geranium', 'Floral'], ['chamomile', 'Chamomile', 'Floral'],
+    ['sweet_orange', 'Sweet Orange', 'Citrus & grassy'], ['bergamot', 'Bergamot', 'Citrus & grassy'],
+    ['lemongrass', 'Lemongrass', 'Citrus & grassy'], ['citronella', 'Citronella', 'Citrus & grassy'],
+    ['sandalwood', 'Sandalwood', 'Woody & earthy'], ['frankincense', 'Frankincense', 'Woody & earthy'],
+    ['patchouli', 'Patchouli', 'Woody & earthy'], ['peppermint', 'Peppermint', 'Fresh & herbal'],
+    ['eucalyptus', 'Eucalyptus', 'Fresh & herbal'], ['tea_tree', 'Tea Tree', 'Fresh & herbal'],
+    ['rosemary', 'Rosemary', 'Fresh & herbal'], ['clary_sage', 'Clary Sage', 'Fresh & herbal'],
+    ['vanilla', 'Vanilla', 'Sweet & spicy'], ['cinnamon', 'Cinnamon', 'Sweet & spicy']
+  ].map(([id, name, family]) => ({ id, name, family }));
+  function scentChoices(values) {
+    const fragranceFree = !values.scent || values.scent === 'No added fragrance';
+    return Object.fromEntries(SCENTS.map(({ id }) => {
+      const state = values.scentMap?.[id];
+      return [id, ['interested', 'discuss', 'avoid'].includes(state) && (!fragranceFree || state === 'avoid') ? state : 'neutral'];
+    }));
+  }
+
   function todayISO(now = new Date()) {
     const parts = new Intl.DateTimeFormat('en-US', {
       timeZone: TIME_ZONE, year: 'numeric', month: '2-digit', day: '2-digit'
@@ -35,10 +57,10 @@
   function buildData(values, zones, now = new Date(), requestId = '') {
     const clean = value => String(value || '').trim();
     return {
-      meta: { schemaVersion: 3, requestId, submittedAt: now.toISOString(), status: 'prepared' },
+      meta: { schemaVersion: 4, requestId, submittedAt: now.toISOString(), status: 'prepared' },
       contact: { name: clean(values.name), pronouns: clean(values.pronouns), email: clean(values.email), phone: clean(values.phone), preferredContact: values.contactPref || 'email', emergencyContact: clean(values.ecName) },
       availability: { length: values.length, date1: values.date1, date2: values.date2 || '', days: [...(values.days || [])], times: [...(values.times || [])], flexible: Boolean(values.flexible), cancellationList: Boolean(values.waitlist), groupBooking: Boolean(values.group), timeZone: TIME_ZONE, trainingContext: values.timing || '' },
-      preferences: { pressure: Number(values.pressure), pressureLabel: PRESSURE[Number(values.pressure) - 1], style: Array.isArray(values.style) ? [...values.style] : [values.style || 'No preference'], atmosphereNotes: clean(values.atmosphereNotes), scent: values.scent || 'No added fragrance', bodyRequests: clean(values.bodyRequests), bodyMap: { ...zones } },
+      preferences: { pressure: Number(values.pressure), pressureLabel: PRESSURE[Number(values.pressure) - 1], style: Array.isArray(values.style) ? [...values.style] : [values.style || 'No preference'], atmosphereNotes: clean(values.atmosphereNotes), scent: values.scent || 'No added fragrance', scentMap: scentChoices(values), scentIntensity: !values.scent || values.scent === 'No added fragrance' ? 'None' : (['Light', 'Medium', 'Strong'].includes(values.scentIntensity) ? values.scentIntensity : 'Light'), bodyRequests: clean(values.bodyRequests), bodyMap: { ...zones } },
       boundaries: { drape: values.drape, notes: clean(values.notes), stopWord: clean(values.stopWord), supportPerson: values.chaperone || '' },
       health: { flags: [...(values.health || [])], notes: clean(values.notes) },
       agreements: { restorativeBodywork: Boolean(values.ack1), answersAccurate: Boolean(values.ack2), boundariesConfirmed: Boolean(values.ack3), reminderAndAftercareOptIn: Boolean(values.ack4), emailDelivery: Boolean(values.ackDelivery) }
@@ -64,7 +86,7 @@
       'Flexible': data.availability.flexible ? 'Yes' : 'No',
       'Time zone': data.availability.timeZone, 'Training context': data.availability.trainingContext,
       'Pressure': `${data.preferences.pressure} · ${data.preferences.pressureLabel}`,
-      'Atmosphere': (Array.isArray(data.preferences.style) ? data.preferences.style.join(', ') : data.preferences.style) || 'No preference', 'Atmosphere notes': data.preferences.atmosphereNotes || '', 'Scent preference': data.preferences.scent || 'No added fragrance', 'Specific bodywork requests': data.preferences.bodyRequests || '', 'Draping': data.boundaries.drape,
+      'Atmosphere': (Array.isArray(data.preferences.style) ? data.preferences.style.join(', ') : data.preferences.style) || 'No preference', 'Atmosphere notes': data.preferences.atmosphereNotes || '', 'Scent preference': data.preferences.scent || 'No added fragrance', 'Requested scent intensity': data.preferences.scentIntensity || 'None', 'Fragrance preferences': ['interested', 'discuss', 'avoid'].map(state => `${{interested:'Interested in',discuss:'Discuss with me',avoid:'Avoid'}[state]}: ${SCENTS.filter(s => data.preferences.scentMap?.[s.id] === state).map(s => s.name).join(', ') || '—'}`).join('\n'), 'Specific bodywork requests': data.preferences.bodyRequests || '', 'Draping': data.boundaries.drape,
       'Stop signal': data.boundaries.stopWord, 'Notes': data.boundaries.notes,
       'Support person': data.boundaries.supportPerson, 'Health flags': data.health.flags.join(', ') || 'None shared',
       'Body map': Object.entries(groups).map(([state, zones]) => `${state}: ${zones.join(', ') || '—'}`).join('\n'),
@@ -87,7 +109,7 @@
       return result;
     } finally { clearTimeout(timeout); }
   }
-  const api = { TIME_ZONE, SITE_URL, PRESSURE, todayISO, validDate, validate, buildData, payload, send };
+  const api = { TIME_ZONE, SITE_URL, PRESSURE, SCENTS, scentChoices, todayISO, validDate, validate, buildData, payload, send };
   if (typeof module !== 'undefined' && module.exports) module.exports = api;
   else root.RecoveryIntake = api;
 })(globalThis);
