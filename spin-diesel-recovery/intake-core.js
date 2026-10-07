@@ -35,10 +35,10 @@
   function buildData(values, zones, now = new Date(), requestId = '') {
     const clean = value => String(value || '').trim();
     return {
-      meta: { schemaVersion: 2, requestId, submittedAt: now.toISOString(), status: 'prepared' },
+      meta: { schemaVersion: 3, requestId, submittedAt: now.toISOString(), status: 'prepared' },
       contact: { name: clean(values.name), pronouns: clean(values.pronouns), email: clean(values.email), phone: clean(values.phone), preferredContact: values.contactPref || 'email', emergencyContact: clean(values.ecName) },
       availability: { length: values.length, date1: values.date1, date2: values.date2 || '', days: [...(values.days || [])], times: [...(values.times || [])], flexible: Boolean(values.flexible), cancellationList: Boolean(values.waitlist), groupBooking: Boolean(values.group), timeZone: TIME_ZONE, trainingContext: values.timing || '' },
-      preferences: { pressure: Number(values.pressure), pressureLabel: PRESSURE[Number(values.pressure) - 1], style: values.style, bodyMap: { ...zones } },
+      preferences: { pressure: Number(values.pressure), pressureLabel: PRESSURE[Number(values.pressure) - 1], style: Array.isArray(values.style) ? [...values.style] : [values.style || 'No preference'], atmosphereNotes: clean(values.atmosphereNotes), scent: values.scent || 'No added fragrance', bodyRequests: clean(values.bodyRequests), bodyMap: { ...zones } },
       boundaries: { drape: values.drape, notes: clean(values.notes), stopWord: clean(values.stopWord), supportPerson: values.chaperone || '' },
       health: { flags: [...(values.health || [])], notes: clean(values.notes) },
       agreements: { restorativeBodywork: Boolean(values.ack1), answersAccurate: Boolean(values.ack2), boundariesConfirmed: Boolean(values.ack3), reminderAndAftercareOptIn: Boolean(values.ack4), emailDelivery: Boolean(values.ackDelivery) }
@@ -64,7 +64,7 @@
       'Flexible': data.availability.flexible ? 'Yes' : 'No',
       'Time zone': data.availability.timeZone, 'Training context': data.availability.trainingContext,
       'Pressure': `${data.preferences.pressure} · ${data.preferences.pressureLabel}`,
-      'Atmosphere': data.preferences.style, 'Draping': data.boundaries.drape,
+      'Atmosphere': (Array.isArray(data.preferences.style) ? data.preferences.style.join(', ') : data.preferences.style) || 'No preference', 'Atmosphere notes': data.preferences.atmosphereNotes || '', 'Scent preference': data.preferences.scent || 'No added fragrance', 'Specific bodywork requests': data.preferences.bodyRequests || '', 'Draping': data.boundaries.drape,
       'Stop signal': data.boundaries.stopWord, 'Notes': data.boundaries.notes,
       'Support person': data.boundaries.supportPerson, 'Health flags': data.health.flags.join(', ') || 'None shared',
       'Body map': Object.entries(groups).map(([state, zones]) => `${state}: ${zones.join(', ') || '—'}`).join('\n'),

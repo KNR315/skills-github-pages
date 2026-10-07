@@ -1,8 +1,8 @@
-# Spin Diesel Recovery
+# Amateur Massage Link
 
 Consent-first recovery bodywork for pole and aerial athletes.
 
-**[Open Spin Diesel Recovery — Booking & Consent](https://knr315.github.io/skills-github-pages/spin-diesel-recovery/)**
+**[Open Amateur Massage Link](https://knr315.github.io/skills-github-pages/spin-diesel-recovery/)**
 
 Use the booking link above to explore the body map, share preferences, and request a session. Times are confirmed personally. This repository contains the website's source code.
 

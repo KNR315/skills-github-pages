@@ -111,3 +111,40 @@ test('missing days and accuracy agreement cannot pass unless day availability is
   assert.ok(core.validate({...values, ack2:''},'2026-10-05').some(e=>e.field==='ack2'));
   assert.deepEqual(core.validate({...values, days:[], times:[]},'2026-10-05'),[]);
 });
+
+
+test('multiple atmosphere preferences and notes survive review, JSON, and delivery', async () => {
+  const selected = ['Quiet, minimal talking', 'Check in with me often', 'Nature sounds', 'Explain each technique as you go'];
+  const data = core.buildData({ ...values, style: selected, atmosphereNotes: 'Forest sounds at low volume' }, zones);
+  assert.deepEqual(data.preferences.style, selected);
+  selected.push('Not part of the prepared request');
+  assert.equal(data.preferences.style.length, 4);
+  const exported = JSON.parse(JSON.stringify(data));
+  assert.deepEqual(exported.preferences.style, data.preferences.style);
+  await core.send('https://example.invalid', data, {}, async (_, options) => {
+    const delivered = JSON.parse(options.body);
+    assert.equal(delivered.Atmosphere, data.preferences.style.join(', '));
+    assert.equal(delivered['Atmosphere notes'], 'Forest sounds at low volume');
+    assert.deepEqual(JSON.parse(delivered['Complete record']).preferences.style, data.preferences.style);
+    return { ok: true, json: async () => ({ success: true }) };
+  });
+});
+test('single-choice legacy records and no preference still produce readable summaries', () => {
+  const data = record();
+  assert.deepEqual(data.preferences.style, ['Quiet']);
+  assert.equal(core.payload(data, {}).Atmosphere, 'Quiet');
+  data.preferences.style = 'Soft music';
+  assert.equal(core.payload(data, {}).Atmosphere, 'Soft music');
+  const empty = core.buildData({ ...values, style: [] }, zones);
+  assert.equal(core.payload(empty, {}).Atmosphere, 'No preference');
+});
+
+test('specific bodywork requests and scent preference survive delivery as literal text', () => {
+  const note = 'Right shoulder focus. <script>literal text</script>';
+  const data = core.buildData({ ...values, bodyRequests: note, scent: 'Interested in a scent; discuss before use' }, zones);
+  const sent = core.payload(data, {});
+  assert.equal(sent['Specific bodywork requests'], note);
+  assert.equal(sent['Scent preference'], 'Interested in a scent; discuss before use');
+  assert.equal(JSON.parse(sent['Complete record']).preferences.bodyRequests, note);
+  assert.equal(core.buildData(values, zones).preferences.scent, 'No added fragrance');
+});

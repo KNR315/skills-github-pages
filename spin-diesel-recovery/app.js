@@ -152,7 +152,7 @@ const smooth = () => window.matchMedia('(prefers-reduced-motion: reduce)').match
 
 function values() {
   const fd = new FormData(form);
-  return { ...Object.fromEntries(fd), times: fd.getAll('times'), days: fd.getAll('days'), health: fd.getAll('health') };
+  return { ...Object.fromEntries(fd), times: fd.getAll('times'), days: fd.getAll('days'), health: fd.getAll('health'), style: fd.getAll('style') };
 }
 function updateDates() {
   for (const id of ['date1', 'date2']) document.getElementById(id).min = core.todayISO();
@@ -289,6 +289,27 @@ document.querySelectorAll('[data-quick-name]').forEach(button => button.addEvent
   clearErrors();
   progress();
 }));
+// Multiple atmosphere preferences, with consistent fallback and conflicting choices.
+form.addEventListener('change', event => {
+  const selected = event.target;
+  if (selected.name !== 'style') return;
+  const choices = [...form.querySelectorAll('input[name="style"]')];
+  const fallback = choices.find(input => input.value === 'No preference');
+  if (selected.checked) {
+    if (selected === fallback) choices.forEach(input => { input.checked = input === fallback; });
+    else {
+      fallback.checked = false;
+      if (selected.dataset.atmosphereGroup) choices.forEach(input => {
+        if (input !== selected && input.dataset.atmosphereGroup === selected.dataset.atmosphereGroup && (selected.value === 'No music' || input.value === 'No music')) input.checked = false;
+      });
+      const conversation = ['Quiet, minimal talking', 'Casual conversation welcome'];
+      if (conversation.includes(selected.value)) choices.forEach(input => {
+        if (input !== selected && conversation.includes(input.value)) input.checked = false;
+      });
+    }
+  }
+  if (!choices.some(input => input.checked)) fallback.checked = true;
+});
 form.addEventListener('input', () => { clearErrors(); progress(); });
 form.addEventListener('change', () => { clearErrors(); progress(); });
 window.addEventListener('focus', progress);

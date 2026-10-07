@@ -3,9 +3,9 @@
 <head>
 <meta charset="UTF-8">
 <meta name="viewport" content="width=device-width, initial-scale=1.0">
-<title>Spin Diesel Recovery | Booking & Consent</title>
+<title>Amateur Massage Link</title>
 <link rel="canonical" href="https://knr315.github.io/skills-github-pages/spin-diesel-recovery/">
-<meta property="og:title" content="Spin Diesel Recovery | Booking & Consent">
+<meta property="og:title" content="Amateur Massage Link">
 <meta property="og:description" content="Shape your recovery session. Explore the body map, set your boundaries, and request an appointment.">
 <meta property="og:url" content="https://knr315.github.io/skills-github-pages/spin-diesel-recovery/">
 <meta property="og:image" content="https://knr315.github.io/skills-github-pages/spin-diesel-recovery/assets/lotus-fire-water.webp">
@@ -154,7 +154,7 @@ tailwind.config = {
   <section class="mb-20 max-w-4xl mx-auto" id="booking-survey" aria-labelledby="form-h">
     <div class="glass-card rounded-2xl p-6 md:p-12">
       <div class="text-center mb-8">
-        <h2 id="form-h" class="font-display text-xl md:text-2xl text-gradient-gold mb-3">Booking & Consent Intake</h2>
+        <h2 id="form-h" class="font-display text-xl md:text-2xl text-gradient-gold mb-3">Amateur Massage Link</h2>
         <p class="text-gray-200 font-light text-sm md:text-base max-w-2xl mx-auto">About 5 minutes. Preview your session before sending an appointment request. Times are confirmed personally. Fields marked <span aria-hidden="true">*</span><span class="sr-only">with an asterisk</span> are required. You can change any answer at any time, including during your session.</p>
       </div>
 
@@ -295,6 +295,12 @@ tailwind.config = {
 </div>
 
           <div>
+            <label class="label" for="bodyRequests">Specific requests for your bodywork (optional)</label>
+            <p class="hint mb-2" id="bodyRequestsHint">Describe areas to focus on or avoid, how you'd like the work to feel, or anything the map doesn't capture. We will discuss your requests and confirm boundaries before touch.</p>
+            <textarea id="bodyRequests" name="bodyRequests" rows="4" maxlength="2000" class="field w-full px-3 py-3 text-base resize-y" aria-describedby="bodyRequestsHint" placeholder="For example: Please spend extra time on my right shoulder and use lighter pressure on my calves."></textarea>
+          </div>
+
+          <div>
             <label class="label" for="pressure">Overall pressure today: <output id="pressureOut" class="text-white">3 · Firm</output></label>
             <input id="pressure" name="pressure" type="range" min="1" max="5" step="1" value="3" class="w-full accent-[#ffaa00]" aria-describedby="pressureHint">
             <div class="flex justify-between hint mt-2" aria-hidden="true"><span class="inline-flex items-center"><svg class="ico" style="margin-right:.3rem"><use href="#i-drop"/></svg>1 Light</span><span class="inline-flex items-center"><svg class="ico" style="margin-right:.3rem"><use href="#i-drop"/></svg>3 Firm</span><span class="inline-flex items-center"><svg class="ico" style="margin-right:.3rem"><use href="#i-bolt"/></svg>5 Intense</span></div>
@@ -302,14 +308,26 @@ tailwind.config = {
           </div>
           <div>
             <p class="label" id="styleLabel">Session atmosphere</p>
-            <div class="flex flex-wrap gap-2" role="radiogroup" aria-labelledby="styleLabel">
-              <label class="pill"><input type="radio" name="style" value="No preference" checked><span>No preference</span></label>
-              <label class="pill"><input type="radio" name="style" value="Quiet, minimal talking"><span><svg class="ico"><use href="#i-mute"/></svg>Quiet</span></label>
-              <label class="pill"><input type="radio" name="style" value="Check in with me often"><span><svg class="ico"><use href="#i-chat"/></svg>Check in often</span></label>
-              <label class="pill"><input type="radio" name="style" value="Explain each technique as you go"><span><svg class="ico"><use href="#i-user"/></svg>Explain as you go</span></label>
-              <label class="pill"><input type="radio" name="style" value="Soft music"><span><svg class="ico"><use href="#i-music"/></svg>Soft music</span></label>
-              <label class="pill"><input type="radio" name="style" value="No music"><span><svg class="ico"><use href="#i-mute"/></svg>No music</span></label>
+            <p class="hint mb-3" id="styleHint">Choose all that suit you. Choosing “No music” clears other sound choices. Preferences depend on the space and will be confirmed at arrival.</p>
+            <div class="flex flex-wrap gap-2" role="group" aria-labelledby="styleLabel" aria-describedby="styleHint">
+              <label class="pill"><input type="checkbox" name="style" value="No preference" checked><span>No preference</span></label>
+              <label class="pill"><input type="checkbox" name="style" value="Quiet, minimal talking"><span><svg class="ico" aria-hidden="true"><use href="#i-mute"/></svg>Quiet</span></label>
+              <label class="pill"><input type="checkbox" name="style" value="Check in with me often"><span><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg>Check in often</span></label>
+              <label class="pill"><input type="checkbox" name="style" value="Explain each technique as you go"><span><svg class="ico" aria-hidden="true"><use href="#i-user"/></svg>Explain as you go</span></label>
+              <label class="pill"><input type="checkbox" name="style" value="Casual conversation welcome"><span><svg class="ico" aria-hidden="true"><use href="#i-chat"/></svg>Conversation welcome</span></label>
+              <label class="pill"><input type="checkbox" name="style" value="Soft music" data-atmosphere-group="sound"><span><svg class="ico" aria-hidden="true"><use href="#i-music"/></svg>Soft music</span></label>
+              <label class="pill"><input type="checkbox" name="style" value="No music" data-atmosphere-group="sound"><span><svg class="ico" aria-hidden="true"><use href="#i-mute"/></svg>No music</span></label>
+              <label class="pill"><input type="checkbox" name="style" value="Nature sounds" data-atmosphere-group="sound"><span><svg class="ico" aria-hidden="true"><use href="#i-music"/></svg>Nature sounds</span></label>
+              <label class="pill"><input type="checkbox" name="style" value="Preferred playlist (discuss at arrival)" data-atmosphere-group="sound"><span><svg class="ico" aria-hidden="true"><use href="#i-music"/></svg>Preferred playlist</span></label>
             </div>
+            <p class="label mt-4" id="scentLabel">Scent preference</p>
+            <div class="flex flex-wrap gap-2" role="radiogroup" aria-labelledby="scentLabel">
+              <label class="pill"><input type="radio" name="scent" value="No added fragrance" checked><span>No added fragrance</span></label>
+              <label class="pill"><input type="radio" name="scent" value="Interested in a scent; discuss before use"><span>Discuss a scent with me</span></label>
+            </div>
+            <p class="hint mt-2">Scent preferences do not authorize application of essential oils to your skin. Any product use will be discussed separately.</p>
+            <label class="label mt-4" for="atmosphereNotes">Anything else for your atmosphere?</label>
+            <textarea id="atmosphereNotes" name="atmosphereNotes" rows="2" maxlength="1000" class="field w-full px-3 py-3 text-base resize-y" placeholder="A music genre, scent preference or sensitivity, or another detail…"></textarea>
           </div>
         </fieldset>
 
@@ -418,7 +436,7 @@ tailwind.config = {
 </footer>
 
 
-<script src="./intake-core.js?v=20261005-public-links-2"></script>
-<script src="./app.js?v=20261005-synthesis"></script>
+<script src="./intake-core.js?v=20261006-atmosphere"></script>
+<script src="./app.js?v=20261006-atmosphere"></script>
 </body>
 </html>
