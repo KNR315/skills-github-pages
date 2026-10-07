@@ -42,3 +42,14 @@ The earlier public revision was verified for keyboard map selection, focus prefe
 - Regression tests use mocked delivery responses. An explicitly authorized synthetic request was submitted through the live public page after FormSubmit activation. Its matching email arrived in the configured Gmail inbox at 1:01 PM Central, with the complete record, body map, and agreements intact. No real client health data was sent.
 - Original Tailwind runtime CDN and externally loaded fonts remain dependencies. The next practical code improvement is a compiled stylesheet for more predictable production loading.
 - The clinical copy was preserved. Public release of a creative prototype does not establish suitability for storing clinical records.
+
+
+## October 6 customization and public-data audit
+
+- Atmosphere now supports multiple communication and sound choices, with no music exclusive of sound selections. Lighting was excluded as requested.
+- Optional scent discussion defaults to no added fragrance and does not authorize skin application.
+- Specific bodywork requests sit directly below the map; these and atmosphere notes survive the review, JSON, and delivery payload.
+- All 15 regression tests passed, including multi-selection retention and literal handling of request notes.
+- Inspected all 26 current text files and the repository file listing. No real client submission records were found. Test fixtures are synthetic. The form sends requests to FormSubmit by POST for email delivery; it has no public requests feed, database, browser storage, or submission logging.
+- Added ignore rules for downloaded intake records and private client-record directories. These reduce accidental commits; they are not an access-control mechanism.
+- Public source files still expose the practitioner delivery address. FormSubmit and the mailbox process submissions; their access controls are outside this static site's code.

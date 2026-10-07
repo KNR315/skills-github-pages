@@ -36,3 +36,10 @@
 ehthumbs.db
 Thumbs.db
 
+
+# Private client intake exports: never publish these files.
+somatic-intake-*.json
+**/somatic-intake-*.json
+intake-records/
+client-records/
+submissions/
