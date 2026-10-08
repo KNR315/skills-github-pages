@@ -35,3 +35,8 @@ Answers remain only in the current page until explicitly sent or exported. A ref
 Live inbox delivery was verified on October 5, 2026, using an explicitly authorized synthetic test. FormSubmit's one-time activation was completed, the public page reported provider acceptance, and the matching request arrived in the configured Gmail inbox at 1:01 PM Central. The received email retained the request ID, body map, agreements, and complete record. No real client health data was used. Automated regression tests still mock the provider.
 
 Styling depends on the original Tailwind CDN and fonts on Google Fonts. A later optional improvement is to compile Tailwind locally and self-host fonts; neither changes the creative design.
+
+
+## October 8 visual refinement
+
+Restored the original booking-and-consent version after reverting the educational planner. Refined the existing artwork framing, navy/gold palette, serif hierarchy, sequence cards, fieldset panels, touch targets, scent cards, and responsive spacing. Original copy, intake schema, map defaults, delivery, and review behavior are preserved.

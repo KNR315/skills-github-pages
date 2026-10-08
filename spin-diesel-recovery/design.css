@@ -163,3 +163,123 @@ footer { margin:30px 40px 0; border-top-color:#dabc8020 !important; padding:36px
 .fragrance-footnote { font-size:.72rem!important; margin-top:18px; }
 @media(max-width:700px) { .fragrance-workspace { grid-template-columns:minmax(0,1fr); } .scent-panel { position:static; order:-1; } .scent-actions { grid-template-columns:repeat(2,minmax(0,1fr)); } }
 @media(max-width:420px) { .fragrance-matrix { padding:16px 12px; } .scent-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .fragrance-header h3 { font-size:1.8rem; } .scent-selection-row { grid-template-columns:1fr; } }
+
+/* Sanctuary refinement: the original composition, with richer depth and rhythm. */
+:root { --paper:#f7efdf; --gold:#eac382; --muted:#b9c4d4; }
+body { font-family:Outfit,Arial,sans-serif; }
+::selection { color:#07101d; background:#eac382; }
+.bg-ethereal { background:radial-gradient(ellipse at 12% 12%,#7b352325,transparent 37%),radial-gradient(ellipse at 90% 19%,#477f9b22,transparent 42%),radial-gradient(ellipse at 55% 75%,#27465c15,transparent 52%),#080d1b; background-attachment:scroll; }
+.site-nav { padding-top:25px; padding-bottom:25px; border-bottom:1px solid #d8ad601b; }
+.wordmark { gap:15px; }
+.brand-orbit { background:radial-gradient(circle,#edc78312,transparent 75%); box-shadow:0 0 22px #eac3820b; }
+.nav-links { gap:30px; }
+.nav-links .nav-book { background:linear-gradient(120deg,#eac3820e,#79b5cf08); border-color:#eac38250; transition:background .2s,border-color .2s; }
+.nav-links .nav-book:hover { border-color:#eac382; background:#eac38214; }
+.hero { padding-top:58px; }
+.hero-grid { grid-template-columns:.96fr 1.04fr; gap:64px; }
+.hero-copy { padding-bottom:25px; }
+.eyebrow { letter-spacing:.24em; font-size:11px; margin-bottom:32px; }
+.hero-title { font-size:clamp(66px,7.4vw,108px); line-height:.94; letter-spacing:-.045em; margin-bottom:30px; }
+.hero-title em { color:#edc787; }
+.hero-sub { color:#bcc6d5; max-width:438px; font-size:17px; line-height:1.85; }
+.primary-action,#submitBtn { background:linear-gradient(115deg,#f0d29a 0%,#e4b670 55%,#cca366 100%); border-color:#f2d9a4; padding:17px 27px; box-shadow:0 9px 32px #d4a45e18,inset 0 1px #fff5; transition:box-shadow .2s,background .2s,transform .2s; }
+.primary-action:hover,#submitBtn:hover { background:linear-gradient(115deg,#f9dfa9,#eac483); box-shadow:0 12px 36px #d4a45e27; transform:translateY(-2px); }
+.secondary-action { border-bottom-color:#eac38265; }
+.hero-promise { margin-top:34px; color:#b0b9c8; }
+.art-frame { padding:7px; border-radius:46px 46px 140px 46px; background:linear-gradient(140deg,#d5ac6a40,#152437 33%,#75afce33); border-color:#e4bd745b; box-shadow:-24px 40px 90px #a9481617,32px -24px 100px #4c94bb1b,0 28px 60px #0005; }
+.art-frame img { border-radius:39px 39px 133px 39px; }
+.art-frame::before { inset:-23px; border:1px solid #eac38225; border-radius:50%; transform:rotate(-12deg) scaleX(1.025); }
+.art-frame::after { content:''; position:absolute; z-index:-1; inset:-39px 17px; border:1px solid #79b5cf1c; border-radius:50%; transform:rotate(18deg); pointer-events:none; }
+.art-frame figcaption { bottom:26px; left:28px; right:32px; font-size:9px; letter-spacing:.19em; }
+.hero-foundations { margin-top:54px; padding:25px 0 29px; font-size:12px; color:#b5c0cf; }
+.hero-foundations i { background:#eac38218; box-shadow:0 0 9px #eac38215; }
+main.band { padding-top:104px; padding-bottom:30px; }
+#seq-h,#promise-h,#form-h { font-size:clamp(36px,4vw,52px); letter-spacing:-.025em; }
+#seq-h::before { margin-bottom:20px; letter-spacing:.27em; }
+section[aria-labelledby="seq-h"] > .grid { gap:22px; }
+section[aria-labelledby="seq-h"] > .text-center { margin-bottom:40px; }
+section[aria-labelledby="seq-h"] .glass-card { padding:30px 27px 32px; border-radius:22px; min-height:278px; }
+.glass-card { background:linear-gradient(145deg,#182235c7,#0b1423e8 75%); border-color:#d8bb8133; box-shadow:0 20px 45px #0002,inset 0 1px #ffebc708; transition:border-color .25s,box-shadow .25s,transform .25s; }
+.glass-card.hoverable { border-top-width:1px; border-top-color:#e5ba7b70; }
+.glass-card.hoverable:nth-child(even) { border-top-color:#79b5cf75; }
+.glass-card.hoverable:hover { transform:translateY(-5px); border-color:#eac38285; box-shadow:0 25px 52px #0005; }
+.glass-card h3 { font-size:27px; line-height:1.14; letter-spacing:-.025em; color:#ead0a0; margin-bottom:14px; }
+section[aria-labelledby="seq-h"] article > p { display:inline-flex; align-items:center; border:1px solid #d8b77a3b; border-radius:999px; padding:5px 10px; color:#d5b985; font-size:10px; letter-spacing:.14em; margin-bottom:20px; }
+.glass-card ul { color:#bac6d7; line-height:1.8; }
+.glass-card ul strong { font-weight:500; color:#e9e7e0; }
+section[aria-labelledby="promise-h"] > .glass-card { padding:45px 42px; background:radial-gradient(ellipse at 100% 0,#79b5cf15,transparent 55%),linear-gradient(120deg,#172333d9,#101b2bf0); border-radius:26px; }
+#promise-h { margin-bottom:24px; }
+section[aria-labelledby="promise-h"] li { padding:5px 0; }
+#booking-survey { max-width:1016px; }
+#booking-survey > .glass-card { border-radius:30px; padding:49px 48px; background:linear-gradient(145deg,#152134e6,#0c1423f5 60%); border-color:#eac38255; box-shadow:0 28px 85px #0004; }
+#form-h { margin-bottom:18px; }
+#intakeForm > fieldset { padding:28px 25px 27px; border:1px solid #7289a425; border-radius:20px; background:linear-gradient(135deg,#24334a23,#07111f28); margin-top:32px; }
+legend.font-serif { padding:0 11px; margin:0 0 18px 0; width:auto; max-width:100%; border-bottom:0; color:#f0e5cf; font-size:29px; background:#111b2b; }
+legend .ico-lg { stroke:#eac382; filter:none; }
+.session-snapshot { border-color:#9aacbe36; padding:21px 10px; border-radius:18px; background:linear-gradient(110deg,#74432720,#0b142140,#385d7921); margin-bottom:32px; }
+.session-snapshot span { font-size:10px; letter-spacing:.13em; color:#a3b0c4; }
+.session-snapshot strong { font-size:27px; color:#ead1a3; }
+.progress { border-radius:14px; background:#0c1727f2; border-color:#bea06b5c; box-shadow:0 10px 25px #0003; }
+.field { background:#070f1be0; border-color:#6b7c9655; border-bottom-color:#d2b48066; border-radius:11px; min-height:52px; }
+.field:hover { border-color:#9cabc36b; }
+.field:focus { border-color:#eac382; box-shadow:0 0 0 3px #eac38218; }
+.label { color:#dcc596; font-size:11px; letter-spacing:.12em; }
+.hint { color:#aebbd0; line-height:1.75; }
+.pill span { background:#0d1829; border-color:#7e91ac4f; min-height:46px; padding:10px 15px; font-weight:400; }
+.pill span:hover { border-color:#eac3828a; background:#19263a; }
+.pill input:checked+span { background:linear-gradient(115deg,#ecd099,#d9ad6b); border-color:#f0d19a; color:#111623; box-shadow:0 4px 20px #eac38214; }
+.pill.ask input:checked+span { background:linear-gradient(115deg,#a2cfdf,#79b5cf); border-color:#addef0; }
+.pill.skip input:checked+span { background:#243148; color:#eff3f9; border-color:#b1bdd0; }
+.mapcard { border-radius:20px; border-color:#eac38243; background:radial-gradient(ellipse at 15% 35%,#5085a925,transparent 65%),radial-gradient(ellipse at 100% 100%,#9959321c,transparent 70%),#081322; }
+.zpanel { border-radius:14px; background:linear-gradient(145deg,#18273b,#101b2c); border-color:#9aacbd37; }
+.zchip { border-radius:11px; padding:9px 12px; background:#111c2c; }
+.zone[data-state=focus] * { fill:#dca3677a; stroke:#ffe0ac; }
+.fragrance-matrix { padding:24px; border-radius:22px; background:radial-gradient(ellipse at 100% 0,#39638428,transparent 58%),radial-gradient(ellipse at 0 100%,#8c4c2d20,transparent 65%),#091322; border-color:#eac38240; box-shadow:0 18px 42px #0002; }
+.fragrance-header h3 { font-size:34px; margin-bottom:0; }
+.scent-card { min-height:130px; padding:15px 13px; border-radius:15px; background:linear-gradient(145deg,#1b2c42,#0c1829); border-color:#8da0b533; box-shadow:inset 0 1px #ffffff04; }
+.scent-card.active { outline-color:#eac3829e; }
+.scent-emblem { height:31px; width:31px; background:#eac3820b; border-color:#eac38250; }
+.scent-panel { background:linear-gradient(145deg,#1c2b3e,#111e30); border-radius:17px; border-color:#eac38243; }
+.scent-selection { border-top-color:#eac38230; }
+.delivery-note { border-color:#7c97b34a; background:#13243a8f; padding:23px; }
+footer { max-width:1240px; margin:30px auto 0; padding:45px 24px!important; }
+.footer-brand { font-size:32px; }
+.footer-meta { letter-spacing:.14em; color:#9aa9bf; }
+@media(min-width:681px) and (max-width:1000px) { .hero-grid { gap:34px; } .hero-title { font-size:clamp(61px,8.2vw,84px); } .hero-sub { font-size:16px; } .hero { padding-top:46px; } .art-frame::after { inset:-25px 17px; } }
+@media(max-width:680px) {
+  .site-nav { margin:0 20px; padding:20px 0; }
+  .nav-links .nav-book { font-size:11px; padding:11px 12px; }
+  .hero { padding:37px 22px 0; }
+  .hero-grid { grid-template-columns:1fr; gap:39px; }
+  .hero-title { font-size:clamp(61px,15vw,88px); margin-bottom:25px; }
+  .hero-sub { font-size:16px; line-height:1.8; max-width:100%; }
+  .eyebrow { font-size:10px; margin-bottom:25px; letter-spacing:.2em; }
+  .hero-promise { font-size:11px; gap:10px; margin-top:26px; }
+  .hero-promise span+span::before { margin-right:10px; }
+  .art-frame { margin:0 9px; border-radius:32px 32px 100px 32px; padding:5px; }
+  .art-frame img { border-radius:27px 27px 95px 27px; }
+  .art-frame::before { inset:-14px; }
+  .art-frame::after { inset:-23px 12px; }
+  .art-frame figcaption { left:21px; bottom:23px; font-size:8px; }
+  .hero-foundations { margin-top:37px; padding:24px 0; gap:15px; }
+  main.band { padding-top:69px; }
+  #seq-h,#promise-h,#form-h { font-size:37px; }
+  section[aria-labelledby="seq-h"] .glass-card { padding:28px 24px; min-height:auto; }
+  section[aria-labelledby="promise-h"] > .glass-card { padding:34px 23px; }
+  #booking-survey > .glass-card { padding:32px 16px; border-radius:23px; }
+  #intakeForm > fieldset { padding:21px 14px 23px; border-radius:16px; margin-top:30px; }
+  legend.font-serif { font-size:25px; padding:0 5px; }
+  .session-snapshot { row-gap:21px; padding:20px 5px; }
+  .session-snapshot strong { font-size:25px; }
+  .pill span { font-size:13px; padding:10px 12px; }
+  .fragrance-matrix { padding:19px 12px; }
+  .fragrance-header { align-items:flex-start; gap:8px; }
+  .fragrance-header h3 { font-size:30px; }
+  .fragrance-badge { font-size:10px; padding:7px 9px; }
+  .scent-card { padding:13px 10px; min-height:122px; }
+  .mapcard { padding:15px 12px; }
+  .delivery-note { padding:19px 15px; }
+  footer { margin-left:20px; margin-right:20px; }
+}
+@media(prefers-reduced-motion:reduce) { .primary-action:hover,#submitBtn:hover,.glass-card.hoverable:hover { transform:none; } }
+
