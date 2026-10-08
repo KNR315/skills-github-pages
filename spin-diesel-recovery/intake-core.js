@@ -1,13 +1,7 @@
 'use strict';
-
-// Pure intake logic shared by the browser and regression tests.
-(function (root) {
-  const TIME_ZONE = 'America/Chicago';
-  const SITE_URL = 'https://knr315.github.io/skills-github-pages/spin-diesel-recovery/';
-  const PRESSURE = ['Light', 'Light-medium', 'Firm', 'Firm-deep', 'Intense'];
-  // Scent names from MAYJAM's matching 20-piece listing (product_id=220).
-  // Families organize the menu; they are not medical or safety classifications.
-  const SCENTS = [
+(function(root){
+const PACE=['Gentle','Easy','Comfortable'];
+const SCENTS = [
     ['lavender', 'Lavender', 'Floral'], ['jasmine', 'Jasmine', 'Floral'],
     ['ylang_ylang', 'Ylang Ylang', 'Floral'], ['rose', 'Rose', 'Floral'],
     ['geranium', 'Geranium', 'Floral'], ['chamomile', 'Chamomile', 'Floral'],
@@ -19,97 +13,22 @@
     ['rosemary', 'Rosemary', 'Fresh & herbal'], ['clary_sage', 'Clary Sage', 'Fresh & herbal'],
     ['vanilla', 'Vanilla', 'Sweet & spicy'], ['cinnamon', 'Cinnamon', 'Sweet & spicy']
   ].map(([id, name, family]) => ({ id, name, family }));
-  function scentChoices(values) {
-    const fragranceFree = !values.scent || values.scent === 'No added fragrance';
-    return Object.fromEntries(SCENTS.map(({ id }) => {
-      const state = values.scentMap?.[id];
-      return [id, ['interested', 'discuss', 'avoid'].includes(state) && (!fragranceFree || state === 'avoid') ? state : 'neutral'];
-    }));
-  }
-
-  function todayISO(now = new Date()) {
-    const parts = new Intl.DateTimeFormat('en-US', {
-      timeZone: TIME_ZONE, year: 'numeric', month: '2-digit', day: '2-digit'
-    }).formatToParts(now);
-    const value = type => parts.find(p => p.type === type).value;
-    return `${value('year')}-${value('month')}-${value('day')}`;
-  }
-  function validDate(value) {
-    return /^\d{4}-\d{2}-\d{2}$/.test(value || '') &&
-      !Number.isNaN(Date.parse(`${value}T12:00:00Z`)) &&
-      new Date(`${value}T12:00:00Z`).toISOString().slice(0, 10) === value;
-  }
-  function validate(values, today = todayISO()) {
-    const errors = [];
-    const fail = (field, message) => errors.push({ field, message });
-    if (!values.name?.trim()) fail('name', 'Please provide your name.');
-    if (!/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(values.email?.trim() || '')) fail('email', 'A valid email is required for confirmation.');
-    if (!['30', '60', '90'].includes(values.length)) fail('length', 'Please choose a session length.');
-    if (!validDate(values.date1) || values.date1 < today) fail('date1', 'Please select an earliest date of today or later.');
-    if (values.date2 && (!validDate(values.date2) || values.date2 < today)) fail('date2', 'Please select a secondary date of today or later.');
-    if (!values.times?.length && !values.flexible) fail('times', 'Select at least one time window, or choose flexible.');
-    if (!values.days?.length && !values.flexible) fail('days', 'Select at least one day, or choose flexible.');
-    if (!['Clothed', 'Draped', 'Clothed (sports bra / shorts)', 'Undressed to comfort with full draping', 'Discuss at arrival'].includes(values.drape)) fail('drape', 'Clothing and draping boundaries are required.');
-    for (const key of ['ack1','ack2','ack3']) if (!values[key]) fail(key, 'Please acknowledge each required agreement.');
-    if (!values.ackDelivery) fail('ackDelivery', 'Please agree to email delivery of your responses before sending.');
-    return errors;
-  }
-  function buildData(values, zones, now = new Date(), requestId = '') {
-    const clean = value => String(value || '').trim();
-    return {
-      meta: { schemaVersion: 4, requestId, submittedAt: now.toISOString(), status: 'prepared' },
-      contact: { name: clean(values.name), pronouns: clean(values.pronouns), email: clean(values.email), phone: clean(values.phone), preferredContact: values.contactPref || 'email', emergencyContact: clean(values.ecName) },
-      availability: { length: values.length, date1: values.date1, date2: values.date2 || '', days: [...(values.days || [])], times: [...(values.times || [])], flexible: Boolean(values.flexible), cancellationList: Boolean(values.waitlist), groupBooking: Boolean(values.group), timeZone: TIME_ZONE, trainingContext: values.timing || '' },
-      preferences: { pressure: Number(values.pressure), pressureLabel: PRESSURE[Number(values.pressure) - 1], style: Array.isArray(values.style) ? [...values.style] : [values.style || 'No preference'], atmosphereNotes: clean(values.atmosphereNotes), scent: values.scent || 'No added fragrance', scentMap: scentChoices(values), scentIntensity: !values.scent || values.scent === 'No added fragrance' ? 'None' : (['Light', 'Medium', 'Strong'].includes(values.scentIntensity) ? values.scentIntensity : 'Light'), bodyRequests: clean(values.bodyRequests), bodyMap: { ...zones } },
-      boundaries: { drape: values.drape, notes: clean(values.notes), stopWord: clean(values.stopWord), supportPerson: values.chaperone || '' },
-      health: { flags: [...(values.health || [])], notes: clean(values.notes) },
-      agreements: { restorativeBodywork: Boolean(values.ack1), answersAccurate: Boolean(values.ack2), boundariesConfirmed: Boolean(values.ack3), reminderAndAftercareOptIn: Boolean(values.ack4), emailDelivery: Boolean(values.ackDelivery) }
-    };
-  }
-  function payload(data, names) {
-    const groups = { focus: [], include: [], ask: [], skip: [] };
-    for (const [id, state] of Object.entries(data.preferences.bodyMap)) groups[state]?.push(names[id] || id);
-    return {
-      name: data.contact.name, email: data.contact.email,
-      _subject: 'Spin Diesel Recovery — appointment request', _template: 'table',
-      _url: SITE_URL,
-      'Form URL': SITE_URL,
-      'Request ID': data.meta.requestId,
-      'Pronouns': data.contact.pronouns, 'Phone': data.contact.phone,
-      'Preferred contact': data.contact.preferredContact, 'Emergency contact': data.contact.emergencyContact,
-      'Session length': `${data.availability.length} minutes`,
-      'Earliest date': data.availability.date1, 'Secondary date': data.availability.date2,
-      'Time windows': data.availability.times.join(', ') || 'No preference',
-      'Days': data.availability.days.join(', ') || 'Flexible',
-      'Cancellation list': data.availability.cancellationList ? 'Yes' : 'No',
-      'Group booking': data.availability.groupBooking ? 'Yes' : 'No',
-      'Flexible': data.availability.flexible ? 'Yes' : 'No',
-      'Time zone': data.availability.timeZone, 'Training context': data.availability.trainingContext,
-      'Pressure': `${data.preferences.pressure} · ${data.preferences.pressureLabel}`,
-      'Atmosphere': (Array.isArray(data.preferences.style) ? data.preferences.style.join(', ') : data.preferences.style) || 'No preference', 'Atmosphere notes': data.preferences.atmosphereNotes || '', 'Scent preference': data.preferences.scent || 'No added fragrance', 'Requested scent intensity': data.preferences.scentIntensity || 'None', 'Fragrance preferences': ['interested', 'discuss', 'avoid'].map(state => `${{interested:'Interested in',discuss:'Discuss with me',avoid:'Avoid'}[state]}: ${SCENTS.filter(s => data.preferences.scentMap?.[s.id] === state).map(s => s.name).join(', ') || '—'}`).join('\n'), 'Specific bodywork requests': data.preferences.bodyRequests || '', 'Draping': data.boundaries.drape,
-      'Stop signal': data.boundaries.stopWord, 'Notes': data.boundaries.notes,
-      'Support person': data.boundaries.supportPerson, 'Health flags': data.health.flags.join(', ') || 'None shared',
-      'Body map': Object.entries(groups).map(([state, zones]) => `${state}: ${zones.join(', ') || '—'}`).join('\n'),
-      'Agreements': JSON.stringify(data.agreements),
-      'Complete record': JSON.stringify(data)
-    };
-  }
-  async function send(endpoint, data, names, fetchFn = root.fetch.bind(root), timeoutMs = 15000) {
-    const controller = new AbortController();
-    const timeout = setTimeout(() => controller.abort(), timeoutMs);
-    try {
-      const response = await fetchFn(endpoint, {
-        method: 'POST', headers: { 'Content-Type': 'application/json', Accept: 'application/json' },
-        // Share only the canonical public form address, never a visitor's query or fragment.
-        referrer: SITE_URL, referrerPolicy: 'no-referrer-when-downgrade',
-        body: JSON.stringify(payload(data, names)), signal: controller.signal
-      });
-      const result = await response.json();
-      if (!response.ok || ![true, 'true'].includes(result.success)) throw new Error('Delivery was not accepted.');
-      return result;
-    } finally { clearTimeout(timeout); }
-  }
-  const api = { TIME_ZONE, SITE_URL, PRESSURE, SCENTS, scentChoices, todayISO, validDate, validate, buildData, payload, send };
-  if (typeof module !== 'undefined' && module.exports) module.exports = api;
-  else root.RecoveryIntake = api;
+function scentChoices(values){const fragranceFree=values.scent!=='Explore scent preferences';return Object.fromEntries(SCENTS.map(({id})=>{const s=values.scentMap?.[id];return [id,['interested','discuss','avoid'].includes(s)&&(!fragranceFree||s==='avoid')?s:'neutral'];}));}
+function validate(v){const errors=[];if(!['30','90'].includes(v.length))errors.push({message:'Choose 30 or 90 minutes.'});if(!['upper','lower','whole'].includes(v.theme))errors.push({message:'Choose an exploration theme.'});if(![1,2,3].includes(Number(v.effort)))errors.push({message:'Choose a comfortable pace.'});return errors;}
+function routine(length,theme){
+ const upper=['Shoulders & grip','Easy shoulder circles, a short wall slide, wrist circles, and relaxed hand opening. No loaded or forced movement.'];
+ const lower=['Hips & legs','Easy ankle circles, comfortable seated knee extension, and a small supported standing hip movement. No forced end range.'];
+ const whole=['Whole-body ease','Alternate comfortable shoulder, wrist, ankle, and hip movements. Choose fewer movements when tired.'];
+ const target={upper,lower,whole}[theme]||whole;
+ const steps=length==='90'?[['Settle',5,'Notice your energy; select one easy movement to revisit.'],['Warm-up',10,'Easy walking or marching; shorten this if needed.'],[target[0],15,target[1]],['Supported rest',10,'Sit or lie comfortably; breathe normally.'],['Optional second exploration',15,'Repeat only comfortable movements or spend this block resting.'],['Gentle mobility',10,'Brief, unforced stretches if comfortable, with breaks.'],['Rest again',15,'No continuous stretching target. Rest is part of the outline.'],['Revisit & close',10,'Repeat the easy movement gently, then choose one small next step.']]:[['Settle',3,'Notice your energy; select one easy movement to revisit.'],['Warm-up',5,'Easy walking or marching.'],[target[0],10,target[1]],['Gentle mobility',7,'If comfortable, try brief unforced stretches, resting between them.'],['Revisit & rest',5,'Repeat your easy movement without forcing range, then rest.']];
+ return {title:`${length}-minute ${target[0].toLowerCase()} outline`,note:'General education for healthy adults. Shorten or skip freely. Pain, dizziness, tingling, numbness or unusual weakness means stop. The body map records intentions; it does not alter or prescribe the outline.',steps:steps.map(([label,minutes,detail])=>({label,minutes,detail}))};
+}
+function buildData(v,zones,now=new Date()){
+ const clean=(s,n)=>String(s||'').trim().slice(0,n);
+ const noScent=v.scent!=='Explore scent preferences';
+ const bodyMap=Object.fromEntries(Object.entries(zones).filter(([k,s])=>/^[a-z_]+$/.test(k)&&['focus','include','ask','skip'].includes(s)));
+ return {meta:{schemaVersion:5,mode:'educational-local-only',createdAt:now.toISOString(),status:'local-plan'},plan:{minutes:Number(v.length),theme:v.theme,pace:PACE[Number(v.effort)-1],bodyMap,notes:clean(v.bodyRequests,1000)},atmosphere:{choices:(Array.isArray(v.style)?v.style:[]).filter(s=>['No preference','Quiet','Soft music','No music','Nature sounds','Personal playlist','Extra pauses'].includes(s)),notes:clean(v.atmosphereNotes,500),scent:noScent?'No added fragrance':'Explore scent preferences',scentMap:scentChoices(v),scentIntensity:noScent?'None':(['Light','Medium','Strong'].includes(v.scentIntensity)?v.scentIntensity:'Light')},outline:routine(v.length,v.theme)};
+}
+function summary(d,names){const mapLabels={focus:'Focus',include:'Include',ask:'Learn more',skip:'Skip'};const lines=[`Time: ${d.plan.minutes} minutes`,`Theme: ${d.outline.title}`,`Pace: ${d.plan.pace}`,`Planning notes: ${d.plan.notes||'None'}`,`Atmosphere: ${d.atmosphere.choices.join(', ')||'No preference'}`,`Atmosphere notes: ${d.atmosphere.notes||'None'}`,`Scent: ${d.atmosphere.scent}`,`Intensity preference: ${d.atmosphere.scentIntensity}`];for(const [s,label]of Object.entries(mapLabels))lines.push(`${label}: ${Object.entries(d.plan.bodyMap).filter(([,v])=>v===s).map(([id])=>names[id]||id).join(', ')||'None'}`);for(const s of ['interested','discuss','avoid'])lines.push(`${{interested:'Scent interests',discuss:'Explore later',avoid:'Avoid'}[s]}: ${SCENTS.filter(x=>d.atmosphere.scentMap[x.id]===s).map(x=>x.name).join(', ')||'None'}`);return lines.join('\n');}
+const api={PACE,SCENTS,scentChoices,validate,routine,buildData,summary};if(typeof module!=='undefined'&&module.exports)module.exports=api;else root.RecoveryIntake=api;
 })(globalThis);

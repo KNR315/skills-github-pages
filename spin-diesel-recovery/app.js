@@ -1,30 +1,23 @@
-
-/* ============ CONFIG ============ */
-// Set this to a real form endpoint (Formspree, Basin, your own server, etc.) so requests reach you.
-// Leave blank and the page will show the guest a summary to copy/download/email instead.
-const FORM_ENDPOINT = "https://formsubmit.co/ajax/khylannr15@gmail.com";
-const PRACTITIONER_EMAIL = "khylannr15@gmail.com";   // used by the "Email it" button
-
 /* ============ BODY MAP ============ */
 const ZONES = [
-  { id:'neck', name:'Neck & upper traps', desc:'Broad, slow work on the neck muscles and tops of the shoulders.' },
-  { id:'shoulders', name:'Shoulders', desc:'Deltoids and the shoulder joint, for overhead and inversion fatigue.' },
-  { id:'upper_back', name:'Upper back & shoulder blades', desc:'Lats, rhomboids and the muscles around the shoulder blades.' },
-  { id:'low_back', name:'Low back', desc:'Broad compression and sweeping work along the lower back.' },
-  { id:'glutes', name:'Glutes', sens:true, desc:'Broad forearm compression over a sheet or clothing to release the hip rotators.' },
-  { id:'hamstrings', name:'Hamstrings', desc:'Slow, downward kneading along the back of the thigh.' },
-  { id:'calves', name:'Calves', desc:'Release for constant toe-pointing (gastrocnemius and soleus).' },
-  { id:'feet', name:'Feet & toes', desc:'Release for toe-point fatigue and arches.' },
-  { id:'forearms', name:'Forearms & grip', desc:'Pin-and-stretch for the forearm flexors, plus thumb-pad work for grip fatigue.' },
-  { id:'elbows', name:'Elbows', desc:'Relief at the inner and outer elbow, where grip strain often collects.' },
-  { id:'chest', name:'Upper chest (below collarbone)', sens:true, desc:'Static pressure just beneath the collarbone to ease rounded shoulders, over clothing or a towel. Does not involve breast tissue.' },
-  { id:'underarm', name:'Underarm / side of ribcage', sens:true, desc:'A hold along the side of the ribcage to release the rotator cuff. I can guide you to position your own arm, or you can apply the pressure yourself with my instruction.' },
-  { id:'hipflex', name:'Hip flexors / lower abdomen', sens:true, desc:'Slow, sustained pressure on the soft tissue beside the lower abdomen, over a sheet or clothing, paired with breathing. I will describe exactly where my hands go first.' },
-  { id:'inner', name:'Inner thighs', sens:true, desc:'A common site of pole bruising. Broad, flat compression only, kept on the thigh and away from the groin. No sharp points.' },
-  { id:'quads', name:'Front of thighs', desc:'Broad compression and sweeping work along the front of the thigh.' }
+  { id:'neck', name:'Neck & upper traps', desc:'Explore small, comfortable head turns. No neck pressure or forced end-range movement.' },
+  { id:'shoulders', name:'Shoulders', desc:'Explore easy shoulder circles or a short, comfortable wall slide.' },
+  { id:'upper_back', name:'Upper back & shoulder blades', desc:'Consider a small seated torso turn without forcing the shoulders.' },
+  { id:'low_back', name:'Low back', desc:'Notice comfortable movement. Pain or radiating symptoms require appropriate assessment.' },
+  { id:'glutes', name:'Glutes', sens:true, desc:'A movement-planning area only. No practitioner-provided pressure or touch.' },
+  { id:'hamstrings', name:'Hamstrings', desc:'Explore a gentle seated knee extension without locking the knee or pulling hard.' },
+  { id:'calves', name:'Calves', desc:'Explore easy ankle circles. Do not exercise a newly swollen, hot, or painful calf.' },
+  { id:'feet', name:'Feet & toes', desc:'Explore easy toe opening and ankle movement, within comfort.' },
+  { id:'forearms', name:'Forearms & grip', desc:'Explore gentle wrist circles and opening the hands; no sustained gripping.' },
+  { id:'elbows', name:'Elbows', desc:'Explore comfortable bending and straightening without weights.' },
+  { id:'chest', name:'Upper chest', sens:true, desc:'A map reference only. No pressure, tissue work, or product application is offered.' },
+  { id:'underarm', name:'Underarm / side of ribcage', sens:true, desc:'A map reference only. No direct pressure or touch is offered.' },
+  { id:'hipflex', name:'Front of hips', sens:true, desc:'Explore movement only within comfort; no abdominal or groin pressure.' },
+  { id:'inner', name:'Inner thighs', sens:true, desc:'A map reference only. No touch or forced stretching is offered.' },
+  { id:'quads', name:'Front of thighs', desc:'Explore comfortable bending and straightening of the knee, without forcing range.' }
 ];
 const ZVIEW = { chest:'front', underarm:'front', hipflex:'front', quads:'front', inner:'front', upper_back:'back', low_back:'back', glutes:'back', hamstrings:'back', calves:'back' };
-const STATES = { focus:'Focus here', include:'Include', ask:'Ask me first', skip:'Skip' };
+const STATES = { focus:'Focus here', include:'Include', ask:'Learn more', skip:'Skip' };
 const zname = id => ZONES.find(z => z.id === id).name;
 const zoneState = {};
 const defaultState = () => ZONES.forEach(z => zoneState[z.id] = z.sens ? 'skip' : 'include');
@@ -89,11 +82,11 @@ function renderPanel() {
   const z = ZONES.find(x => x.id === activeZone), cur = zoneState[z.id];
   panel.innerHTML = `<h4 class="font-display text-sm text-mystic-glow mb-2">${z.name}</h4>
     <p class="hint mb-3">${z.desc}</p>
-    ${z.sens ? '<p class="text-xs text-[#9fd0ff] mb-3">Sensitive area: starts as Skip, and nothing happens here unless you choose it.</p>' : ''}
+    ${z.sens ? '<p class="text-xs text-[#9fd0ff] mb-3">Sensitive area: starts as Skip. This is a movement-planning reference, not permission for touch.</p>' : ''}
     <div class="flex flex-wrap gap-2" role="radiogroup" aria-label="${z.name} preference">
       <label class="pill"><input type="radio" name="zone_state" value="focus" ${cur==='focus'?'checked':''}><span>Focus here</span></label>
       <label class="pill"><input type="radio" name="zone_state" value="include" ${cur==='include'?'checked':''}><span>Include</span></label>
-      <label class="pill ask"><input type="radio" name="zone_state" value="ask" ${cur==='ask'?'checked':''}><span>Ask me first</span></label>
+      <label class="pill ask"><input type="radio" name="zone_state" value="ask" ${cur==='ask'?'checked':''}><span>Learn more</span></label>
       <label class="pill skip"><input type="radio" name="zone_state" value="skip" ${cur==='skip'?'checked':''}><span>Skip</span></label>
     </div>`;
 }
@@ -114,7 +107,7 @@ function refresh(rebuildPanel = true) {
     c.setAttribute('aria-controls', 'zonePanel');
   });
   const n = k => Object.values(zoneState).filter(s => s === k).length;
-  document.getElementById('mapCount').textContent = `${n('focus')} focus · ${n('ask')} ask first · ${n('skip')} skipped`;
+  document.getElementById('mapCount').textContent = `${n('focus')} focus · ${n('ask')} learning choices · ${n('skip')} skipped`;
   if (rebuildPanel) renderPanel();
 }
 function selectZone(id) {
@@ -133,7 +126,7 @@ renderMap();
 function zoneSummary() {
   const g = { focus:[], include:[], ask:[], skip:[] };
   ZONES.forEach(z => g[zoneState[z.id]].push(z.name));
-  return ['  Focus here: ' + (g.focus.join(', ') || '—'), '  Ask me first: ' + (g.ask.join(', ') || '—'),
+  return ['  Focus here: ' + (g.focus.join(', ') || '—'), '  Learn more: ' + (g.ask.join(', ') || '—'),
           '  Skip: ' + (g.skip.join(', ') || '—'), '  Include as usual: ' + (g.include.join(', ') || '—')].join('\n');
 }
 
@@ -143,19 +136,19 @@ function zoneSummary() {
 const core = RecoveryIntake;
 const form = document.getElementById('intakeForm');
 const errBox = document.getElementById('formError');
-const submitBtn = document.getElementById('submitBtn');
-const submitStatus = document.getElementById('submitStatus');
+
+
 const done = document.getElementById('done');
 let lastData = null;
 let submitting = false;
 const smooth = () => window.matchMedia('(prefers-reduced-motion: reduce)').matches ? 'auto' : 'smooth';
 
-// Fragrance preferences stay in this page and travel only with the guest's request.
+// Fragrance preferences remain in this page. There is no transmission function.
 const scentState = Object.fromEntries(core.SCENTS.map(scent => [scent.id, 'neutral']));
 const scentCards = document.getElementById('scentCards');
 const scentFamilies = document.getElementById('scentFamilies');
 const scentPanel = document.getElementById('scentPanel');
-const scentLabels = { neutral: 'No preference', interested: 'Interested', discuss: 'Discuss with me', avoid: 'Avoid' };
+const scentLabels = { neutral: 'No preference', interested: 'Interested', discuss: 'Explore later', avoid: 'Avoid' };
 let activeScent = core.SCENTS[0].id;
 let activeFamily = 'all';
 const families = ['all', ...new Set(core.SCENTS.map(scent => scent.family))];
@@ -165,7 +158,7 @@ scentCards.innerHTML = core.SCENTS.map(scent => `<button type="button" class="sc
 function renderScentPanel() {
   const scent = core.SCENTS.find(item => item.id === activeScent);
   scentPanel.innerHTML = `<div class="scent-panel-emblem" aria-hidden="true"><svg class="ico-lg"><use href="#i-drop"/></svg></div><p class="fragrance-kicker">${scent.family}</p><h4>${scent.name}</h4><p class="hint">How would you like this scent considered?</p>
-    <div class="scent-actions" role="radiogroup" aria-label="${scent.name} preference">${Object.entries(scentLabels).map(([state, label]) => `<label class="pill ${state === 'avoid' ? 'skip' : state === 'discuss' ? 'ask' : ''}"><input type="radio" name="activeScentState" value="${state}" ${scentState[activeScent] === state ? 'checked' : ''}><span>${label}</span></label>`).join('')}</div><p class="hint scent-panel-note">Your preferences guide the conversation. They do not authorize application to skin.</p>`;
+    <div class="scent-actions" role="radiogroup" aria-label="${scent.name} preference">${Object.entries(scentLabels).map(([state, label]) => `<label class="pill ${state === 'avoid' ? 'skip' : state === 'discuss' ? 'ask' : ''}"><input type="radio" name="activeScentState" value="${state}" ${scentState[activeScent] === state ? 'checked' : ''}><span>${label}</span></label>`).join('')}</div><p class="hint scent-panel-note">A visual preference only. No products are supplied, applied, or recommended for skin.</p>`;
 }
 function refreshScents(rebuildPanel = true) {
   Object.assign(scentState, core.scentChoices({ scent: new FormData(form).get('scent'), scentMap: scentState }));
@@ -182,7 +175,7 @@ function refreshScents(rebuildPanel = true) {
   const count = state => Object.values(scentState).filter(value => value === state).length;
   const fragranceFree = new FormData(form).get('scent') === 'No added fragrance';
   form.querySelectorAll('input[name="scentIntensity"]').forEach(input => { input.disabled = fragranceFree; });
-  document.getElementById('scentCount').textContent = `${fragranceFree ? 'No added fragrance' : 'Scent discussion requested'} · ${count('interested')} interested · ${count('discuss')} to discuss · ${count('avoid')} avoided`;
+  document.getElementById('scentCount').textContent = `${fragranceFree ? 'No added fragrance' : 'Exploring scent preferences'} · ${count('interested')} interested · ${count('discuss')} to discuss · ${count('avoid')} avoided`;
   const rows = ['interested', 'discuss', 'avoid'].map(state => {
     const selected = core.SCENTS.filter(scent => scentState[scent.id] === state);
     return `<div class="scent-selection-row" data-state="${state}"><span>${scentLabels[state]}</span><div>${selected.length ? selected.map(scent => `<button type="button" data-explore-scent="${scent.id}" aria-label="Review ${scent.name} preference">${scent.name}</button>`).join('') : '<small>None selected</small>'}</div></div>`;
@@ -210,8 +203,9 @@ scentFamilies.addEventListener('click', event => {
 scentPanel.addEventListener('change', event => {
   if (event.target.name !== 'activeScentState') return;
   scentState[activeScent] = event.target.value;
-  if (['interested', 'discuss'].includes(event.target.value)) form.querySelector('input[name="scent"][value="Interested in a scent; discuss before use"]').checked = true;
+  if (['interested', 'discuss'].includes(event.target.value)) form.querySelector('input[name="scent"][value="Explore scent preferences"]').checked = true;
   refreshScents(false);
+  progress();
 });
 document.getElementById('scentSelection').addEventListener('click', event => {
   const button = event.target.closest('[data-explore-scent]');
@@ -232,219 +226,62 @@ document.getElementById('scentReset').addEventListener('click', () => {
 });
 refreshScents();
 
+
 function values() {
   const fd = new FormData(form);
-  return { ...Object.fromEntries(fd), times: fd.getAll('times'), days: fd.getAll('days'), health: fd.getAll('health'), style: fd.getAll('style'), scentMap: { ...scentState } };
-}
-function updateDates() {
-  for (const id of ['date1', 'date2']) document.getElementById(id).min = core.todayISO();
+  return { ...Object.fromEntries(fd), style:fd.getAll('style'), scentMap:{...scentState} };
 }
 function progress() {
-  updateDates();
-  const v = values();
-  const checks = [
-    !!v.name?.trim(), /^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(v.email?.trim() || ''),
-    ['30','60','90'].includes(v.length),
-    core.validDate(v.date1) && v.date1 >= core.todayISO() && (!v.date2 || (core.validDate(v.date2) && v.date2 >= core.todayISO())),
-    !!v.flexible || v.times.length > 0, !!v.flexible || v.days.length > 0, !!v.drape, !!v.ack1, !!v.ack2, !!v.ack3, !!v.ackDelivery
-  ];
-  const n = checks.filter(Boolean).length;
-  document.getElementById('pbar').style.width = `${n / checks.length * 100}%`;
-  document.getElementById('ptxt').textContent = n === checks.length ? 'Alignment Complete' : `${n} of ${checks.length} required fields`;
-  const pressure = document.getElementById('pressure');
-  const text = `${pressure.value} · ${core.PRESSURE[Number(pressure.value)-1]}`;
-  document.getElementById('pressureOut').textContent = text;
-  pressure.setAttribute('aria-valuetext', text);
-  updateSnapshot();
+  const v=values();
+  const pace=core.PACE[Number(v.effort)-1] || core.PACE[0];
+  document.getElementById('pressureOut').textContent=pace;
+  document.getElementById('effort').setAttribute('aria-valuetext',pace);
+  document.getElementById('snapLength').textContent=`${v.length} min`;
+  document.getElementById('snapPressure').textContent=pace;
+  document.getElementById('snapFocus').textContent=Object.values(zoneState).filter(s=>s==='focus').length;
+  document.getElementById('snapSkip').textContent=`${Object.values(zoneState).filter(s=>s==='skip').length} skipped`;
 }
-function clearErrors() {
-  errBox.classList.add('hidden');
-  form.querySelectorAll('[aria-invalid]').forEach(el => el.removeAttribute('aria-invalid'));
-}
+function clearErrors() {errBox.classList.add('hidden');errBox.textContent='';}
 function showErrors(errors) {
-  errBox.replaceChildren();
-  const list = document.createElement('ul');
-  list.className = 'list-disc pl-5 space-y-1';
-  for (const error of errors) {
-    const item = document.createElement('li');
-    item.textContent = error.message;
-    list.appendChild(item);
-    if (error.field) form.querySelectorAll(`[name="${error.field}"]`).forEach(el => el.setAttribute('aria-invalid', 'true'));
-  }
-  errBox.appendChild(list);
-  errBox.classList.remove('hidden');
-  errBox.focus({ preventScroll: true });
-  errBox.scrollIntoView({ behavior: smooth(), block: 'center' });
-}
-function buildData() {
-  const id = window.crypto?.randomUUID ? window.crypto.randomUUID() : `request-${Date.now()}-${Math.random().toString(36).slice(2)}`;
-  return core.buildData(values(), zoneState, new Date(), id);
-}
-function saveRecord(data) {
-  const url = URL.createObjectURL(new Blob([JSON.stringify(data, null, 2)], { type: 'application/json' }));
-  const a = document.createElement('a');
-  a.href = url;
-  const name = data.contact.name.toLowerCase().replace(/[^a-z0-9]+/g, '-').replace(/^-|-$/g, '').slice(0, 60) || 'draft';
-  a.download = `somatic-intake-${name}.json`;
-  document.body.appendChild(a);
-  a.click();
-  a.remove();
-  setTimeout(() => URL.revokeObjectURL(url), 1000);
-}
-function prepareEmail(data) {
-  const payload = core.payload(data, Object.fromEntries(ZONES.map(z => [z.id, z.name])));
-  const body = Object.entries(payload).filter(([key]) => !key.startsWith('_') && key !== 'Complete record').map(([key, value]) => `${key}: ${value}`).join('\r\n');
-  const subject = encodeURIComponent('Spin Diesel Recovery — appointment request');
-  let uri = `mailto:${PRACTITIONER_EMAIL}?subject=${subject}&body=${encodeURIComponent(body)}`;
-  if (uri.length > 1800) {
-    saveRecord(data);
-    uri = `mailto:${PRACTITIONER_EMAIL}?subject=${subject}&body=${encodeURIComponent(`Please find my intake record attached.\r\nRequest ID: ${data.meta.requestId}\r\nName: ${data.contact.name}\r\nSession: ${data.availability.length} minutes\r\nEarliest date: ${data.availability.date1}\r\n\r\nPlease attach the downloaded JSON record before sending.`)}`;
-    submitStatus.textContent = 'Your record was downloaded. Attach it to the email draft before sending; nothing has been emailed yet.';
-  } else submitStatus.textContent = 'An email draft will open in your mail app. Review and send it there; this page has not sent that email.';
-  const link = document.createElement('a');
-  link.href = uri;
-  link.click();
-}
-
-function updateSnapshot() {
-  const v = values();
-  document.getElementById('snapLength').textContent = `${v.length || '60'} min`;
-  document.getElementById('snapPressure').textContent = core.PRESSURE[Number(v.pressure) - 1];
-  document.getElementById('snapFocus').textContent = Object.values(zoneState).filter(s => s === 'focus').length;
-  document.getElementById('snapSkip').textContent = `${Object.values(zoneState).filter(s => s === 'skip').length} skipped`;
-}
-function readableSummary(data) {
-  const payload = core.payload(data, Object.fromEntries(ZONES.map(z => [z.id, z.name])));
-  return Object.entries(payload).filter(([key]) => !key.startsWith('_') && key !== 'Complete record').map(([key, value]) => `${key}: ${value || '—'}`).join('\n');
-}
-function refreshRecord() {
-  document.getElementById('summary').textContent = readableSummary(lastData);
-  document.getElementById('jsonPreview').textContent = JSON.stringify(lastData, null, 2);
+  errBox.textContent=errors.map(e=>e.message).join(' ');
+  errBox.classList.remove('hidden');errBox.focus();
 }
 function renderReview() {
-  document.getElementById('doneTitle').textContent = `Ready when you are, ${lastData.contact.name.split(/\s+/)[0]}.`;
-  document.getElementById('doneMsg').textContent = 'Review your session intentions below. Nothing has been sent yet. Your preferences will be reconfirmed in person.';
-  document.getElementById('sendReviewedBtn').classList.remove('hidden');
-  document.getElementById('retryBtn').classList.add('hidden');
-  refreshRecord();
-  form.classList.add('hidden');
-  document.getElementById('intakeProgress').classList.add('hidden');
-  document.querySelector('.session-snapshot').classList.add('hidden');
-  done.classList.remove('hidden');
-  done.focus({ preventScroll:true });
-  done.scrollIntoView({ behavior:smooth(), block:'start' });
+  const names=Object.fromEntries(ZONES.map(z=>[z.id,z.name]));
+  document.getElementById('summary').textContent=core.summary(lastData,names);
+  document.getElementById('jsonPreview').textContent=JSON.stringify(lastData,null,2);
+  const outline=document.getElementById('routineOutline');outline.replaceChildren();
+  const heading=document.createElement('h4');heading.textContent=lastData.outline.title;outline.appendChild(heading);
+  const caution=document.createElement('p');caution.className='hint';caution.textContent=lastData.outline.note;outline.appendChild(caution);
+  const list=document.createElement('ol');
+  lastData.outline.steps.forEach(step=>{const item=document.createElement('li');item.textContent=`${step.minutes} min · ${step.label}: ${step.detail}`;list.appendChild(item);});outline.appendChild(list);
+  form.classList.add('hidden');document.querySelector('.session-snapshot').classList.add('hidden');done.classList.remove('hidden');done.focus();done.scrollIntoView({behavior:smooth(),block:'start'});
 }
-async function sendReviewed() {
-  if (submitting || !lastData || lastData.meta.status === 'accepted-by-delivery-service') return;
-  submitting = true;
-  const buttons = [...done.querySelectorAll('button')];
-  buttons.forEach(btn => { btn.disabled = true; });
-  done.setAttribute('aria-busy', 'true');
-  const message = document.getElementById('doneMsg');
-  message.textContent = 'Sending your appointment request. Please keep this page open.';
-  try {
-    await core.send(FORM_ENDPOINT, lastData, Object.fromEntries(ZONES.map(z => [z.id, z.name])));
-    lastData.meta.status = 'accepted-by-delivery-service';
-    document.getElementById('doneTitle').textContent = 'Your request is on its way.';
-    message.textContent = 'The delivery service accepted your request for email delivery. Your time is not booked yet; the practitioner will contact you to confirm availability and boundaries.';
-    document.getElementById('sendReviewedBtn').classList.add('hidden');
-    document.getElementById('retryBtn').classList.add('hidden');
-  } catch {
-    lastData.meta.status = 'delivery-unconfirmed';
-    document.getElementById('doneTitle').textContent = 'Your answers are still here.';
-    message.textContent = 'We could not confirm delivery. Download your record or prepare an email below. Check with the practitioner before retrying if a request may already have arrived, so it is not duplicated.';
-    document.getElementById('sendReviewedBtn').classList.add('hidden');
-    document.getElementById('retryBtn').classList.remove('hidden');
-  } finally {
-    submitting = false;
-    buttons.forEach(btn => { btn.disabled = false; });
-    done.removeAttribute('aria-busy');
-    refreshRecord();
-  }
+function clearPlan() {
+  form.reset();lastData=null;defaultState();activeZone=null;view='front';
+  Object.keys(scentState).forEach(id=>scentState[id]='neutral');activeFamily='all';activeScent=core.SCENTS[0].id;
+  document.getElementById('summary').textContent='';document.getElementById('jsonPreview').textContent='';document.getElementById('routineOutline').replaceChildren();
+  done.classList.add('hidden');form.classList.remove('hidden');document.querySelector('.session-snapshot').classList.remove('hidden');clearErrors();renderMap();refreshScents();progress();
 }
-
-document.querySelectorAll('[data-quick-name]').forEach(button => button.addEventListener('click', () => {
-  const choices = button.dataset.vals === '*' ? null : button.dataset.vals.split(',');
-  form.querySelectorAll(`input[name="${button.dataset.quickName}"]`).forEach(input => {
-    input.checked = choices === null || choices.includes(input.value);
-  });
-  clearErrors();
-  progress();
-}));
-// Multiple atmosphere preferences, with consistent fallback and conflicting choices.
-form.addEventListener('change', event => {
-  const selected = event.target;
-  if (selected.name !== 'style') return;
-  const choices = [...form.querySelectorAll('input[name="style"]')];
-  const fallback = choices.find(input => input.value === 'No preference');
-  if (selected.checked) {
-    if (selected === fallback) choices.forEach(input => { input.checked = input === fallback; });
-    else {
-      fallback.checked = false;
-      if (selected.dataset.atmosphereGroup) choices.forEach(input => {
-        if (input !== selected && input.dataset.atmosphereGroup === selected.dataset.atmosphereGroup && (selected.value === 'No music' || input.value === 'No music')) input.checked = false;
-      });
-      const conversation = ['Quiet, minimal talking', 'Casual conversation welcome'];
-      if (conversation.includes(selected.value)) choices.forEach(input => {
-        if (input !== selected && conversation.includes(input.value)) input.checked = false;
-      });
-    }
-  }
-  if (!choices.some(input => input.checked)) fallback.checked = true;
+form.addEventListener('change',event=>{
+  const selected=event.target;if(selected.name!=='style')return;
+  const choices=[...form.querySelectorAll('input[name="style"]')];const fallback=choices.find(i=>i.value==='No preference');
+  if(selected.checked){if(selected===fallback)choices.forEach(i=>i.checked=i===fallback);else {fallback.checked=false;if(selected.dataset.atmosphereGroup)choices.forEach(i=>{if(i!==selected && i.dataset.atmosphereGroup===selected.dataset.atmosphereGroup && (selected.value==='No music'||i.value==='No music'))i.checked=false;});}}
+  if(!choices.some(i=>i.checked))fallback.checked=true;
 });
-form.addEventListener('input', () => { clearErrors(); progress(); });
-form.addEventListener('change', () => { clearErrors(); progress(); });
-window.addEventListener('focus', progress);
-document.getElementById('mapReset').addEventListener('click', progress);
-progress();
-
-form.addEventListener('submit', event => {
-  event.preventDefault();
-  if (submitting) return;
-  clearErrors();
-  const problems = core.validate(values());
-  if (problems.length) { showErrors(problems); return; }
-  if (!form.checkValidity()) { form.reportValidity(); return; }
-  lastData = buildData();
-  renderReview();
+form.addEventListener('input',()=>{clearErrors();progress();});form.addEventListener('change',()=>{clearErrors();progress();});
+form.addEventListener('submit',event=>{
+  event.preventDefault();clearErrors();const v=values();const errors=core.validate(v);if(errors.length){showErrors(errors);return;}
+  lastData=core.buildData(v,zoneState);renderReview();
 });
-document.getElementById('sendReviewedBtn').addEventListener('click', sendReviewed);
-document.getElementById('retryBtn').addEventListener('click', sendReviewed);
-document.getElementById('jsonNowBtn').addEventListener('click', () => saveRecord(buildData()));
-document.getElementById('jsonBtn').addEventListener('click', () => { if (lastData) saveRecord(lastData); });
-document.getElementById('mailBtn').addEventListener('click', () => {
-  if (!lastData) return;
-  prepareEmail(lastData);
-  document.getElementById('doneMsg').textContent = submitStatus.textContent;
+document.getElementById('editBtn').addEventListener('click',()=>{done.classList.add('hidden');form.classList.remove('hidden');document.querySelector('.session-snapshot').classList.remove('hidden');document.getElementById('theme').focus();progress();});
+for(const id of ['clearPlan','clearReview'])document.getElementById(id).addEventListener('click',clearPlan);
+document.getElementById('jsonBtn').addEventListener('click',()=>{
+  if(!lastData)return;const url=URL.createObjectURL(new Blob([JSON.stringify(lastData,null,2)],{type:'application/json'}));
+  const a=document.createElement('a');a.href=url;a.download='spin-diesel-personal-plan.json';document.body.appendChild(a);a.click();a.remove();setTimeout(()=>URL.revokeObjectURL(url),1000);
 });
-document.getElementById('copyBtn').addEventListener('click', async event => {
-  if (!lastData) return;
-  try {
-    await navigator.clipboard.writeText(JSON.stringify(lastData, null, 2));
-    event.target.textContent = 'Copied';
-  } catch {
-    document.getElementById('jsonPreview').closest('details').open = true;
-    event.target.textContent = 'Select and copy JSON below';
-  }
-});
-document.getElementById('editBtn').addEventListener('click', () => {
-  if (submitting) return;
-  done.classList.add('hidden');
-  form.classList.remove('hidden');
-  document.getElementById('intakeProgress').classList.remove('hidden');
-  document.querySelector('.session-snapshot').classList.remove('hidden');
-  document.getElementById('name').focus();
-  progress();
-});
-
-// A quiet, optional response to pointer movement, never needed to use the page.
-const artwork = document.getElementById('heroArtwork');
-const motion = window.matchMedia('(prefers-reduced-motion: reduce)');
-artwork.addEventListener('pointermove', event => {
-  if (motion.matches || event.pointerType !== 'mouse') return;
-  const rect = artwork.getBoundingClientRect();
-  const x = ((event.clientX - rect.left) / rect.width - .5) * 4;
-  const y = ((event.clientY - rect.top) / rect.height - .5) * -4;
-  artwork.style.transform = `perspective(1000px) rotateY(${x}deg) rotateX(${y}deg)`;
-});
-artwork.addEventListener('pointerleave', () => { artwork.style.transform = ''; });
+window.addEventListener('pageshow',event=>{if(event.persisted)clearPlan();});
+clearPlan();
+const artwork=document.getElementById('heroArtwork');const motion=window.matchMedia('(prefers-reduced-motion: reduce)');
+artwork.addEventListener('pointermove',event=>{if(motion.matches||event.pointerType!=='mouse')return;const r=artwork.getBoundingClientRect();artwork.style.transform=`perspective(1000px) rotateY(${((event.clientX-r.left)/r.width-.5)*4}deg) rotateX(${((event.clientY-r.top)/r.height-.5)*-4}deg)`;});
+artwork.addEventListener('pointerleave',()=>{artwork.style.transform='';});
