@@ -284,3 +284,39 @@ footer { max-width:1240px; margin:30px auto 0; padding:45px 24px!important; }
 }
 @media(prefers-reduced-motion:reduce) { .primary-action:hover,#submitBtn:hover,.glass-card.hoverable:hover { transform:none; } }
 
+/* Deeper jewel tones, drawn from the original fire-and-water artwork. */
+:root { --ink:#070c19; --gold:#edc58b; --fire:#c87959; --water:#7cbeb9; }
+.bg-ethereal { background:radial-gradient(ellipse at 6% 10%,#713a323e,transparent 42%),radial-gradient(ellipse at 96% 18%,#19536445,transparent 44%),radial-gradient(ellipse at 15% 50%,#4a26553a,transparent 38%),radial-gradient(ellipse at 93% 74%,#174b4934,transparent 45%),linear-gradient(160deg,#0e0d21,#071423 46%,#100d20); }
+.site-nav { border-bottom-color:#aa837638; }
+.nav-links .nav-book { background:linear-gradient(115deg,#693f3528,#275c6630); border-color:#d5a77865; }
+.art-frame { background:linear-gradient(135deg,#90513d66,#1b263e 42%,#36777460); border-color:#d9b07980; box-shadow:-26px 35px 100px #b4543029,30px -20px 100px #29999326,0 28px 60px #0005; }
+.art-frame::before { border-color:#c28a6240; }
+.art-frame::after { border-color:#63b9b837; }
+.hero-title em { color:#efc796; }
+.glass-card { background:linear-gradient(140deg,#263044e0,#152539ec 48%,#231b32ed); border-color:#b29e7950; }
+section[aria-labelledby="seq-h"] .glass-card:nth-child(3n+1) { background:linear-gradient(145deg,#38252be8,#191d30ee 70%); border-top-color:#d391716e; }
+section[aria-labelledby="seq-h"] .glass-card:nth-child(3n+2) { background:linear-gradient(145deg,#15353ee8,#132031ee 75%); border-top-color:#72b6b980; }
+section[aria-labelledby="seq-h"] .glass-card:nth-child(3n) { background:linear-gradient(145deg,#30243ee8,#171e33ee 75%); border-top-color:#ab86bd75; }
+.glass-card h3 { color:#f0d3a6; }
+section[aria-labelledby="promise-h"] > .glass-card { background:radial-gradient(ellipse at 100% 0,#386b6f30,transparent 65%),linear-gradient(130deg,#292139ed,#132637f5); border-color:#a38c985c; }
+#booking-survey > .glass-card { background:radial-gradient(ellipse at 0 0,#56374c2b,transparent 48%),linear-gradient(145deg,#1b293df2,#111b2cf8 58%,#231b30f2); border-color:#c59b726b; }
+#intakeForm > fieldset { background:linear-gradient(135deg,#28334b45,#182b3340); border-color:#819aa339; }
+#intakeForm > fieldset:nth-of-type(even) { background:linear-gradient(135deg,#42304336,#172f3947); }
+legend.font-serif { background:#1b2638; color:#f0e5cf; }
+.field { background:linear-gradient(125deg,#11182de8,#0a1c28f0); border-color:#84969d5c; border-bottom-color:#be9c776b; }
+.session-snapshot { background:linear-gradient(110deg,#7b493333,#231c3b50,#20525b42); border-color:#af9d795c; }
+.progress { background:linear-gradient(110deg,#242137f7,#112b36f7); }
+.pill span,.zchip { background:linear-gradient(125deg,#20233a,#142b35); border-color:#839ba959; }
+.pill input:checked+span { background:linear-gradient(115deg,#efd5a8,#d4a270); color:#111623; }
+.pill.ask input:checked+span { background:linear-gradient(115deg,#a6d7d0,#72b5bd); }
+.mapcard { background:radial-gradient(ellipse at 10% 25%,#27687742,transparent 62%),radial-gradient(ellipse at 100% 100%,#6c414b37,transparent 65%),#111b2d; border-color:#92b0a75b; }
+.zpanel { background:linear-gradient(145deg,#253348,#172a35); border-color:#92b0a749; }
+.delivery-note { background:linear-gradient(125deg,#34283b9e,#18333fa8); border-color:#82aba264; }
+.fragrance-matrix { background:radial-gradient(ellipse at 100% 0,#285f6645,transparent 60%),radial-gradient(ellipse at 0 100%,#71394c35,transparent 65%),#141c2e; border-color:#b7997460; }
+.scent-card { background:linear-gradient(145deg,#283348,#172635); border-color:#9d9cb94a; }
+.scent-card:nth-child(3n+1) { background:linear-gradient(145deg,#352b44,#192436); }
+.scent-card:nth-child(3n+2) { background:linear-gradient(145deg,#1b3c42,#142333); }
+.scent-panel { background:linear-gradient(145deg,#303047,#19343d); border-color:#bca07958; }
+.scent-family { background:#20263a; border-color:#9ca4b34a; }
+.scent-family[aria-pressed="true"] { background:#6b503a45; border-color:#ddb77d; }
+
