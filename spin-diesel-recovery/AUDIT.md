@@ -21,3 +21,5 @@ The current page offers self-directed movement and rest planning. It offers no a
 Run `node --test spin-diesel-recovery/tests/intake.test.cjs` from the repository root. Checks cover six timed outlines, validation, fragrance-free exclusions, multiple scent choices, schema minimization, bounded notes, snapshot isolation, readable review, absence of transmission/storage code, local assets, CSP, safe rendering, and clear/reset behavior.
 
 The private reports describe evidence limits, official Missouri sources, proposed record retention, and a future private data architecture. No central record backend has been created.
+
+Live verification completed on 2026-10-08: hero/artwork and scope notice visible; keyboard map selection; 90-minute theme selection; multiple sound choices; scent interest/exclusion and intensity; fragrance-free exclusions; No music conflict clearing; local review, edit preservation, actual JSON download; full clear/reset with empty notes and review. Downloaded synthetic JSON matched the reviewed preferences and had no contact/health objects. No submission was sent.
