@@ -1,11 +1,19 @@
-# Spin Diesel Recovery - Movement & Rest Lab
+# Spin Diesel Recovery
 
-An interactive educational design project for self-directed movement, rest, and atmosphere.
+Consent-first recovery bodywork for pole and aerial athletes.
 
-**[Open Spin Diesel Recovery - Movement & Rest Lab](https://knr315.github.io/skills-github-pages/spin-diesel-recovery/)**
+**[Open Spin Diesel Recovery — Booking & Consent](https://knr315.github.io/skills-github-pages/spin-diesel-recovery/)**
 
-Compose a local-only plan, explore a body map and fragrance menu, and download your preferences. No appointments, practitioner-provided touch, treatment, or product application are offered through this demo. No client submissions are collected.
+Use the booking link above to explore the body map, share preferences, and request a session. Times are confirmed personally. This repository contains the website's source code.
 
-The [Pages homepage](https://knr315.github.io/skills-github-pages/) also opens the application. The repository name and public URL remain unchanged.
+The shorter [Pages homepage](https://knr315.github.io/skills-github-pages/) also opens the form. The bare `knr315.github.io` domain is not the booking address.
 
-See [project details](spin-diesel-recovery/README.md) and [verification notes](spin-diesel-recovery/AUDIT.md). Run `node --test spin-diesel-recovery/tests/intake.test.cjs` for regression checks. Pushes to main publish through GitHub Pages. Previous revisions remain in Git history.
+## Project files
+
+- [`spin-diesel-recovery/`](spin-diesel-recovery/): website, styles, artwork, and intake logic.
+- [Project README](spin-diesel-recovery/README.md): local development and publishing.
+- [Code audit](spin-diesel-recovery/AUDIT.md): repairs, verification, and limits.
+
+Run `node --test spin-diesel-recovery/tests/intake.test.cjs` for regression checks. Pushes to `main` publish through GitHub Pages.
+
+The repository began as the GitHub Pages exercise. Its original first-page copy remains at `index.md`, published under `/archive/first-page/`, and earlier revisions remain in Git history.
