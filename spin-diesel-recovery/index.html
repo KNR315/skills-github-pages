@@ -197,7 +197,15 @@ tailwind.config = {
         <!-- 2. Availability -->
         <fieldset class="space-y-6">
           <legend class="font-serif text-xl text-mystic-glow mb-2"><svg class="ico-lg"><use href="#i-calendar"/></svg>2. When works for you</legend>
-          <p class="hint">I come to your space. Pick everything that could work. All time windows are in St. Louis time (Central). We confirm your location, visit arrangements, and final time personally.</p>
+          <div class="delivery-note space-y-4">
+            <p class="hint"><strong class="text-white">I come to your space.</strong> Share where you would like me to come below. We confirm your location, visit arrangements, and final time personally.</p>
+            <div>
+              <label class="label" for="visitAddress">Address for your visit (optional)</label>
+              <textarea id="visitAddress" name="visitAddress" rows="3" maxlength="500" autocomplete="street-address" class="field w-full px-3 py-3 text-base resize-y" aria-describedby="visitAddressHint" placeholder="Street address, unit or suite, city, and ZIP code"></textarea>
+              <p class="hint mt-2" id="visitAddressHint">Where would you like me to report? You can also confirm the address directly with me before the visit.</p>
+            </div>
+          </div>
+          <p class="hint">Pick everything that could work. All time windows are in St. Louis time (Central).</p>
 
           <div>
             <p class="label" id="lenLabel">Session length *</p>
@@ -299,6 +307,12 @@ tailwind.config = {
             <label class="label" for="bodyRequests">Specific requests for your bodywork (optional)</label>
             <p class="hint mb-2" id="bodyRequestsHint">Describe areas to focus on or avoid, how you'd like the work to feel, or anything the map doesn't capture. We will discuss your requests and confirm boundaries before touch.</p>
             <textarea id="bodyRequests" name="bodyRequests" rows="4" maxlength="2000" class="field w-full px-3 py-3 text-base resize-y" aria-describedby="bodyRequestsHint" placeholder="For example: Please spend extra time on my right shoulder and use lighter pressure on my calves."></textarea>
+          </div>
+
+          <div>
+            <label class="label" for="techniqueInterests">Massage styles or techniques you’re curious about (optional)</label>
+            <p class="hint mb-2" id="techniqueInterestsHint">If you’re familiar with or curious about a particular massage style or technique, tell me in the box below. I’ll look into it before our session so we can discuss whether it’s a good fit.</p>
+            <textarea id="techniqueInterests" name="techniqueInterests" rows="3" maxlength="1500" class="field w-full px-3 py-3 text-base resize-y" aria-describedby="techniqueInterestsHint" placeholder="A style you enjoy, a technique you’ve heard about, or a question you’d like to explore…"></textarea>
           </div>
 
           <div>
@@ -416,7 +430,7 @@ tailwind.config = {
             <span>Optional: send me a reminder the day before, and a short aftercare note afterward.</span></label>
         </fieldset>
 
-        <div class="delivery-note"><p id="deliveryNote">Your submitted answers are not published on this website or stored in the public GitHub repository. Your review is visible only in your current browser session. Sending shares these answers, including any health details, with FormSubmit for email delivery to the practitioner. Share only what you are comfortable emailing. This page keeps answers only until it is refreshed; a downloaded copy stays on your device.</p>
+        <div class="delivery-note"><p id="deliveryNote">Your submitted answers are not published on this website or stored in the public GitHub repository. Your review is visible only in your current browser session. Sending shares these answers, including your visit address and any health details, with FormSubmit for email delivery to the practitioner. Share only what you are comfortable emailing. This page keeps answers only until it is refreshed; a downloaded copy stays on your device.</p>
           <label class="flex items-start gap-3"><input type="checkbox" name="ackDelivery" required class="check" aria-describedby="deliveryNote"><span>I agree to this email delivery of my answers. *</span></label>
         </div>
         <div class="text-center pt-2">
@@ -458,7 +472,7 @@ tailwind.config = {
 </footer>
 
 
-<script src="./intake-core.js?v=20261008-sanctuary-restored"></script>
+<script src="./intake-core.js?v=20261008-visit-techniques"></script>
 <script src="./app.js?v=20261008-sanctuary-restored"></script>
 </body>
 </html>

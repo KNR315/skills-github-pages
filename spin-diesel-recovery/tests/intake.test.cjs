@@ -15,6 +15,36 @@ const values = {
 const zones = { neck: 'focus', glutes: 'skip', chest: 'ask' };
 const record = () => core.buildData(values, zones, new Date('2026-10-05T13:00:00Z'), 'test-request');
 
+test('visit address and technique interests survive export and the actual POST payload', async () => {
+  const address = '123 Example Lane\nUnit 4\nSt. Louis, MO 63101';
+  const interest = 'Curious about Swedish massage and <gentle stretching>.';
+  const data = core.buildData({ ...values, visitAddress: `  ${address}  `, techniqueInterests: `  ${interest}  ` }, zones);
+  assert.equal(data.meta.schemaVersion, 5);
+  const exported = JSON.parse(JSON.stringify(data));
+  assert.equal(exported.visit.address, address);
+  assert.equal(exported.preferences.techniqueInterests, interest);
+  await core.send('https://example.invalid', data, {}, async (_, options) => {
+    const sent = JSON.parse(options.body);
+    assert.equal(sent['Visit address'], address);
+    assert.equal(sent['Massage styles or technique interests'], interest);
+    assert.equal(JSON.parse(sent['Complete record']).visit.address, address);
+    assert.equal(JSON.parse(sent['Complete record']).preferences.techniqueInterests, interest);
+    return { ok: true, json: async () => ({ success: true }) };
+  });
+});
+
+test('new optional fields and existing records without those fields remain supported', () => {
+  const data = record();
+  assert.equal(data.visit.address, '');
+  assert.equal(data.preferences.techniqueInterests, '');
+  assert.deepEqual(core.validate(values, '2026-10-05'), []);
+  delete data.visit;
+  delete data.preferences.techniqueInterests;
+  const sent = core.payload(data, {});
+  assert.equal(sent['Visit address'], '');
+  assert.equal(sent['Massage styles or technique interests'], '');
+});
+
 test('St. Louis dates remain correct across midnight and daylight saving', () => {
   assert.equal(core.todayISO(new Date('2026-10-06T03:00:00Z')), '2026-10-05');
   assert.equal(core.todayISO(new Date('2026-12-06T05:59:00Z')), '2026-12-05');
