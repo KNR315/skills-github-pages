@@ -166,6 +166,7 @@ footer { margin:30px 40px 0; border-top-color:#dabc8020 !important; padding:36px
 
 /* Sanctuary refinement: the original composition, with richer depth and rhythm. */
 :root { --paper:#f7efdf; --gold:#eac382; --muted:#b9c4d4; }
+html { overflow-x:clip; }
 body { font-family:Outfit,Arial,sans-serif; }
 ::selection { color:#07101d; background:#eac382; }
 .bg-ethereal { background:radial-gradient(ellipse at 12% 12%,#7b352325,transparent 37%),radial-gradient(ellipse at 90% 19%,#477f9b22,transparent 42%),radial-gradient(ellipse at 55% 75%,#27465c15,transparent 52%),#080d1b; background-attachment:scroll; }
