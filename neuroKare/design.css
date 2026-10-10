@@ -1,0 +1,322 @@
+:root { --ink:#080d1b; --gold:#e8bd70; --paper:#f5ebd8; --fire:#df784c; --water:#79b5cf; }
+html { scroll-behavior:smooth; scroll-padding-top:2rem; }
+body { margin:0; font-family:Outfit,sans-serif; color:var(--paper); background:var(--ink); -webkit-font-smoothing:antialiased; }
+.hidden { display:none!important; }
+.bg-ethereal { background:radial-gradient(ellipse at 0% 32%,#6e251424,transparent 46%),radial-gradient(ellipse at 100% 58%,#34749624,transparent 48%),var(--ink); }
+.site-nav { position:relative; z-index:5; max-width:1320px; margin:auto; padding:28px 40px; display:flex; align-items:center; justify-content:space-between; gap:24px; }
+.wordmark { display:flex; align-items:center; gap:13px; font-family:Syncopate,sans-serif; font-size:12px; line-height:1.5; letter-spacing:.15em; color:var(--paper); text-decoration:none; }
+.wordmark small { color:var(--gold); font-size:10px; letter-spacing:.34em; }
+.brand-orbit { width:34px; height:34px; border:1px solid var(--gold); border-radius:50%; position:relative; transform:rotate(-30deg); }
+.brand-orbit::before { content:''; position:absolute; inset:5px -4px; border:1px solid #d8ad6070; border-radius:50%; }
+.brand-orbit::after { content:''; width:6px; height:6px; background:var(--gold); border-radius:50%; position:absolute; top:0; left:10px; box-shadow:0 0 12px #e8bd70aa; }
+.nav-links { display:flex; align-items:center; gap:28px; font-size:14px; }
+.nav-links a { color:#c1c5d0; text-decoration:none; transition:color .2s; }
+.nav-links a:hover { color:var(--gold); }
+.nav-links .nav-book { color:var(--gold); border:1px solid #d8ad6045; padding:12px 19px; border-radius:999px; }
+.hero { display:block; min-height:auto; max-width:1320px; margin:0 auto; padding:32px 40px 0; background:none; text-align:left; }
+.hero::after { display:none; }
+.hero-grid { display:grid; grid-template-columns:.92fr 1.08fr; align-items:center; gap:56px; }
+.hero-copy { padding:10px 0 25px; }
+.eyebrow { display:flex; align-items:center; gap:12px; color:var(--gold); font-size:12px; letter-spacing:.2em; text-transform:uppercase; margin-bottom:28px; }
+.eyebrow>span { width:27px; height:1px; background:var(--gold); }
+.hero-title { font-family:'Cormorant Garamond',serif; font-size:clamp(58px,6.8vw,94px); letter-spacing:-.035em; font-weight:400; line-height:.98; color:var(--paper); text-shadow:none; margin:0 0 30px; }
+.hero-title em { color:var(--gold); font-weight:400; }
+.hero-sub { font-size:18px; font-weight:300; line-height:1.7; color:#bfc5d1; max-width:445px; text-shadow:none; margin:0 0 33px; }
+.hero-actions { display:flex; flex-wrap:wrap; align-items:center; gap:24px; }
+.primary-action, #submitBtn { display:inline-flex; align-items:center; justify-content:center; border-radius:999px; border:1px solid #efcc86; background:linear-gradient(120deg,#ecc681,#d8a75e); padding:16px 26px; color:#15111a; font:500 15px Outfit,sans-serif; letter-spacing:.02em; text-decoration:none; min-height:50px; cursor:pointer; box-shadow:0 5px 30px #d9a75615; }
+.primary-action:hover, #submitBtn:hover { background:#f3d497; transform:none; }
+.secondary-action { font-size:14px; color:#d1c8b6; border-bottom:1px solid #d8ad6050; padding-bottom:4px; text-decoration:none; }
+.hero-promise { display:flex; flex-wrap:wrap; gap:16px; font-size:12px; color:#939bab; letter-spacing:.035em; margin-top:32px; }
+.hero-promise span+span::before { content:'·'; margin-right:16px; color:var(--gold); }
+.art-frame { margin:0; position:relative; border-radius:34px 34px 120px 34px; padding:6px; border:1px solid #dcb96c55; background:#132034; box-shadow:-25px 35px 90px #c4561913,25px -20px 90px #398ec51a; transition:transform .6s ease-out; isolation:isolate; }
+.art-frame::before { content:''; position:absolute; z-index:-1; inset:-17px; border:1px solid #d8ad601a; border-radius:50%; }
+.art-frame img { width:100%; height:auto; display:block; border-radius:29px 29px 114px 29px; }
+.art-frame figcaption { position:absolute; bottom:27px; left:27px; right:32px; display:flex; justify-content:space-between; flex-wrap:wrap; gap:8px; font-size:10px; text-transform:uppercase; letter-spacing:.16em; color:#f4ddad; text-shadow:0 1px 8px #000; }
+.hero-foundations { display:flex; justify-content:space-between; flex-wrap:wrap; gap:18px; margin-top:42px; padding:22px 0 28px; border-bottom:1px solid #caa25c25; color:#aeb7c7; font-size:13px; }
+.hero-foundations span { display:flex; align-items:center; gap:10px; }
+.hero-foundations i { width:6px; height:6px; border:1px solid var(--gold); transform:rotate(45deg); }
+.band { padding-top:90px; padding-bottom:20px; }
+.band::before { display:none; }
+.font-serif { font-family:'Cormorant Garamond',serif!important; font-weight:500; letter-spacing:0; }
+#seq-h,#promise-h,#form-h { font-family:'Cormorant Garamond',serif; font-size:clamp(32px,3.5vw,46px); text-transform:none; letter-spacing:-.02em; line-height:1.15; font-weight:400; color:var(--paper); background:none; -webkit-text-fill-color:initial; border:none; }
+#seq-h::before { content:'THE RESTORATIVE SEQUENCE'; display:block; font:400 11px Outfit,sans-serif; letter-spacing:.24em; color:var(--gold); margin-bottom:16px; }
+.glass-card { background:linear-gradient(140deg,#141c2bcc,#0d1422ee); border:1px solid #dcb96c30; box-shadow:none; border-radius:18px; }
+.glass-card.hoverable { border-top:2px solid #dba96665; }
+.glass-card.hoverable:nth-child(even) { border-top-color:#70b4d065; }
+.glass-card.hoverable:hover { border-color:#e7bd6b65; transform:translateY(-3px); box-shadow:0 16px 45px #0003; }
+.glass-card h3 { font-size:26px; line-height:1.2; color:var(--gold); }
+.glass-card ul { font-size:14px; line-height:1.7; color:#b9c2d2; }
+#booking-survey { max-width:980px; }
+#booking-survey>.glass-card { border:1px solid #ddb96c45; position:relative; box-shadow:0 35px 100px #0004; }
+#booking-survey>.glass-card::before { content:''; position:absolute; top:-1px; left:20%; right:20%; height:1px; background:linear-gradient(90deg,transparent,#efbd67,transparent); }
+.hint { font-size:14px; line-height:1.65; color:#a8b4c7; }
+.label { font-size:12px; line-height:1.5; color:#dabc80; letter-spacing:.09em; }
+fieldset { min-width:0; padding-top:10px; }
+legend.font-serif { font-size:30px; color:var(--paper); padding:0 0 16px; line-height:1.2; letter-spacing:-.015em; width:100%; border-bottom:1px solid #dabc8020; margin-bottom:18px; }
+.field { background:#070e1a99; border:1px solid #5660786b; border-bottom-color:#bca06980; border-radius:10px; color:var(--paper); min-height:50px; }
+.field:focus { border-color:var(--gold); box-shadow:0 0 0 3px #dcb96c17; }
+.field::placeholder { color:#77869d; }
+.pill span { border-color:#53607980; background:#0c1624; font-size:14px; color:#c8d1df; transition:background .25s,box-shadow .25s; }
+.pill input:checked+span { background:#e7bd70; border-color:#e7bd70; color:#15111a; box-shadow:0 0 18px #e7bd7025; }
+.pill.ask input:checked+span { background:#75b3ca; border-color:#75b3ca; color:#081724; box-shadow:0 0 18px #75b3ca25; }
+.pill.skip input:checked+span { background:#243148; border-color:#a0aec6; color:#eef2f8; }
+.chip-btn,.viewbtn,.zchip { min-height:44px; font-size:13px; border-color:#64738d65; color:#c5cede; }
+.viewbtn[aria-pressed=true] { background:#e8bd70; color:#11141d; }
+.progress { top:12px; padding:13px 18px; border-radius:14px; background:#0a1421ee; border-color:#c6a15e45; }
+.progress .flex { font-size:12px; }
+.pbar { height:3px; }
+.pbar>i { background:linear-gradient(90deg,#d77853,#edc780,#78b4ce); }
+.session-snapshot { display:grid; grid-template-columns:repeat(4,minmax(0,1fr)); border:1px solid #63708b45; border-radius:14px; padding:18px 8px; margin:0 0 36px; background:linear-gradient(115deg,#56281c22,#06102155,#20415c22); }
+.session-snapshot>div { text-align:center; padding:0 8px; border-right:1px solid #72809825; }
+.session-snapshot>div:last-child { border:none; }
+.session-snapshot span { display:block; color:#91a1b9; font-size:11px; text-transform:uppercase; letter-spacing:.08em; }
+.session-snapshot strong { display:block; font:500 23px 'Cormorant Garamond',serif; color:var(--gold); margin-top:6px; }
+.mapcard { background:radial-gradient(ellipse at 20% 35%,#497cad20,transparent 55%),radial-gradient(ellipse at 80% 75%,#dc774717,transparent 60%),#08121d; border-color:#dabc8045; }
+.mapcard [aria-label='Body view'] { flex-wrap:wrap; }
+#mapSvg { background:radial-gradient(ellipse,#daa5520d,transparent 65%); border-bottom:1px solid #dabc8030; padding-bottom:12px; }
+.sil * { fill:#8badd908; stroke:#779ac24f; stroke-width:.75; }
+.zone * { fill:#cfb37d0e; stroke:#c7a05f99; }
+.zone[data-state=focus] * { fill:#d9975c6b; stroke:#ffd39a; filter:drop-shadow(0 0 5px #df8a5399); }
+.zone[data-state=ask] * { fill:#73b4cc40; stroke:#89c4df; }
+.zone[data-state=skip] * { fill:#10192a; stroke:#8797b280; }
+.zpanel { min-width:0; background:#0b1625; border-color:#8392b33b; }
+.zchip { max-width:100%; flex-wrap:wrap; text-align:left; border-radius:12px; padding:8px 11px; gap:6px; }
+.zchip small { font-size:11px; }
+.zchip[data-state=focus] { border-color:#deaa6c; }
+.zchip[data-state=ask] { border-color:#75b3cc; }
+.delivery-note { border:1px solid #98aac13b; background:#15203266; border-radius:14px; padding:20px; font-size:14px; color:#b7c2d4; line-height:1.65; }
+.delivery-note label { margin-top:18px; color:var(--paper); }
+.review-eyebrow { justify-content:center; }
+#done .review-title { font:400 clamp(32px,4vw,45px) 'Cormorant Garamond',serif; color:var(--paper); }
+#done pre { font-size:13px; line-height:1.7; overflow-wrap:anywhere; white-space:pre-wrap; }
+#done summary { font-size:14px; }
+#done [aria-busy=true] { opacity:.8; }
+[aria-invalid=true] { outline:1px solid #e9a77a; outline-offset:3px; }
+button:disabled { cursor:wait; opacity:.65; }
+footer { margin:30px 40px 0; border-top-color:#dabc8020 !important; padding:36px 0 !important; }
+.footer-brand { font:400 27px 'Cormorant Garamond',serif; color:var(--gold); margin-bottom:10px; }
+.footer-meta { font-size:11px; color:#8390a5; margin-top:16px; letter-spacing:.08em; }
+@media (max-width:900px) { .site-nav { padding:22px 24px; } .hero { padding:24px 24px 0; } .hero-grid { gap:30px; } .hero-title { font-size:64px; } .hero-sub { font-size:16px; } .art-frame figcaption span:last-child { display:none; } .hero-actions { gap:15px; } .secondary-action { font-size:13px; } }
+@media (max-width:680px) {
+  .site-nav { padding:22px 20px; } .nav-links>a:not(.nav-book) { display:none; } .nav-links { gap:0; } .nav-links .nav-book { padding:10px 13px; font-size:12px; }
+  .wordmark { font-size:10px; gap:8px; } .brand-orbit { width:28px; height:28px; flex-shrink:0; } .wordmark small { font-size:8px; }
+  .hero { padding:24px 20px 0; } .hero-grid { grid-template-columns:1fr; gap:34px; } .hero-copy { padding:0; } .eyebrow { margin-bottom:20px; font-size:11px; }
+  .hero-title { font-size:clamp(53px,13vw,76px); margin-bottom:22px; } .hero-sub { max-width:100%; font-size:16px; }
+  .hero-promise { margin-top:24px; } .art-frame { max-width:480px; margin:0 auto; border-radius:24px 24px 80px 24px; } .art-frame img { border-radius:20px 20px 76px 20px; }
+  .hero-foundations { margin-top:32px; flex-direction:column; gap:12px; font-size:13px; padding-bottom:24px; }
+  .band { padding-top:60px; } #booking-survey>.glass-card { padding:24px 18px; } legend.font-serif { font-size:26px; }
+  .session-snapshot { grid-template-columns:repeat(2,minmax(0,1fr)); row-gap:18px; } .session-snapshot>div:nth-child(2) { border:none; }
+  .mapcard { padding:14px; } .zchip { font-size:12px; } .pill span { padding:10px 12px; }
+  .hero-actions { gap:18px; } .primary-action { padding:15px 22px; } #done .primary-action { width:100%; }
+  footer { margin-left:20px; margin-right:20px; }
+}
+@media (prefers-reduced-motion:reduce) { html { scroll-behavior:auto; } *,*::before,*::after { transition:none!important; animation:none!important; } .art-frame { transform:none!important; } .bg-ethereal { background-attachment:scroll; } }
+
+/* Fragrance atelier: a touch-friendly menu in the site's fire/water palette. */
+.fragrance-matrix { border:1px solid #d4af3759; border-radius:22px; padding:22px; background:radial-gradient(ellipse at 100% 0,#25416b33,transparent 55%),radial-gradient(ellipse at 0 100%,#6b0f1a24,transparent 65%),#080e1ccc; box-shadow:0 18px 45px #0003; }
+.fragrance-header { display:flex; justify-content:space-between; align-items:center; gap:12px; margin-bottom:12px; }
+.fragrance-kicker { color:var(--gold); text-transform:uppercase; letter-spacing:.15em; font-size:.65rem; margin:0 0 6px; }
+.fragrance-header h3 { font-family:'Cormorant Garamond',Georgia,serif; font-size:2rem; line-height:1.1; color:var(--paper); margin:0; }
+.fragrance-badge { border:1px solid #d4af3760; border-radius:24px; color:var(--gold); padding:8px 12px; white-space:nowrap; font-size:.72rem; }
+.fragrance-families { display:flex; flex-wrap:wrap; gap:7px; margin:20px 0; }
+.scent-family { min-height:44px; border:1px solid #5660786b; border-radius:24px; padding:8px 12px; font-size:.78rem; color:#c7cfe0; background:#101a2c; transition:background .18s,border-color .18s; }
+.scent-family[aria-pressed="true"] { background:#d4af3722; color:#f5ddb4; border-color:var(--gold); }
+.fragrance-workspace { display:grid; grid-template-columns:minmax(0,1fr) minmax(210px,.7fr); gap:16px; align-items:start; }
+.scent-grid { display:grid; grid-template-columns:repeat(3,minmax(0,1fr)); gap:8px; }
+.scent-card { position:relative; display:flex; flex-direction:column; align-items:flex-start; min-width:0; min-height:120px; border:1px solid #5660786b; border-radius:14px; padding:12px 10px; text-align:left; background:linear-gradient(145deg,#142035,#080f1e); transition:transform .18s,border-color .18s,background .18s; }
+.scent-card[hidden] { display:none; }
+.scent-card:hover { transform:translateY(-2px); border-color:#d4af3799; }
+.scent-card.active { outline:2px solid #d4af37b3; outline-offset:2px; }
+.scent-card:focus-visible,.scent-family:focus-visible,.scent-selection button:focus-visible { outline:3px solid #79b5cf; outline-offset:3px; }
+.scent-emblem { display:grid; place-items:center; height:28px; width:28px; border:1px solid #d4af3740; border-radius:50%; color:#d9bb79; margin-bottom:8px; }
+.scent-emblem .ico { margin:0; width:14px; height:14px; }
+.scent-name { color:var(--paper); font-weight:500; line-height:1.3; font-size:.82rem; }
+.scent-card small { color:#a9b3c6; font-size:.62rem; margin:3px 0 8px; }
+.scent-status { display:block; margin-top:auto; font-size:.65rem; color:#a9b3c6; }
+.scent-card[data-state="interested"] { border-color:#d4af37aa; background:linear-gradient(145deg,#4a391f77,#111a29); }
+.scent-card[data-state="interested"] .scent-status { color:#f5ddb4; }
+.scent-card[data-state="discuss"] { border-color:#79b5cfa6; }
+.scent-card[data-state="discuss"] .scent-status { color:#9fd0ff; }
+.scent-card[data-state="avoid"] { border-color:#e19696a6; }
+.scent-card[data-state="avoid"] .scent-status { color:#eeb7b7; }
+.scent-panel { position:sticky; top:20px; border:1px solid #d4af374d; background:radial-gradient(circle at 50% 10%,#66512830,transparent 65%),#0d1525; border-radius:18px; padding:20px 16px; text-align:center; }
+.scent-panel-emblem { position:relative; display:grid; place-items:center; height:82px; width:82px; border:1px solid #d4af3777; border-radius:50%; margin:0 auto 20px; color:var(--gold); box-shadow:0 0 35px #d4af3712,inset 0 0 25px #d4af3712; }
+.scent-panel-emblem::before { content:''; position:absolute; inset:7px; border:1px solid #79b5cf55; border-radius:50%; }
+.scent-panel-emblem .ico-lg { margin:0; width:32px; height:32px; }
+.scent-panel h4 { font-family:'Cormorant Garamond',Georgia,serif; font-size:2rem; line-height:1.15; color:var(--paper); margin:6px 0 12px; }
+.scent-actions { display:grid; grid-template-columns:1fr; gap:8px; margin:18px 0; }
+.scent-actions .pill,.scent-actions .pill span { width:100%; justify-content:center; min-height:44px; }
+.scent-panel-note { font-size:.72rem!important; }
+.scent-intensity { padding:20px 0; margin-top:8px; border-bottom:1px solid #5660784d; }
+.intensity-options { display:flex; flex-wrap:wrap; gap:8px; margin:10px 0; }
+.scent-intensity:has(input:disabled) .intensity-options { opacity:.5; }
+.scent-selection { margin-top:18px; }
+.scent-selection-header { display:flex; align-items:center; justify-content:space-between; gap:10px; margin-bottom:8px; }
+.scent-selection h4 { margin:0; font-size:.95rem; color:var(--paper); }
+.scent-selection-row { display:grid; grid-template-columns:110px 1fr; gap:10px; align-items:center; padding:10px 0; border-bottom:1px solid #56607826; }
+.scent-selection-row>span { font-size:.78rem; color:#bfc8d9; }
+.scent-selection-row>div { display:flex; flex-wrap:wrap; gap:6px; }
+.scent-selection-row small { color:#8995aa; font-size:.75rem; }
+.scent-selection-row button { min-height:40px; padding:6px 12px; font-size:.78rem; border-radius:20px; border:1px solid #d4af3755; color:#f5ddb4; background:#d4af3714; }
+.scent-selection-row[data-state="discuss"] button { border-color:#79b5cf55; color:#9fd0ff; background:#79b5cf14; }
+.scent-selection-row[data-state="avoid"] button { border-color:#e1969655; color:#eeb7b7; background:#e1969614; }
+.fragrance-footnote { font-size:.72rem!important; margin-top:18px; }
+@media(max-width:700px) { .fragrance-workspace { grid-template-columns:minmax(0,1fr); } .scent-panel { position:static; order:-1; } .scent-actions { grid-template-columns:repeat(2,minmax(0,1fr)); } }
+@media(max-width:420px) { .fragrance-matrix { padding:16px 12px; } .scent-grid { grid-template-columns:repeat(2,minmax(0,1fr)); } .fragrance-header h3 { font-size:1.8rem; } .scent-selection-row { grid-template-columns:1fr; } }
+
+/* Sanctuary refinement: the original composition, with richer depth and rhythm. */
+:root { --paper:#f7efdf; --gold:#eac382; --muted:#b9c4d4; }
+html { overflow-x:clip; }
+body { font-family:Outfit,Arial,sans-serif; }
+::selection { color:#07101d; background:#eac382; }
+.bg-ethereal { background:radial-gradient(ellipse at 12% 12%,#7b352325,transparent 37%),radial-gradient(ellipse at 90% 19%,#477f9b22,transparent 42%),radial-gradient(ellipse at 55% 75%,#27465c15,transparent 52%),#080d1b; background-attachment:scroll; }
+.site-nav { padding-top:25px; padding-bottom:25px; border-bottom:1px solid #d8ad601b; }
+.wordmark { gap:15px; }
+.brand-orbit { background:radial-gradient(circle,#edc78312,transparent 75%); box-shadow:0 0 22px #eac3820b; }
+.nav-links { gap:30px; }
+.nav-links .nav-book { background:linear-gradient(120deg,#eac3820e,#79b5cf08); border-color:#eac38250; transition:background .2s,border-color .2s; }
+.nav-links .nav-book:hover { border-color:#eac382; background:#eac38214; }
+.hero { padding-top:58px; }
+.hero-grid { grid-template-columns:.96fr 1.04fr; gap:64px; }
+.hero-copy { padding-bottom:25px; }
+.eyebrow { letter-spacing:.24em; font-size:11px; margin-bottom:32px; }
+.hero-title { font-size:clamp(66px,7.4vw,108px); line-height:.94; letter-spacing:-.045em; margin-bottom:30px; }
+.hero-title em { color:#edc787; }
+.hero-sub { color:#bcc6d5; max-width:438px; font-size:17px; line-height:1.85; }
+.primary-action,#submitBtn { background:linear-gradient(115deg,#f0d29a 0%,#e4b670 55%,#cca366 100%); border-color:#f2d9a4; padding:17px 27px; box-shadow:0 9px 32px #d4a45e18,inset 0 1px #fff5; transition:box-shadow .2s,background .2s,transform .2s; }
+.primary-action:hover,#submitBtn:hover { background:linear-gradient(115deg,#f9dfa9,#eac483); box-shadow:0 12px 36px #d4a45e27; transform:translateY(-2px); }
+.secondary-action { border-bottom-color:#eac38265; }
+.hero-promise { margin-top:34px; color:#b0b9c8; }
+.art-frame { padding:7px; border-radius:46px 46px 140px 46px; background:linear-gradient(140deg,#d5ac6a40,#152437 33%,#75afce33); border-color:#e4bd745b; box-shadow:-24px 40px 90px #a9481617,32px -24px 100px #4c94bb1b,0 28px 60px #0005; }
+.art-frame img { border-radius:39px 39px 133px 39px; }
+.art-frame::before { inset:-23px; border:1px solid #eac38225; border-radius:50%; transform:rotate(-12deg) scaleX(1.025); }
+.art-frame::after { content:''; position:absolute; z-index:-1; inset:-39px 17px; border:1px solid #79b5cf1c; border-radius:50%; transform:rotate(18deg); pointer-events:none; }
+.art-frame figcaption { bottom:26px; left:28px; right:32px; font-size:9px; letter-spacing:.19em; }
+.hero-foundations { margin-top:54px; padding:25px 0 29px; font-size:12px; color:#b5c0cf; }
+.hero-foundations i { background:#eac38218; box-shadow:0 0 9px #eac38215; }
+main.band { padding-top:104px; padding-bottom:30px; }
+#seq-h,#promise-h,#form-h { font-size:clamp(36px,4vw,52px); letter-spacing:-.025em; }
+#seq-h::before { margin-bottom:20px; letter-spacing:.27em; }
+section[aria-labelledby="seq-h"] > .grid { gap:22px; }
+section[aria-labelledby="seq-h"] > .text-center { margin-bottom:40px; }
+section[aria-labelledby="seq-h"] .glass-card { padding:30px 27px 32px; border-radius:22px; min-height:278px; }
+.glass-card { background:linear-gradient(145deg,#182235c7,#0b1423e8 75%); border-color:#d8bb8133; box-shadow:0 20px 45px #0002,inset 0 1px #ffebc708; transition:border-color .25s,box-shadow .25s,transform .25s; }
+.glass-card.hoverable { border-top-width:1px; border-top-color:#e5ba7b70; }
+.glass-card.hoverable:nth-child(even) { border-top-color:#79b5cf75; }
+.glass-card.hoverable:hover { transform:translateY(-5px); border-color:#eac38285; box-shadow:0 25px 52px #0005; }
+.glass-card h3 { font-size:27px; line-height:1.14; letter-spacing:-.025em; color:#ead0a0; margin-bottom:14px; }
+section[aria-labelledby="seq-h"] article > p { display:inline-flex; align-items:center; border:1px solid #d8b77a3b; border-radius:999px; padding:5px 10px; color:#d5b985; font-size:10px; letter-spacing:.14em; margin-bottom:20px; }
+.glass-card ul { color:#bac6d7; line-height:1.8; }
+.glass-card ul strong { font-weight:500; color:#e9e7e0; }
+section[aria-labelledby="promise-h"] > .glass-card { padding:45px 42px; background:radial-gradient(ellipse at 100% 0,#79b5cf15,transparent 55%),linear-gradient(120deg,#172333d9,#101b2bf0); border-radius:26px; }
+#promise-h { margin-bottom:24px; }
+section[aria-labelledby="promise-h"] li { padding:5px 0; }
+#booking-survey { max-width:1016px; }
+#booking-survey > .glass-card { border-radius:30px; padding:49px 48px; background:linear-gradient(145deg,#152134e6,#0c1423f5 60%); border-color:#eac38255; box-shadow:0 28px 85px #0004; }
+#form-h { margin-bottom:18px; }
+#intakeForm > fieldset { padding:28px 25px 27px; border:1px solid #7289a425; border-radius:20px; background:linear-gradient(135deg,#24334a23,#07111f28); margin-top:32px; }
+legend.font-serif { padding:0 11px; margin:0 0 18px 0; width:auto; max-width:100%; border-bottom:0; color:#f0e5cf; font-size:29px; background:#111b2b; }
+legend .ico-lg { stroke:#eac382; filter:none; }
+.session-snapshot { border-color:#9aacbe36; padding:21px 10px; border-radius:18px; background:linear-gradient(110deg,#74432720,#0b142140,#385d7921); margin-bottom:32px; }
+.session-snapshot span { font-size:10px; letter-spacing:.13em; color:#a3b0c4; }
+.session-snapshot strong { font-size:27px; color:#ead1a3; }
+.progress { border-radius:14px; background:#0c1727f2; border-color:#bea06b5c; box-shadow:0 10px 25px #0003; }
+.field { background:#070f1be0; border-color:#6b7c9655; border-bottom-color:#d2b48066; border-radius:11px; min-height:52px; }
+.field:hover { border-color:#9cabc36b; }
+.field:focus { border-color:#eac382; box-shadow:0 0 0 3px #eac38218; }
+.label { color:#dcc596; font-size:11px; letter-spacing:.12em; }
+.hint { color:#aebbd0; line-height:1.75; }
+.pill span { background:#0d1829; border-color:#7e91ac4f; min-height:46px; padding:10px 15px; font-weight:400; }
+.pill span:hover { border-color:#eac3828a; background:#19263a; }
+.pill input:checked+span { background:linear-gradient(115deg,#ecd099,#d9ad6b); border-color:#f0d19a; color:#111623; box-shadow:0 4px 20px #eac38214; }
+.pill.ask input:checked+span { background:linear-gradient(115deg,#a2cfdf,#79b5cf); border-color:#addef0; }
+.pill.skip input:checked+span { background:#243148; color:#eff3f9; border-color:#b1bdd0; }
+.mapcard { border-radius:20px; border-color:#eac38243; background:radial-gradient(ellipse at 15% 35%,#5085a925,transparent 65%),radial-gradient(ellipse at 100% 100%,#9959321c,transparent 70%),#081322; }
+.zpanel { border-radius:14px; background:linear-gradient(145deg,#18273b,#101b2c); border-color:#9aacbd37; }
+.zchip { border-radius:11px; padding:9px 12px; background:#111c2c; }
+.zone[data-state=focus] * { fill:#dca3677a; stroke:#ffe0ac; }
+.fragrance-matrix { padding:24px; border-radius:22px; background:radial-gradient(ellipse at 100% 0,#39638428,transparent 58%),radial-gradient(ellipse at 0 100%,#8c4c2d20,transparent 65%),#091322; border-color:#eac38240; box-shadow:0 18px 42px #0002; }
+.fragrance-header h3 { font-size:34px; margin-bottom:0; }
+.scent-card { min-height:130px; padding:15px 13px; border-radius:15px; background:linear-gradient(145deg,#1b2c42,#0c1829); border-color:#8da0b533; box-shadow:inset 0 1px #ffffff04; }
+.scent-card.active { outline-color:#eac3829e; }
+.scent-emblem { height:31px; width:31px; background:#eac3820b; border-color:#eac38250; }
+.scent-panel { background:linear-gradient(145deg,#1c2b3e,#111e30); border-radius:17px; border-color:#eac38243; }
+.scent-selection { border-top-color:#eac38230; }
+.delivery-note { border-color:#7c97b34a; background:#13243a8f; padding:23px; }
+footer { max-width:1240px; margin:30px auto 0; padding:45px 24px!important; }
+.footer-brand { font-size:32px; }
+.footer-meta { letter-spacing:.14em; color:#9aa9bf; }
+@media(min-width:681px) and (max-width:1000px) { .hero-grid { gap:34px; } .hero-title { font-size:clamp(61px,8.2vw,84px); } .hero-sub { font-size:16px; } .hero { padding-top:46px; } .art-frame::after { inset:-25px 17px; } }
+@media(max-width:680px) {
+  .site-nav { margin:0 20px; padding:20px 0; }
+  .nav-links .nav-book { font-size:11px; padding:11px 12px; }
+  .hero { padding:37px 22px 0; }
+  .hero-grid { grid-template-columns:1fr; gap:39px; }
+  .hero-title { font-size:clamp(61px,15vw,88px); margin-bottom:25px; }
+  .hero-sub { font-size:16px; line-height:1.8; max-width:100%; }
+  .eyebrow { font-size:10px; margin-bottom:25px; letter-spacing:.2em; }
+  .hero-promise { font-size:11px; gap:10px; margin-top:26px; }
+  .hero-promise span+span::before { margin-right:10px; }
+  .art-frame { margin:0 9px; border-radius:32px 32px 100px 32px; padding:5px; }
+  .art-frame img { border-radius:27px 27px 95px 27px; }
+  .art-frame::before { inset:-14px; }
+  .art-frame::after { inset:-23px 12px; }
+  .art-frame figcaption { left:21px; bottom:23px; font-size:8px; }
+  .hero-foundations { margin-top:37px; padding:24px 0; gap:15px; }
+  main.band { padding-top:69px; }
+  #seq-h,#promise-h,#form-h { font-size:37px; }
+  section[aria-labelledby="seq-h"] .glass-card { padding:28px 24px; min-height:auto; }
+  section[aria-labelledby="promise-h"] > .glass-card { padding:34px 23px; }
+  #booking-survey > .glass-card { padding:32px 16px; border-radius:23px; }
+  #intakeForm > fieldset { padding:21px 14px 23px; border-radius:16px; margin-top:30px; }
+  legend.font-serif { font-size:25px; padding:0 5px; }
+  .session-snapshot { row-gap:21px; padding:20px 5px; }
+  .session-snapshot strong { font-size:25px; }
+  .pill span { font-size:13px; padding:10px 12px; }
+  .fragrance-matrix { padding:19px 12px; }
+  .fragrance-header { align-items:flex-start; gap:8px; }
+  .fragrance-header h3 { font-size:30px; }
+  .fragrance-badge { font-size:10px; padding:7px 9px; }
+  .scent-card { padding:13px 10px; min-height:122px; }
+  .mapcard { padding:15px 12px; }
+  .delivery-note { padding:19px 15px; }
+  footer { margin-left:20px; margin-right:20px; }
+}
+@media(prefers-reduced-motion:reduce) { .primary-action:hover,#submitBtn:hover,.glass-card.hoverable:hover { transform:none; } }
+
+/* Deeper jewel tones, drawn from the original fire-and-water artwork. */
+:root { --ink:#070c19; --gold:#edc58b; --fire:#c87959; --water:#7cbeb9; }
+.bg-ethereal { background:radial-gradient(ellipse at 6% 10%,#713a323e,transparent 42%),radial-gradient(ellipse at 96% 18%,#19536445,transparent 44%),radial-gradient(ellipse at 15% 50%,#4a26553a,transparent 38%),radial-gradient(ellipse at 93% 74%,#174b4934,transparent 45%),linear-gradient(160deg,#0e0d21,#071423 46%,#100d20); }
+.site-nav { border-bottom-color:#aa837638; }
+.nav-links .nav-book { background:linear-gradient(115deg,#693f3528,#275c6630); border-color:#d5a77865; }
+.art-frame { background:linear-gradient(135deg,#90513d66,#1b263e 42%,#36777460); border-color:#d9b07980; box-shadow:-26px 35px 100px #b4543029,30px -20px 100px #29999326,0 28px 60px #0005; }
+.art-frame::before { border-color:#c28a6240; }
+.art-frame::after { border-color:#63b9b837; }
+.hero-title em { color:#efc796; }
+.glass-card { background:linear-gradient(140deg,#263044e0,#152539ec 48%,#231b32ed); border-color:#b29e7950; }
+section[aria-labelledby="seq-h"] .glass-card:nth-child(3n+1) { background:linear-gradient(145deg,#38252be8,#191d30ee 70%); border-top-color:#d391716e; }
+section[aria-labelledby="seq-h"] .glass-card:nth-child(3n+2) { background:linear-gradient(145deg,#15353ee8,#132031ee 75%); border-top-color:#72b6b980; }
+section[aria-labelledby="seq-h"] .glass-card:nth-child(3n) { background:linear-gradient(145deg,#30243ee8,#171e33ee 75%); border-top-color:#ab86bd75; }
+.glass-card h3 { color:#f0d3a6; }
+section[aria-labelledby="promise-h"] > .glass-card { background:radial-gradient(ellipse at 100% 0,#386b6f30,transparent 65%),linear-gradient(130deg,#292139ed,#132637f5); border-color:#a38c985c; }
+#booking-survey > .glass-card { background:radial-gradient(ellipse at 0 0,#56374c2b,transparent 48%),linear-gradient(145deg,#1b293df2,#111b2cf8 58%,#231b30f2); border-color:#c59b726b; }
+#intakeForm > fieldset { background:linear-gradient(135deg,#28334b45,#182b3340); border-color:#819aa339; }
+#intakeForm > fieldset:nth-of-type(even) { background:linear-gradient(135deg,#42304336,#172f3947); }
+legend.font-serif { background:#1b2638; color:#f0e5cf; }
+.field { background:linear-gradient(125deg,#11182de8,#0a1c28f0); border-color:#84969d5c; border-bottom-color:#be9c776b; }
+.session-snapshot { background:linear-gradient(110deg,#7b493333,#231c3b50,#20525b42); border-color:#af9d795c; }
+.progress { background:linear-gradient(110deg,#242137f7,#112b36f7); }
+.pill span,.zchip { background:linear-gradient(125deg,#20233a,#142b35); border-color:#839ba959; }
+.pill input:checked+span { background:linear-gradient(115deg,#efd5a8,#d4a270); color:#111623; }
+.pill.ask input:checked+span { background:linear-gradient(115deg,#a6d7d0,#72b5bd); }
+.mapcard { background:radial-gradient(ellipse at 10% 25%,#27687742,transparent 62%),radial-gradient(ellipse at 100% 100%,#6c414b37,transparent 65%),#111b2d; border-color:#92b0a75b; }
+.zpanel { background:linear-gradient(145deg,#253348,#172a35); border-color:#92b0a749; }
+.delivery-note { background:linear-gradient(125deg,#34283b9e,#18333fa8); border-color:#82aba264; }
+.fragrance-matrix { background:radial-gradient(ellipse at 100% 0,#285f6645,transparent 60%),radial-gradient(ellipse at 0 100%,#71394c35,transparent 65%),#141c2e; border-color:#b7997460; }
+.scent-card { background:linear-gradient(145deg,#283348,#172635); border-color:#9d9cb94a; }
+.scent-card:nth-child(3n+1) { background:linear-gradient(145deg,#352b44,#192436); }
+.scent-card:nth-child(3n+2) { background:linear-gradient(145deg,#1b3c42,#142333); }
+.scent-panel { background:linear-gradient(145deg,#303047,#19343d); border-color:#bca07958; }
+.scent-family { background:#20263a; border-color:#9ca4b34a; }
+.scent-family[aria-pressed="true"] { background:#6b503a45; border-color:#ddb77d; }
+
