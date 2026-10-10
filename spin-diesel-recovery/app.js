@@ -294,7 +294,7 @@ function saveRecord(data) {
 function prepareEmail(data) {
   const payload = core.payload(data, Object.fromEntries(ZONES.map(z => [z.id, z.name])));
   const body = Object.entries(payload).filter(([key]) => !key.startsWith('_') && key !== 'Complete record').map(([key, value]) => `${key}: ${value}`).join('\r\n');
-  const subject = encodeURIComponent('Spin Diesel Recovery — appointment request');
+  const subject = encodeURIComponent('NeuroKare — appointment request');
   let uri = `mailto:${PRACTITIONER_EMAIL}?subject=${subject}&body=${encodeURIComponent(body)}`;
   if (uri.length > 1800) {
     saveRecord(data);

@@ -72,7 +72,7 @@
     for (const [id, state] of Object.entries(data.preferences.bodyMap)) groups[state]?.push(names[id] || id);
     return {
       name: data.contact.name, email: data.contact.email,
-      _subject: 'Spin Diesel Recovery — appointment request', _template: 'table',
+      _subject: 'NeuroKare — appointment request', _template: 'table',
       _url: SITE_URL,
       'Form URL': SITE_URL,
       'Request ID': data.meta.requestId,
