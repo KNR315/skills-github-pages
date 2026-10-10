@@ -11,15 +11,15 @@ const ZONES = [
   { id:'shoulders', name:'Shoulders', desc:'Deltoids and the shoulder joint, for overhead and inversion fatigue.' },
   { id:'upper_back', name:'Upper back & shoulder blades', desc:'Lats, rhomboids and the muscles around the shoulder blades.' },
   { id:'low_back', name:'Low back', desc:'Broad compression and sweeping work along the lower back.' },
-  { id:'glutes', name:'Glutes', sens:true, desc:'Broad forearm compression over a sheet or clothing to release the hip rotators.' },
+  { id:'glutes', name:'Glutes', sens:true, desc:'Broad forearm compression around the hip rotators, adjusted to your preferred pressure.' },
   { id:'hamstrings', name:'Hamstrings', desc:'Slow, downward kneading along the back of the thigh.' },
   { id:'calves', name:'Calves', desc:'Release for constant toe-pointing (gastrocnemius and soleus).' },
   { id:'feet', name:'Feet & toes', desc:'Release for toe-point fatigue and arches.' },
   { id:'forearms', name:'Forearms & grip', desc:'Pin-and-stretch for the forearm flexors, plus thumb-pad work for grip fatigue.' },
   { id:'elbows', name:'Elbows', desc:'Relief at the inner and outer elbow, where grip strain often collects.' },
-  { id:'chest', name:'Upper chest (below collarbone)', sens:true, desc:'Static pressure just beneath the collarbone to ease rounded shoulders, over clothing or a towel. Does not involve breast tissue.' },
+  { id:'chest', name:'Upper chest (below collarbone)', sens:true, desc:'Static pressure just beneath the collarbone, tailored to comfort. Does not involve breast tissue.' },
   { id:'underarm', name:'Underarm / side of ribcage', sens:true, desc:'A hold along the side of the ribcage to release the rotator cuff. I can guide you to position your own arm, or you can apply the pressure yourself with my instruction.' },
-  { id:'hipflex', name:'Hip flexors / lower abdomen', sens:true, desc:'Slow, sustained pressure on the soft tissue beside the lower abdomen, over a sheet or clothing, paired with breathing. I will describe exactly where my hands go first.' },
+  { id:'hipflex', name:'Hip flexors / lower abdomen', sens:true, desc:'Slow, sustained work at the front of the hip, paired with comfortable breathing. We’ll discuss the approach before including this area.' },
   { id:'inner', name:'Inner thighs', sens:true, desc:'A common site of pole bruising. Broad, flat compression only, kept on the thigh and away from the groin. No sharp points.' },
   { id:'quads', name:'Front of thighs', desc:'Broad compression and sweeping work along the front of the thigh.' }
 ];
@@ -83,13 +83,13 @@ function renderMap() {
 }
 function renderPanel() {
   if (!activeZone) {
-    panel.innerHTML = '<p class="text-sm text-[#c7cfe0]">Tap any glowing area on the body, or pick from the list below. Everything starts as <strong class="text-white">Include</strong>, except sensitive areas, which start as <strong class="text-white">Skip</strong>.</p>';
+    panel.innerHTML = '<p class="text-sm text-[#c7cfe0]">Tap any glowing area on the body, or pick from the list below. Everything starts as <strong class="text-white">Include</strong>, except optional areas, which start as <strong class="text-white">Skip</strong>.</p>';
     return;
   }
   const z = ZONES.find(x => x.id === activeZone), cur = zoneState[z.id];
   panel.innerHTML = `<h4 class="font-display text-sm text-mystic-glow mb-2">${z.name}</h4>
     <p class="hint mb-3">${z.desc}</p>
-    ${z.sens ? '<p class="text-xs text-[#9fd0ff] mb-3">Sensitive area: starts as Skip, and nothing happens here unless you choose it.</p>' : ''}
+    ${z.sens ? '<p class="text-xs text-[#9fd0ff] mb-3">Optional area: starts as Skip. Choose a preference if you’d like to include or discuss it.</p>' : ''}
     <div class="flex flex-wrap gap-2" role="radiogroup" aria-label="${z.name} preference">
       <label class="pill"><input type="radio" name="zone_state" value="focus" ${cur==='focus'?'checked':''}><span>Focus here</span></label>
       <label class="pill"><input type="radio" name="zone_state" value="include" ${cur==='include'?'checked':''}><span>Include</span></label>
@@ -165,7 +165,7 @@ scentCards.innerHTML = core.SCENTS.map(scent => `<button type="button" class="sc
 function renderScentPanel() {
   const scent = core.SCENTS.find(item => item.id === activeScent);
   scentPanel.innerHTML = `<div class="scent-panel-emblem" aria-hidden="true"><svg class="ico-lg"><use href="#i-drop"/></svg></div><p class="fragrance-kicker">${scent.family}</p><h4>${scent.name}</h4><p class="hint">How would you like this scent considered?</p>
-    <div class="scent-actions" role="radiogroup" aria-label="${scent.name} preference">${Object.entries(scentLabels).map(([state, label]) => `<label class="pill ${state === 'avoid' ? 'skip' : state === 'discuss' ? 'ask' : ''}"><input type="radio" name="activeScentState" value="${state}" ${scentState[activeScent] === state ? 'checked' : ''}><span>${label}</span></label>`).join('')}</div><p class="hint scent-panel-note">Your preferences guide the conversation. They do not authorize application to skin.</p>`;
+    <div class="scent-actions" role="radiogroup" aria-label="${scent.name} preference">${Object.entries(scentLabels).map(([state, label]) => `<label class="pill ${state === 'avoid' ? 'skip' : state === 'discuss' ? 'ask' : ''}"><input type="radio" name="activeScentState" value="${state}" ${scentState[activeScent] === state ? 'checked' : ''}><span>${label}</span></label>`).join('')}</div><p class="hint scent-panel-note">Your choices help shape the atmosphere. Products are agreed before use.</p>`;
 }
 function refreshScents(rebuildPanel = true) {
   Object.assign(scentState, core.scentChoices({ scent: new FormData(form).get('scent'), scentMap: scentState }));
@@ -323,7 +323,7 @@ function refreshRecord() {
 }
 function renderReview() {
   document.getElementById('doneTitle').textContent = `Ready when you are, ${lastData.contact.name.split(/\s+/)[0]}.`;
-  document.getElementById('doneMsg').textContent = 'Review your session intentions below. Nothing has been sent yet. Your preferences will be reconfirmed in person.';
+  document.getElementById('doneMsg').textContent = 'Review your personalized session plan below. Nothing has been sent yet. We’ll fine-tune the details together when I arrive.';
   document.getElementById('sendReviewedBtn').classList.remove('hidden');
   document.getElementById('retryBtn').classList.add('hidden');
   refreshRecord();
@@ -346,7 +346,7 @@ async function sendReviewed() {
     await core.send(FORM_ENDPOINT, lastData, Object.fromEntries(ZONES.map(z => [z.id, z.name])));
     lastData.meta.status = 'accepted-by-delivery-service';
     document.getElementById('doneTitle').textContent = 'Your request is on its way.';
-    message.textContent = 'The delivery service accepted your request for email delivery. Your time is not booked yet; the practitioner will contact you to confirm availability and boundaries.';
+    message.textContent = 'The delivery service accepted your request for email delivery. Your time is not booked yet; the practitioner will contact you to confirm your time and session preferences.';
     document.getElementById('sendReviewedBtn').classList.add('hidden');
     document.getElementById('retryBtn').classList.add('hidden');
   } catch {
