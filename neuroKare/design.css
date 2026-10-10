@@ -320,3 +320,43 @@ legend.font-serif { background:#1b2638; color:#f0e5cf; }
 .scent-family { background:#20263a; border-color:#9ca4b34a; }
 .scent-family[aria-pressed="true"] { background:#6b503a45; border-color:#ddb77d; }
 
+
+/* Guided booking: one calm section at a time, with optional detail on demand. */
+#intakeForm { display:block; }
+#intakeForm > .booking-step { margin:0 0 12px; border:1px solid #93a4a443; border-radius:18px; background:linear-gradient(130deg,#27324c70,#18293470); overflow:hidden; scroll-margin-top:100px; }
+.booking-step > summary { display:flex; align-items:center; gap:14px; padding:19px 20px; cursor:pointer; list-style:none; }
+.booking-step > summary::-webkit-details-marker { display:none; }
+.booking-step > summary::after { content:'+'; color:#e8c796; font-size:24px; margin-left:auto; }
+.booking-step[open] > summary::after { content:'−'; }
+.booking-step[open] { border-color:#dbb98599; }
+.step-number { display:grid; place-items:center; flex:0 0 32px; height:32px; border-radius:50%; border:1px solid #c4b49c66; color:#f0d2a7; font-size:14px; }
+.booking-step[open] .step-number { background:#e8c796; color:#172337; }
+.step-heading { display:flex; flex-direction:column; gap:4px; }
+.step-heading strong { font-weight:500; color:#f1e9de; }
+.step-heading small { color:#b6c1cc; font-size:12px; line-height:1.5; }
+.step-status { color:#9ec4bd; font-size:11px; margin-left:auto; }
+.booking-step:not([data-visited]) .step-status { display:none; }
+.booking-step > fieldset { margin:0; padding:8px 22px 22px; min-width:0; border:0; background:transparent; }
+.booking-step > fieldset > legend { display:none; }
+.step-actions { display:flex; justify-content:space-between; gap:12px; padding:0 22px 22px; }
+.step-actions .primary-action { margin-left:auto; font-size:13px; min-height:44px; }
+.booking-step > .delivery-note { margin:0 22px 20px; }
+.booking-step > .text-center { padding:0 22px 20px; }
+.guided-position { color:#efcea2; font-size:13px; margin:0 0 16px; letter-spacing:.03em; }
+.optional-detail { border:1px solid #829c9b45; border-radius:12px; padding:14px; margin:16px 0; background:#14223460; }
+.optional-detail > summary { color:#dcd8cd; cursor:pointer; font-size:14px; line-height:1.5; min-height:28px; }
+.optional-detail[open] > summary { margin-bottom:16px; color:#f1d0a4; }
+.optional-detail > .hint { margin-bottom:14px; }
+.optional-detail #bodymap { margin-top:14px; }
+summary:focus-visible { outline:2px solid #e8c796; outline-offset:-3px; border-radius:12px; }
+@media (max-width:600px) {
+  .booking-step > summary { padding:16px 14px; gap:10px; }
+  .booking-step > fieldset { padding:8px 14px 18px; }
+  .step-actions { padding:0 14px 18px; }
+  .step-actions .primary-action { max-width:75%; white-space:normal; }
+  .step-heading small { font-size:11px; }
+  .booking-step > .delivery-note { margin:0 14px 18px; }
+  .session-snapshot { gap:12px; }
+  .step-status { display:none; }
+}
+@media print { .booking-step > summary::after,.step-actions { display:none; } }

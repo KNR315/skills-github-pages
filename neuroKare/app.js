@@ -271,6 +271,8 @@ function showErrors(errors) {
     list.appendChild(item);
     if (error.field) form.querySelectorAll(`[name="${error.field}"]`).forEach(el => el.setAttribute('aria-invalid', 'true'));
   }
+  const firstControl = errors[0]?.field && form.querySelector('[name="' + errors[0].field + '"]');
+  if (firstControl) revealControl(firstControl);
   errBox.appendChild(list);
   errBox.classList.remove('hidden');
   errBox.focus({ preventScroll: true });
@@ -433,9 +435,138 @@ document.getElementById('editBtn').addEventListener('click', () => {
   form.classList.remove('hidden');
   document.getElementById('intakeProgress').classList.remove('hidden');
   document.querySelector('.session-snapshot').classList.remove('hidden');
+  window.openBookingStep?.(0, false);
   document.getElementById('name').focus();
   progress();
 });
+
+
+// Progressive disclosure: all original inputs stay in the same form and JSON schema.
+function initGuidedBooking() {
+  const labels = [
+    ['About you', 'Name and email to confirm your request.'],
+    ['Your visit & timing', 'Session length, location, and when you’re available.'],
+    ['Focus & pressure', 'Optional: tell me where to focus, or keep the balanced defaults.'],
+    ['Atmosphere', 'Optional: music, conversation, and scent preferences.'],
+    ['Comfort & setup', 'Choose how you’d like to get settled.'],
+    ['Health check', 'Share anything relevant so I can plan appropriately.'],
+    ['Review & prepare', 'A few final checks, then preview before sending.']
+  ];
+  const fieldsets = [...form.children].filter(el => el.tagName === 'FIELDSET');
+  if (fieldsets.length !== labels.length) return;
+  const steps = fieldsets.map((fieldset, i) => {
+    const details = document.createElement('details');
+    details.className = 'booking-step';
+    details.id = 'booking-step-' + (i + 1);
+    const summary = document.createElement('summary');
+    summary.innerHTML = '<span class="step-number">' + (i + 1) + '</span><span class="step-heading"><strong>' + labels[i][0] + '</strong><small>' + labels[i][1] + '</small></span><span class="step-status">Open</span>';
+    fieldset.before(details);
+    details.append(summary, fieldset);
+    const nav = document.createElement('div');
+    nav.className = 'step-actions';
+    if (i > 0) {
+      const back = document.createElement('button');
+      back.type = 'button'; back.className = 'chip-btn'; back.textContent = 'Back';
+      back.addEventListener('click', () => openStep(i - 1));
+      nav.append(back);
+    }
+    if (i < labels.length - 1) {
+      const next = document.createElement('button');
+      next.type = 'button'; next.className = 'primary-action';
+      next.textContent = 'Continue to ' + labels[i + 1][0].toLowerCase();
+      next.addEventListener('click', () => {
+        clearErrors();
+        const names = new Set([...fieldset.querySelectorAll('[name]')].map(el => el.name));
+        const errors = core.validate(values()).filter(error => names.has(error.field));
+        if (errors.length) { showErrors(errors); return; }
+        const invalid = [...fieldset.querySelectorAll('input, select, textarea')].find(el => !el.checkValidity());
+        if (invalid) { revealControl(invalid); invalid.reportValidity(); return; }
+        details.dataset.visited = 'true';
+        summary.querySelector('.step-status').textContent = 'Visited';
+        openStep(i + 1);
+      });
+      nav.append(next);
+    }
+    details.append(nav);
+    details.addEventListener('toggle', () => {
+      if (!details.open) return;
+      steps.forEach(other => { if (other !== details) other.open = false; });
+      stepPosition.textContent = 'Step ' + (i + 1) + ' of ' + labels.length + ' · ' + labels[i][0];
+    });
+    return details;
+  });
+  const stepPosition = document.createElement('p');
+  stepPosition.id = 'stepPosition'; stepPosition.className = 'guided-position';
+  stepPosition.setAttribute('role', 'status'); stepPosition.setAttribute('aria-live', 'polite');
+  form.before(stepPosition);
+  function openStep(i, scroll = true) {
+    steps.forEach((step, n) => { step.open = n === i; });
+    stepPosition.textContent = 'Step ' + (i + 1) + ' of ' + labels.length + ' · ' + labels[i][0];
+    if (scroll) {
+      const summary = steps[i].querySelector('summary');
+      summary.tabIndex = 0;
+      summary.focus({preventScroll:true});
+      steps[i].scrollIntoView({behavior:smooth(), block:'start'});
+    }
+  }
+  window.openBookingStep = openStep;
+  // Keep delivery agreement and preview actions inside the final step.
+  const delivery = document.getElementById('deliveryNote').closest('.delivery-note');
+  const previewActions = document.getElementById('submitBtn').parentElement;
+  steps.at(-1).insertBefore(delivery, steps.at(-1).lastElementChild);
+  steps.at(-1).insertBefore(previewActions, steps.at(-1).lastElementChild);
+  function disclose(element, title, description) {
+    const details = document.createElement('details');
+    details.className = 'optional-detail';
+    const summary = document.createElement('summary');
+    summary.textContent = title;
+    element.before(details);
+    details.append(summary);
+    if (description) {
+      const hint = document.createElement('p'); hint.className = 'hint'; hint.textContent = description;
+      details.append(hint);
+    }
+    details.append(element);
+    return details;
+  }
+  disclose(document.getElementById('bodymap'), 'Customize specific body areas (optional)', 'Balanced defaults are already selected. Optional areas stay skipped unless you choose otherwise. Open this only if you want more detail.');
+  disclose(document.getElementById('techniqueInterests').parentElement, 'Explore a style or technique (optional)');
+  disclose(document.getElementById('ecName').parentElement, 'Add an emergency contact (optional)');
+  disclose(document.getElementById('timing').parentElement, 'Training context (optional)');
+  const scentDetails = disclose(document.getElementById('fragranceMatrix'), 'Explore scent choices (optional)', 'Fragrance-free is the default. You can still note scents to avoid.');
+  form.addEventListener('change', event => {
+    if (event.target.name === 'scent' && event.target.value !== 'No added fragrance') scentDetails.open = true;
+  });
+  // Detailed technique descriptions are reference material, not a booking step.
+  const sequence = document.querySelector('section[aria-labelledby="seq-h"]');
+  const sequenceGrid = sequence.querySelector('.grid');
+  disclose(sequenceGrid, 'Explore the recommended 60-minute sequence', 'Reference only—you can book without reading every technique.');
+  function revealHash() {
+    if (!location.hash) return;
+    const target = document.getElementById(location.hash.slice(1));
+    if (!target) return;
+    revealControl(target);
+    target.scrollIntoView({behavior:smooth(), block:'start'});
+  }
+  window.addEventListener('hashchange', revealHash);
+  document.addEventListener('click', event => {
+    const link = event.target.closest('a[href^="#"]');
+    if (link?.getAttribute('href') === '#bodymap') {
+      const target = document.getElementById('bodymap');
+      revealControl(target);
+    }
+  });
+  openStep(0, false);
+  revealHash();
+}
+function revealControl(control) {
+  let parent = control.parentElement;
+  while (parent) {
+    if (parent.tagName === 'DETAILS') parent.open = true;
+    parent = parent.parentElement;
+  }
+}
+initGuidedBooking();
 
 // A quiet, optional response to pointer movement, never needed to use the page.
 const artwork = document.getElementById('heroArtwork');

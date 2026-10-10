@@ -24,7 +24,7 @@ tailwind.config = {
 }
 </script>
 <link rel="stylesheet" href="./base.css?v=20261008-sanctuary-restored">
-<link rel="stylesheet" href="./design.css?v=20261008-deep-jewel">
+<link rel="stylesheet" href="./design.css?v=20261010-guided-flow">
 </head>
 <body class="bg-ethereal font-sans min-h-screen">
 <svg width="0" height="0" style="position:absolute" aria-hidden="true" focusable="false"><defs>
@@ -153,7 +153,7 @@ tailwind.config = {
     <div class="glass-card rounded-2xl p-6 md:p-12">
       <div class="text-center mb-8">
         <h2 id="form-h" class="font-display text-xl md:text-2xl text-gradient-gold mb-3">Personalize Your Session</h2>
-        <p class="text-gray-200 font-light text-sm md:text-base max-w-2xl mx-auto">About 5 minutes to shape your session around what you need most. Preview your preferences, then send your appointment request. I’ll confirm the time with you. Fields marked <span aria-hidden="true">*</span><span class="sr-only">with an asterisk</span> are required. Your selections help me plan a session that fits you.</p>
+        <p class="text-gray-200 font-light text-sm md:text-base max-w-2xl mx-auto">One small step at a time: contact details, timing, then your session preferences. Customization is optional—keep the defaults or explore what matters to you. Review everything before sending; I’ll confirm your appointment personally. Fields marked <span aria-hidden="true">*</span><span class="sr-only">with an asterisk</span> are required. Your selections help me plan a session that fits you.</p>
       </div>
 
       <div id="formError" tabindex="-1" role="alert" class="hidden mb-6 rounded-lg border border-red-400 bg-red-950/60 p-4 text-sm"></div>
@@ -240,7 +240,7 @@ tailwind.config = {
           </div>
 
           <div class="grid md:grid-cols-2 gap-6">
-            <div><label class="label" for="date1">Earliest date you could come *</label>
+            <div><label class="label" for="date1">Earliest date for your visit *</label>
               <input id="date1" name="date1" type="date" required class="field w-full px-3 py-3 text-base [color-scheme:dark]"></div>
             <div><label class="label" for="date2">Backup date (optional)</label>
               <input id="date2" name="date2" type="date" class="field w-full px-3 py-3 text-base [color-scheme:dark]"></div>
@@ -271,7 +271,7 @@ tailwind.config = {
 
         <!-- 3. Goals -->
         <fieldset class="space-y-6">
-          <legend class="font-serif text-xl text-mystic-glow mb-2"><svg class="ico-lg"><use href="#i-body"/></svg>3. Body map &amp; preferences</legend>
+          <legend class="font-serif text-xl text-mystic-glow mb-2"><svg class="ico-lg"><use href="#i-body"/></svg>3. Your focus & pressure</legend>
           <div id="bodymap" class="mapcard rounded-2xl border border-mystic-gold/30 p-4 md:p-6">
   <div class="flex flex-wrap items-center justify-between gap-3 mb-4">
     <p class="label" id="mapLabel" style="margin:0">Body map · tap an area to set it</p>
@@ -318,6 +318,10 @@ tailwind.config = {
             <div class="flex justify-between hint mt-2" aria-hidden="true"><span class="inline-flex items-center"><svg class="ico" style="margin-right:.3rem"><use href="#i-drop"/></svg>1 Light</span><span class="inline-flex items-center"><svg class="ico" style="margin-right:.3rem"><use href="#i-drop"/></svg>3 Firm</span><span class="inline-flex items-center"><svg class="ico" style="margin-right:.3rem"><use href="#i-bolt"/></svg>5 Intense</span></div>
             <p id="pressureHint" class="hint mt-1">We can adjust pressure for each area in person, and we will check in during the session.</p>
           </div>
+        </fieldset>
+
+        <fieldset class="space-y-6">
+          <legend class="font-serif text-xl text-mystic-glow mb-2">4. Atmosphere (optional)</legend>
           <div>
             <p class="label" id="styleLabel">Session atmosphere</p>
             <p class="hint mb-3" id="styleHint">Choose all that suit you. Choosing “No music” clears other sound choices. Preferences depend on the space and will be confirmed at arrival.</p>
@@ -366,7 +370,7 @@ tailwind.config = {
 
         <!-- 4. Comfort and setup -->
         <fieldset class="space-y-6">
-          <legend class="font-serif text-xl text-mystic-glow mb-2"><svg class="ico-lg"><use href="#i-shield"/></svg>4. Your comfort & setup</legend>
+          <legend class="font-serif text-xl text-mystic-glow mb-2"><svg class="ico-lg"><use href="#i-shield"/></svg>5. Your comfort & setup</legend>
 
           <div>
             <p class="label" id="drapeLabel">Clothing & draping *</p>
@@ -396,7 +400,7 @@ tailwind.config = {
 
         <!-- 5. Health -->
         <fieldset class="space-y-4">
-          <legend class="font-serif text-xl text-mystic-glow mb-2"><svg class="ico-lg"><use href="#i-heart"/></svg>5. Health check</legend>
+          <legend class="font-serif text-xl text-mystic-glow mb-2"><svg class="ico-lg"><use href="#i-heart"/></svg>6. Health check</legend>
           <p class="hint">This helps keep deep work safe. Tick anything that applies. I may need to adapt the session or ask for a doctor's okay, and I will talk it through with you first.</p>
           <div class="grid md:grid-cols-2 gap-3 text-sm">
             <label class="flex items-start gap-3"><input type="checkbox" class="check" name="health" value="Pregnant or possibly pregnant"><span>Pregnant or possibly pregnant</span></label>
@@ -414,7 +418,7 @@ tailwind.config = {
           </div>
         </fieldset>
 
-        <!-- 6. Ready for your session -->
+        <!-- 7. Review & prepare -->
         <fieldset class="space-y-4">
           <legend class="font-serif text-xl text-mystic-glow mb-2"><svg class="ico-lg"><use href="#i-check"/></svg>6. Ready for your session</legend>
           <label class="flex items-start gap-3 cursor-pointer text-sm"><input type="checkbox" class="check" name="ack1" required>
@@ -470,7 +474,7 @@ tailwind.config = {
 
 
 <script src="./intake-core.js?v=20261010-neurokare-warm"></script>
-<script src="./app.js?v=20261010-neurokare-warm"></script>
+<script src="./app.js?v=20261010-guided-flow"></script>
 </body>
 </html>
 
